@@ -566,8 +566,6 @@ abstract class MapperBase implements MappingBaseInterface
 	 * @param array $options
 	 *
 	 * @throws MapperArgumentException
-	 *
-	 * @return self
 	 */
 	public function __construct(View $view, array $options = [])
 	{
@@ -953,23 +951,23 @@ abstract class MapperBase implements MappingBaseInterface
 	/**
 	 * Set map zoom level.
 	 *
-	 * @param integer $zoom
+	 * @param integer $value
 	 *
 	 * @throws MapperArgumentException
 	 *
 	 * @return void
 	 */
-	public function setZoom($zoom)
+	public function setZoom($value)
 	{
-		if (!is_numeric($zoom)) {
+		if (!is_numeric($value)) {
 			throw new MapperArgumentException('Zoom level must be an integer.');
 		}
 
-		if ($zoom < 1 || $zoom > 20) {
+		if ($value < 1 || $value > 20) {
 			throw new MapperArgumentException('A zoom level must be between 1 and 20.');
 		}
 
-		$this->zoom = $zoom;
+		$this->zoom = $value;
 	}
 
 	/**
@@ -985,19 +983,19 @@ abstract class MapperBase implements MappingBaseInterface
 	/**
 	 * Set map type.
 	 *
-	 * @param string $type
+	 * @param string $value
 	 *
 	 * @throws MapperArgumentException
 	 *
 	 * @return void
 	 */
-	public function setType($type)
+	public function setType($value)
 	{
-		if (!in_array($type, $this->types)) {
+		if (!in_array($value, $this->types)) {
 			throw new MapperArgumentException('Invalid map type.');
 		}
 
-		$this->type = $type;
+		$this->type = $value;
 	}
 
 	/**
@@ -1013,7 +1011,7 @@ abstract class MapperBase implements MappingBaseInterface
 	/**
 	 * Set map tilt.
 	 *
-	 * @param integer $value
+	 * @param integer|double $value
 	 *
 	 * @throws MapperArgumentException
 	 *
@@ -1113,12 +1111,14 @@ abstract class MapperBase implements MappingBaseInterface
 			'type' => $this->getType(),
 			'tilt' => $this->getTilt(),
 			'ui' => $this->getUi(),
+			'overlay' => '',
 			'markers' => [
 				'title' => '',
 				'content' => '',
 				'icon' => $this->getIcon(),
 				'place' => '',
 				'animation' => $this->getAnimation(),
+				'symbol' => '',
 			]
 		];
 	}
@@ -1126,7 +1126,7 @@ abstract class MapperBase implements MappingBaseInterface
 	/**
 	 * Add mapping item.
 	 *
-	 * @param string $value
+	 * @param object $value
 	 *
 	 * @return void
 	 */

@@ -43,24 +43,26 @@ bounds.extend(marker_{{ $id }}.position);
 
 marker_{{ $id }}.setMap({{ $options['map'] }});
 
-@if (!empty($options['content']) && !$options['user'])
-
-	var infowindow_{{ $id }} = new google.maps.InfoWindow({
-		content: '{{ $options['content'] }}'
-	});
-
-	google.maps.event.addListener(marker_{{ $id }}, 'click', function() {
-		infowindow_{{ $id }}.open(map, marker_{{ $id }});
-	});
-
-@endif
-
 @if ($options['user'] && $options['place'])
 
 		marker_{{ $id }}.addListener('click', function() {
 			infowindow.setContent('<a href="' + placeResult.website + '">' + placeResult.name + '</a>');
-			infowindow.open(map, this);
+			infowindow.open({{ $options['map'] }}, this);
 		});
 	});
+
+@else
+
+	@if (!empty($options['content']))
+
+		var infowindow_{{ $id }} = new google.maps.InfoWindow({
+			content: '{{ $options['content'] }}'
+		});
+
+		google.maps.event.addListener(marker_{{ $id }}, 'click', function() {
+			infowindow_{{ $id }}.open({{ $options['map'] }}, marker_{{ $id }});
+		});
+
+	@endif
 
 @endif

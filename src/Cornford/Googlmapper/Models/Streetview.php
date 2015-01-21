@@ -20,17 +20,7 @@ class Streetview implements ModelingInterface {
 	 */
 	public function __construct(array $parameters = [])
 	{
-		$this->options['latitude'] = isset($parameters['latitude']) ? $parameters['latitude'] : null;
-		$this->options['longitude'] = isset($parameters['longitude']) ? $parameters['longitude'] : null;
-		$this->options['user'] = isset($parameters['user']) ? $parameters['user'] : null;
-		$this->options['marker'] = isset($parameters['marker']) ? $parameters['marker'] : null;
-		$this->options['center'] = isset($parameters['center']) ? $parameters['center'] : null;
-		$this->options['ui'] = isset($parameters['ui']) ? $parameters['ui'] : null;
-		$this->options['zoom'] = isset($parameters['zoom']) ? $parameters['zoom'] : null;
-		$this->options['type'] = isset($parameters['type']) ? $parameters['type'] : null;
-		$this->options['tilt'] = isset($parameters['tilt']) ? $parameters['tilt'] : null;
-		$this->options['heading'] = isset($parameters['heading']) ? $parameters['heading'] : null;
-		$this->options['pitch'] = isset($parameters['pitch']) ? $parameters['pitch'] : null;
+		$this->options = $parameters;
 	}
 
 	/**

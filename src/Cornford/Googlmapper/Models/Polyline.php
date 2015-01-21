@@ -19,13 +19,7 @@ class Polyline implements ModelingInterface {
 	 */
 	public function __construct(array $parameters = [])
 	{
-		$this->options['map'] = isset($parameters['shapes']['map']) ? $parameters['shapes']['map'] : null;
-		$this->options['coordinates'] = isset($parameters['coordinates']) ? $parameters['coordinates'] : null;
-		$this->options['geodesic'] = isset($parameters['geodesic']) ? $parameters['geodesic'] : null;
-		$this->options['strokeColor'] = isset($parameters['strokeColor']) ? $parameters['strokeColor'] : null;
-		$this->options['strokeOpacity'] = isset($parameters['strokeOpacity']) ? $parameters['strokeOpacity'] : null;
-		$this->options['strokeWeight'] = isset($parameters['strokeWeight']) ? $parameters['strokeWeight'] : null;
-		$this->options['editable'] = isset($parameters['editable']) ? $parameters['editable'] : null;
+		$this->options = $parameters;
 	}
 
 	/**

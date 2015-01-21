@@ -1,7 +1,6 @@
 <?php namespace Cornford\Googlmapper;
 
 use Cornford\Googlmapper\Contracts\MappingInterface;
-use Cornford\Googlmapper\Exceptions\MapperArgumentException;
 use Cornford\Googlmapper\Exceptions\MapperException;
 use Cornford\Googlmapper\Models\Map;
 use Cornford\Googlmapper\Models\Streetview;
@@ -34,7 +33,7 @@ class Mapper extends MapperBase implements MappingInterface {
 	 * @param float $longitude
 	 * @param array $options
 	 *
-	 * @return void
+	 * @return self
 	 */
 	public function map($latitude, $longitude, array $options = [])
 	{
@@ -63,7 +62,7 @@ class Mapper extends MapperBase implements MappingInterface {
 	 * @param integer $pitch
 	 * @param array   $options
 	 *
-	 * @return void
+	 * @return self
 	 */
 	public function streetview($latitude, $longitude, $heading, $pitch, array $options = [])
 	{
@@ -94,7 +93,7 @@ class Mapper extends MapperBase implements MappingInterface {
 	 *
 	 * @throws MapperException
 	 *
-	 * @return void
+	 * @return self
 	 */
 	public function marker($latitude, $longitude, array $options = [])
 	{
@@ -122,7 +121,7 @@ class Mapper extends MapperBase implements MappingInterface {
 	 *
 	 * @throws MapperException
 	 *
-	 * @return void
+	 * @return self
 	 */
 	public function informationWindow($latitude, $longitude, $content, array $options = [])
 	{
@@ -148,7 +147,7 @@ class Mapper extends MapperBase implements MappingInterface {
 	 *
 	 * @throws MapperException
 	 *
-	 * @return void
+	 * @return self
 	 */
 	public function polyline(array $coordinates = [], array $options = [])
 	{
@@ -183,7 +182,7 @@ class Mapper extends MapperBase implements MappingInterface {
 	 *
 	 * @throws MapperException
 	 *
-	 * @return void
+	 * @return self
 	 */
 	public function polygon(array $coordinates = [], array $options = [])
 	{
@@ -219,7 +218,7 @@ class Mapper extends MapperBase implements MappingInterface {
 	 *
 	 * @throws MapperException
 	 *
-	 * @return void
+	 * @return self
 	 */
 	public function rectangle(array $coordinates = [], array $options = [])
 	{
@@ -255,7 +254,7 @@ class Mapper extends MapperBase implements MappingInterface {
 	 *
 	 * @throws MapperException
 	 *
-	 * @return void
+	 * @return self
 	 */
 	public function circle(array $coordinates = [], array $options = [])
 	{

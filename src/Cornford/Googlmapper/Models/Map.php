@@ -33,25 +33,7 @@ class Map implements ModelingInterface {
 	 */
 	public function __construct(array $parameters = [])
 	{
-		$this->options['latitude'] = isset($parameters['latitude']) ? $parameters['latitude'] : null;
-		$this->options['longitude'] = isset($parameters['longitude']) ? $parameters['longitude'] : null;
-		$this->options['user'] = isset($parameters['user']) ? $parameters['user'] : null;
-		$this->options['marker'] = isset($parameters['marker']) ? $parameters['marker'] : null;
-		$this->options['center'] = isset($parameters['center']) ? $parameters['center'] : null;
-		$this->options['ui'] = isset($parameters['ui']) ? $parameters['ui'] : null;
-		$this->options['zoom'] = isset($parameters['zoom']) ? $parameters['zoom'] : null;
-		$this->options['type'] = isset($parameters['type']) ? $parameters['type'] : null;
-		$this->options['tilt'] = isset($parameters['tilt']) ? $parameters['tilt'] : null;
-		$this->options['overlay'] = isset($parameters['overlay']) ? $parameters['overlay'] : null;
-		$this->options['markers']['title'] = isset($parameters['markers']['title']) ? $parameters['markers']['title'] : null;
-		$this->options['markers']['map'] = isset($parameters['map']) ? $parameters['map'] : null;
-		$this->options['markers']['content'] = isset($parameters['markers']['content']) ? $parameters['markers']['content'] : null;
-		$this->options['markers']['icon'] = isset($parameters['markers']['icon']) ? $parameters['markers']['icon'] : null;
-		$this->options['markers']['place'] = isset($parameters['markers']['place']) ? $parameters['markers']['place'] : null;
-		$this->options['markers']['animation'] = isset($parameters['markers']['animation']) ? $parameters['markers']['animation'] : null;
-		$this->options['markers']['symbol'] = isset($parameters['markers']['symbol']) ? $parameters['markers']['symbol'] : null;
-		$this->options['markers']['scale'] = isset($parameters['markers']['scale']) ? $parameters['markers']['scale'] : null;
-		$this->options['shapes']['map'] = isset($parameters['map']) ? $parameters['map'] : null;
+		$this->options = $parameters;
 
 		if (isset($this->options['marker']) && $this->options['marker']) {
 			$this->marker($this->options['latitude'], $this->options['longitude'], $this->options);
