@@ -19,7 +19,11 @@ class MapperServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('cornford/googlmapper');
+		$configPath = __DIR__ . '/../../config/config.php';
+		$this->publishes([$configPath => config_path('config.php')], 'googlmapper');
+
+		$viewPath = __DIR__ . '/../../views';
+		$this->loadViewsFrom($viewPath, 'googlmapper');
 	}
 
 	/**
@@ -29,13 +33,14 @@ class MapperServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+		$configPath = __DIR__ . '/../../config/config.php';
+		$this->mergeConfigFrom($configPath, 'googlmapper');
+
 		$this->app['mapper'] = $this->app->share(function($app)
 		{
-			$config = $app['config']->get('googlmapper::config');
-
 			return new Mapper(
 				$this->app->view,
-				$config
+				$app['config']->get('googlmapper')
 			);
 		});
 	}
