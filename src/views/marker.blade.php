@@ -1,8 +1,8 @@
 @if ($options['user'] && $options['place'])
 
-	var service = new google.maps.places.PlacesService({{ $options['map'] }});
+	var service = new google.maps.places.PlacesService({!! $options['map'] !!});
 	var request = {
-		placeId: '{{ $options['place'] }}'
+		placeId: '{!! $options['place'] !!}'
 	};
 
 	service.getDetails(request, function(placeResult, status) {
@@ -13,41 +13,41 @@
 
 @endif
 
-var markerPosition_{{ $id }} = new google.maps.LatLng({{ $options['latitude'] }}, {{ $options['longitude'] }});
+var markerPosition_{!! $id !!} = new google.maps.LatLng({!! $options['latitude'] !!}, {!! $options['longitude'] !!});
 
-var marker_{{ $id }} = new google.maps.Marker({
-	position: markerPosition_{{ $id }},
+var marker_{!! $id !!} = new google.maps.Marker({
+	position: markerPosition_{!! $id !!},
 	@if ($options['user'] && $options['place'])
 		place: {
-			placeId: '{{ $options['place'] }}',
-			location: { lat: {{ $options['latitude'] }}, lng: {{ $options['longitude'] }} }
+			placeId: '{!! $options['place'] !!}',
+			location: { lat: {!! $options['latitude'] !!}, lng: {!! $options['longitude'] !!} }
 		},
 		attribution: {
 			source: document.title,
 			webUrl: document.URL
 		},
 	@endif
-	title: '{{ $options['title'] }}',
-	animation: @if (empty($options['animation']) || $options['animation'] == 'NONE') '' @else google.maps.Animation.{{ $options['animation'] }} @endif,
+	title: '{!! $options['title'] !!}',
+	animation: @if (empty($options['animation']) || $options['animation'] == 'NONE') '' @else google.maps.Animation.{!! $options['animation'] !!} @endif,
 	@if ($options['symbol'])
 		icon: {
-			path: google.maps.SymbolPath.{{ $options['symbol'] }},
-			scale: {{ $options['scale'] }}
+			path: google.maps.SymbolPath.{!! $options['symbol'] !!},
+			scale: {!! $options['scale'] !!}
 		}
 	@else
-		icon: '{{ $options['icon'] }}'
+		icon: '{!! $options['icon'] !!}'
 	@endif
 });
 
-bounds.extend(marker_{{ $id }}.position);
+bounds.extend(marker_{!! $id !!}.position);
 
-marker_{{ $id }}.setMap({{ $options['map'] }});
+marker_{!! $id !!}.setMap({!! $options['map'] !!});
 
 @if ($options['user'] && $options['place'])
 
-		marker_{{ $id }}.addListener('click', function() {
+		marker_{!! $id !!}.addListener('click', function() {
 			infowindow.setContent('<a href="' + placeResult.website + '">' + placeResult.name + '</a>');
-			infowindow.open({{ $options['map'] }}, this);
+			infowindow.open({!! $options['map'] !!}, this);
 		});
 	});
 
@@ -55,12 +55,12 @@ marker_{{ $id }}.setMap({{ $options['map'] }});
 
 	@if (!empty($options['content']))
 
-		var infowindow_{{ $id }} = new google.maps.InfoWindow({
-			content: '{{ $options['content'] }}'
+		var infowindow_{!! $id !!} = new google.maps.InfoWindow({
+			content: '{!! $options['content'] !!}'
 		});
 
-		google.maps.event.addListener(marker_{{ $id }}, 'click', function() {
-			infowindow_{{ $id }}.open({{ $options['map'] }}, marker_{{ $id }});
+		google.maps.event.addListener(marker_{!! $id !!}, 'click', function() {
+			infowindow_{!! $id !!}.open({!! $options['map'] !!}, marker_{!! $id !!});
 		});
 
 	@endif
