@@ -1,16 +1,16 @@
-var polylineCoordinates_{{ $id }} = [
+var polylineCoordinates_{!! $id !!} = [
 	@foreach ($options['coordinates'] as $coordinate)
-		new google.maps.LatLng({{ $coordinate['latitude'] }}, {{ $coordinate['longitude'] }}),
+		new google.maps.LatLng({!! $coordinate['latitude'] !!}, {!! $coordinate['longitude'] !!}),
 	@endforeach
 ];
 
-var polyline_{{ $id }} = new google.maps.Polyline({
-	path: polylineCoordinates_{{ $id }},
-	geodesic: {{ $options['strokeColor'] ? 'true' : 'false' }},
-	strokeColor: '{{ $options['strokeColor'] }}',
-	strokeOpacity: {{ $options['strokeOpacity'] }},
-	strokeWeight: {{ $options['strokeWeight'] }},
-	editable: {{ $options['editable'] ? 'true' : 'false' }}
+var polyline_{!! $id !!} = new google.maps.Polyline({
+	path: polylineCoordinates_{!! $id !!},
+	geodesic: {!! $options['strokeColor'] ? 'true' : 'false' !!},
+	strokeColor: '{!! $options['strokeColor'] !!}',
+	strokeOpacity: {!! $options['strokeOpacity'] !!},
+	strokeWeight: {!! $options['strokeWeight'] !!},
+	editable: {!! $options['editable'] ? 'true' : 'false' !!}
 });
 
-polyline_{{ $id }}.setMap({{ $options['map'] }});
+polyline_{!! $id !!}.setMap({!! $options['map'] !!});
