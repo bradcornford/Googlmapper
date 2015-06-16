@@ -41,7 +41,7 @@ The next step is to introduce the facade. Open `app/config/app.php`, and add a n
 
 Finally we need to introduce the configuration files into your application/
 
-	php artisan config:publish cornford/googlmapper
+	php artisan vendor:publish --provider="Cornford\\Googlmapper\\MapperServiceProvider"
 
 That's it! You're all set to go.
 
