@@ -18,9 +18,15 @@
 		var map_{!! $id !!} = new google.maps.Map(document.getElementById('map-canvas-{!! $id !!}'), mapOptions_{!! $id !!});
 		map_{!! $id !!}.setTilt({!! $options['tilt'] !!});
 
+		var markers = [];
+
 		@foreach ($options['markers'] as $key => $marker)
 			{!! $marker->render($key, $view) !!}
 		@endforeach
+
+		@if ($options['cluster'])
+			var markerCluster = new MarkerClusterer(map_{!! $id !!}, markers);
+		@endif
 
 		@foreach ($options['shapes'] as $key => $shape)
 			{!! $shape->render($key, $view) !!}
