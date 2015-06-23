@@ -553,6 +553,13 @@ abstract class MapperBase implements MappingBaseInterface
 	];
 
 	/**
+	 * Map marker cluster.
+	 *
+	 * @var boolean
+	 */
+	protected $cluster;
+
+	/**
 	 * Mapping items.
 	 *
 	 * @var array
@@ -604,6 +611,7 @@ abstract class MapperBase implements MappingBaseInterface
 		$this->setUi(isset($options['ui']) ? $options['ui'] : true);
 		$this->setIcon(isset($options['markers']['icon']) ? $options['markers']['icon'] : '');
 		$this->setAnimation(isset($options['markers']['animation']) ? $options['markers']['animation'] : self::ANIMATION_NONE);
+		$this->setCluster(isset($options['cluster']) ? $options['cluster'] : true);
 	}
 
 	/**
@@ -1119,7 +1127,8 @@ abstract class MapperBase implements MappingBaseInterface
 				'place' => '',
 				'animation' => $this->getAnimation(),
 				'symbol' => '',
-			]
+			],
+			'cluster' => $this->getCluster()
 		];
 	}
 
@@ -1167,6 +1176,54 @@ abstract class MapperBase implements MappingBaseInterface
 	public function getItem($item)
 	{
 		return isset($this->items[$item]) ? $this->items[$item] : false;
+	}
+
+	/**
+	 * Set cluster status.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	protected function setCluster($value)
+	{
+		if (!is_bool($value)) {
+			throw new MapperArgumentException('Invalid map cluster setting.');
+		}
+
+		$this->cluster = $value;
+	}
+
+	/**
+	 * Get the cluster status.
+	 *
+	 * @return boolean
+	 */
+	protected function getCluster()
+	{
+		return $this->cluster;
+	}
+
+	/**
+	 * Enable cluster.
+	 *
+	 * @return void
+	 */
+	public function enableCluster()
+	{
+		$this->setCluster(true);
+	}
+
+	/**
+	 * Disable cluster.
+	 *
+	 * @return void
+	 */
+	public function disableCluster()
+	{
+		$this->setCluster(false);
 	}
 
 }
