@@ -39,9 +39,11 @@ The next step is to introduce the facade. Open `app/config/app.php`, and add a n
 
 	'Mapper'         => 'Cornford\Googlmapper\Facades\Mapper',
 
-Finally we need to introduce the configuration files into your application/
+Finally we need to introduce the configuration files into your application.
 
 	php artisan vendor:publish --provider="Cornford\\Googlmapper\\MapperServiceProvider"
+
+You also need to set your Google API Key into the `GOOGLE_API_KEY` environment variable. To obtain an API key for your project, visit the [Google developers console](https://console.developers.google.com/).
 
 That's it! You're all set to go.
 
