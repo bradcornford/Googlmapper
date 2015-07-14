@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 
-class Mapper extends Facade {
+class MapperFacade extends Facade {
 
 	protected static function getFacadeAccessor() { return 'mapper'; }
 
