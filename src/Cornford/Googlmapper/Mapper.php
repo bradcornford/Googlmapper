@@ -23,7 +23,7 @@ class Mapper extends MapperBase implements MappingInterface {
 		return $this->view->make('googlmapper::mapper')
 			->withView($this->view)
 			->withOptions($this->getOptions())
-			->withItems(array_reverse($item > -1 ? $this->getItem($item) : $this->getItems()))->render();
+			->withItems($item > -1 ? [$item => $this->getItem($item)] : $this->getItems())->render();
 	}
 
 	/**
