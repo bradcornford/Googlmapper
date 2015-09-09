@@ -42,6 +42,7 @@ var marker_{{ $id }} = new google.maps.Marker({
 bounds.extend(marker_{{ $id }}.position);
 
 marker_{{ $id }}.setMap({{ $options['map'] }});
+markers.push(marker_{!! $id !!});
 
 @if ($options['user'] && $options['place'])
 
