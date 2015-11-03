@@ -2,6 +2,8 @@
 
 <script type="text/javascript">
 
+	var maps = [];
+
 	function initialize_{{ $id }}() {
 		var bounds = new google.maps.LatLngBounds();
 		var infowindow = new google.maps.InfoWindow();
@@ -54,6 +56,12 @@
 		var listener = google.maps.event.addListener(map_{{ $id }}, "idle", function () {
 			map_{{ $id }}.setZoom({{ $options['zoom'] }});
 			google.maps.event.removeListener(listener);
+		});
+
+		maps.push({
+			key: {!! $id !!},
+			markers: markers,
+			map: map_{!! $id !!}
 		});
 	}
 
