@@ -60,6 +60,7 @@
 
 		maps.push({
 			key: {!! $id !!},
+			markers: markers,
 			map: map_{!! $id !!}
 		});
 	}
