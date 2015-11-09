@@ -126,13 +126,13 @@ class Mapper extends MapperBase implements MappingInterface {
 	public function informationWindow($latitude, $longitude, $content, array $options = [])
 	{
 		$items = $this->getItems();
-		$parameters = $this->getOptions();
-		$options = array_replace_recursive(['user' => $parameters['user']], $parameters['markers'], $options);
-
+		
 		if (empty($items)) {
 			throw new MapperException('No map found to add a information window to.');
 		}
 
+		$parameters = $this->getOptions();
+		$options = array_replace_recursive(['user' => $parameters['user']], ['markers' => $parameters['markers']], $options);
 		$item = end($items);
 		$item->marker($latitude, $longitude, array_replace_recursive($options, ['markers' => ['content' => $content]]));
 
