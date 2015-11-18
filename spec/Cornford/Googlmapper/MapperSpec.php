@@ -16,12 +16,16 @@ class MapperSpec extends ObjectBehavior
 
 	public function let()
 	{
+		$location = Mockery::mock('Cornford\Googlmapper\Models\Location');
+
 		$view = Mockery::mock('Illuminate\View\Factory');
 		$view->shouldReceive('make')->andReturn($view);
 		$view->shouldReceive('withView')->andReturn($view);
 		$view->shouldReceive('withOptions')->andReturn($view);
 		$view->shouldReceive('withItems')->andReturn($view);
 		$view->shouldReceive('render')->andReturn(self::STRING);
+		$view->shouldReceive('location')->andReturn($location);
+
 		$this->beConstructedWith($view, ['enabled' => true, 'key' => self::STRING, 'region' => self::REGION, 'language' => self::LANGUAGE]);
 	}
 
@@ -37,9 +41,14 @@ class MapperSpec extends ObjectBehavior
 			->during('__construct', [$view]);
 	}
 
-	public function it_can_render_map_code()
+	public function it_can_return_a_location_when_a_location_is_searched()
 	{
-		$this->render()->shouldReturn(self::STRING);
+		$this->location(self::STRING)->shouldReturnAnInstanceOf('Cornford\Googlmapper\Models\Location');
+	}
+
+	public function it_can_throws_an_exception_when_a_blank_location_is_searched()
+	{
+		$this->shouldThrow('Cornford\Googlmapper\Exceptions\MapperArgumentException')->during('location', ['']);
 	}
 
 	public function it_can_be_enabled()
@@ -77,7 +86,7 @@ class MapperSpec extends ObjectBehavior
 		$this->getLanguage()->shouldReturn(self::LANGUAGE);
 	}
 
-	public function it_can_be_set_and_get_user_option()
+	public function it_can_set_and_get_user_option()
 	{
 		$this->enableUsers();
 		$this->getUser()->shouldReturn(true);
@@ -85,7 +94,7 @@ class MapperSpec extends ObjectBehavior
 		$this->getUser()->shouldReturn(false);
 	}
 
-	public function it_can_be_set_and_get_marker_option()
+	public function it_can_set_and_get_marker_option()
 	{
 		$this->enableMarkers();
 		$this->getMarker()->shouldReturn(true);
@@ -93,7 +102,7 @@ class MapperSpec extends ObjectBehavior
 		$this->getMarker()->shouldReturn(false);
 	}
 
-	public function it_can_be_set_and_get_center_option()
+	public function it_can_set_and_get_center_option()
 	{
 		$this->enableCenter();
 		$this->getCenter()->shouldReturn(true);
@@ -101,7 +110,7 @@ class MapperSpec extends ObjectBehavior
 		$this->getCenter()->shouldReturn(false);
 	}
 
-	public function it_can_be_set_and_get_ui_option()
+	public function it_can_set_and_get_ui_option()
 	{
 		$this->enableUi();
 		$this->getUi()->shouldReturn(false);
