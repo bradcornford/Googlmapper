@@ -10,6 +10,7 @@
 Think of Googlmapper as an easy way to integrate Google Maps with Laravel, providing a variety of helpers to speed up the utilisation of mapping. These include:
 
 - `Mapper::map`
+- `Mapper::location`
 - `Mapper::stretview`
 - `Mapper::marker`
 - `Mapper::informationWindow`
@@ -74,6 +75,7 @@ It's really as simple as using the Mapper class in any Controller / Model / File
 This will give you access to
 
 - [Map](#map)
+- [Location](#location)
 - [Streetview](#streetview)
 - [Marker](#marker)
 - [Information Window](#information-window)
@@ -91,12 +93,20 @@ The `map` method allows a map to be created, with latitude, longitude and option
 	Mapper::map(53.381128999999990000, -1.470085000000040000, ['zoom' => 15, 'center' => false, 'marker' => false, 'type' => 'HYBRID', 'overlay' => 'TRAFFIC']);
 	Mapper::map(53.381128999999990000, -1.470085000000040000, ['zoom' => 10, 'markers' => ['title' => 'My Location', 'Animation' => 'DROP']]);
 
+### Location
+
+The `location` method allows a location to be searched for with a string, returning a Location object with its latitude and longitude.
+
+	Mapper::location('Sheffield');
+	Mapper::location('Sheffield')->map(['zoom' => 15, 'center' => false, 'marker' => false, 'type' => 'HYBRID', 'overlay' => 'TRAFFIC']);
+	Mapper::location('Sheffield')->streetview(1, 1, ['ui' => false]);
+
 ### Streetview
 
 The `streetview` method allows a streetview map to be created, with latitude, longitude, heading, pitch and optional parameters for options.
 
-	Mapper::streetview(53.381128999999990000, -1.470085000000040000);
-	Mapper::streetview(53.381128999999990000, -1.470085000000040000, ['ui' => false]);
+	Mapper::streetview(53.381128999999990000, -1.470085000000040000, 1, 1);
+	Mapper::streetview(53.381128999999990000, -1.470085000000040000, 1, 1, ['ui' => false]);
 
 ### Marker
 

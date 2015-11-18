@@ -1,7 +1,11 @@
 <?php namespace Cornford\Googlmapper;
 
 use Cornford\Googlmapper\Contracts\MappingInterface;
+use Cornford\Googlmapper\Exceptions\MapperArgumentException;
 use Cornford\Googlmapper\Exceptions\MapperException;
+use Cornford\Googlmapper\Exceptions\MapperSearchException;
+use Cornford\Googlmapper\Exceptions\MapperSearchResultException;
+use Cornford\Googlmapper\Models\Location;
 use Cornford\Googlmapper\Models\Map;
 use Cornford\Googlmapper\Models\Streetview;
 
@@ -24,6 +28,69 @@ class Mapper extends MapperBase implements MappingInterface {
 			->withView($this->view)
 			->withOptions($this->getOptions())
 			->withItems($item > -1 ? [$item => $this->getItem($item)] : $this->getItems())->render();
+	}
+
+	/**
+	 * Search for a location against Google Maps Api.
+	 *
+	 * @param string $location
+	 *
+	 * @return mixed
+	 */
+	protected function searchLocation($location)
+	{
+		$location = urlencode($location);
+		$request = file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address={$location}&sensor=false");
+
+		return json_decode($request);
+	}
+
+	/**
+	 * Locate a location and return a Location instance.
+	 *
+	 * @param string $location
+	 *
+	 * @throws MapperArgumentException
+	 * @throws MapperSearchException
+	 * @throws MapperSearchResultException
+	 * @throws MapperException
+	 *
+	 * @return Location
+	 */
+	public function location($location)
+	{
+		if (empty($location)) {
+			throw new MapperArgumentException('Invalid location search term provided.');
+		}
+
+		try {
+			$resultObject = $this->searchLocation($location);
+		} catch (Exception $exception) {
+			throw new MapperSearchException('Unable to perform location search, the error was: "' . $exception->getMessage() .  '".');
+		}
+
+		if (!isset($resultObject->results) || count($resultObject->results) == 0) {
+			throw new MapperSearchResultException('No results found for the location search.');
+		}
+
+		if (!isset($resultObject->results[0]->formatted_address) ||
+			!isset($resultObject->results[0]->address_components[0]->types[0]) ||
+			!isset($resultObject->results[0]->geometry->location->lat) ||
+			!isset($resultObject->results[0]->geometry->location->lng) ||
+			!isset($resultObject->results[0]->place_id)
+		) {
+			throw new MapperException('The location search return invalid result data.');
+		}
+
+		return new Location([
+			'mapper' => $this,
+			'search' => $location,
+			'address' => $resultObject->results[0]->formatted_address,
+			'type' => $resultObject->results[0]->address_components[0]->types[0],
+			'latitude' => $resultObject->results[0]->geometry->location->lat,
+			'longitude' => $resultObject->results[0]->geometry->location->lng,
+			'placeId' => $resultObject->results[0]->place_id,
+		]);
 	}
 
 	/**
@@ -165,7 +232,7 @@ class Mapper extends MapperBase implements MappingInterface {
 		$options = array_replace_recursive(['user' => $parameters['user']], $defaults, $options);
 
 		if (empty($items)) {
-			throw new MapperException('No map found to add a marker to.');
+			throw new MapperException('No map found to add a polyline to.');
 		}
 
 		$item = end($items);
@@ -201,7 +268,7 @@ class Mapper extends MapperBase implements MappingInterface {
 		$options = array_replace_recursive(['user' => $parameters['user']], $defaults, $options);
 
 		if (empty($items)) {
-			throw new MapperException('No map found to add a marker to.');
+			throw new MapperException('No map found to add a polygon to.');
 		}
 
 		$item = end($items);
@@ -237,7 +304,7 @@ class Mapper extends MapperBase implements MappingInterface {
 		$options = array_replace_recursive(['user' => $parameters['user']], $defaults, $options);
 
 		if (empty($items)) {
-			throw new MapperException('No map found to add a marker to.');
+			throw new MapperException('No map found to add a rectangle to.');
 		}
 
 		$item = end($items);
@@ -274,7 +341,7 @@ class Mapper extends MapperBase implements MappingInterface {
 		$options = array_replace_recursive(['user' => $parameters['user']], $defaults, $options);
 
 		if (empty($items)) {
-			throw new MapperException('No map found to add a marker to.');
+			throw new MapperException('No map found to add a circle to.');
 		}
 
 		$item = end($items);
