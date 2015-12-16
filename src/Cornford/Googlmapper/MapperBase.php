@@ -17,6 +17,7 @@ abstract class MapperBase implements MappingBaseInterface
 	const TYPE_TERRAIN = 'TERRAIN';
 
 	const ZOOM = 8;
+	const SCROLL_WHEEL_ZOOM = true;
 
 	const TILT = 90;
 
@@ -502,6 +503,13 @@ abstract class MapperBase implements MappingBaseInterface
 	protected $zoom;
 
 	/**
+	 * Map scroll wheel zoom.
+	 *
+	 * @var boolean
+	 */
+	protected $scrollWheelZoom;
+
+	/**
 	 * Map type.
 	 *
 	 * @var string
@@ -606,6 +614,7 @@ abstract class MapperBase implements MappingBaseInterface
 		$this->setMarker(isset($options['marker']) ? $options['marker'] : true);
 		$this->setCenter(isset($options['centre']) ? $options['centre'] : true);
 		$this->setZoom(isset($options['zoom']) ? $options['zoom'] : self::ZOOM);
+		$this->setScrollWheelZoom(isset($options['scrollWheelZoom']) ? $options['scrollWheelZoom'] : self::SCROLL_WHEEL_ZOOM);
 		$this->setType(isset($options['type']) ? $options['type'] : self::TYPE_ROADMAP);
 		$this->setTilt(isset($options['tilt']) ? $options['tilt'] : self::TILT);
 		$this->setUi(isset($options['ui']) ? $options['ui'] : true);
@@ -989,6 +998,34 @@ abstract class MapperBase implements MappingBaseInterface
 	}
 
 	/**
+	 * Set map scroll wheel zoom.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setScrollWheelZoom($value)
+	{
+		if (!is_bool($value)) {
+			throw new MapperArgumentException('Mouse Wheel Zoom must be a boolean.');
+		}
+
+		$this->scrollWheelZoom = $value;
+	}
+
+	/**
+	 * Get map scroll wheel zoom.
+	 *
+	 * @return boolean
+	 */
+	public function getScrollWheelZoom()
+	{
+		return $this->scrollWheelZoom;
+	}
+
+	/**
 	 * Set map type.
 	 *
 	 * @param string $value
@@ -1116,6 +1153,7 @@ abstract class MapperBase implements MappingBaseInterface
 			'marker' => $this->getMarker(),
 			'center' => $this->getCenter(),
 			'zoom' => $this->getZoom(),
+			'scrollWheelZoom' => $this->getScrollWheelZoom(),
 			'type' => $this->getType(),
 			'tilt' => $this->getTilt(),
 			'ui' => $this->getUi(),
