@@ -13,7 +13,7 @@
 			@if ($options['center'])
 				center: position,
 			@endif
-			mapTypeId: google.maps.MapTypeId.{!! $options['type'] !!},
+			mapTypeId: google.maps.MapTypeId.{{ $options['type'] }},
 			disableDefaultUI: @if (!$options['ui']) true @else false @endif,
 			scrollwheel: @if ($options['scrollWheelZoom']) true @else false @endif
 		};
@@ -28,7 +28,7 @@
 		@endforeach
 
 		@if ($options['cluster'])
-			var markerCluster = new MarkerClusterer(map_{!! $id !!}, markers);
+			var markerCluster = new MarkerClusterer(map_{{ $id }}, markers);
 		@endif
 
 		@foreach ($options['shapes'] as $key => $shape)
@@ -60,9 +60,9 @@
 		});
 
 		maps.push({
-			key: {!! $id !!},
+			key: {{ $id }},
 			markers: markers,
-			map: map_{!! $id !!}
+			map: map_{{ $id }}
 		});
 	}
 

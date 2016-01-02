@@ -27,8 +27,14 @@ var marker_{{ $id }} = new google.maps.Marker({
 			webUrl: document.URL
 		},
 	@endif
+
 	title: '{{ $options['title'] }}',
 	animation: @if (empty($options['animation']) || $options['animation'] == 'NONE') '' @else google.maps.Animation.{{ $options['animation'] }} @endif,
+
+	@if (isset($options['draggable']) && $options['draggable'] == true)
+		draggable: true,
+	@endif
+
 	@if ($options['symbol'])
 		icon: {
 			path: google.maps.SymbolPath.{{ $options['symbol'] }},
@@ -42,7 +48,7 @@ var marker_{{ $id }} = new google.maps.Marker({
 bounds.extend(marker_{{ $id }}.position);
 
 marker_{{ $id }}.setMap({{ $options['map'] }});
-markers.push(marker_{!! $id !!});
+markers.push(marker_{{ $id }});
 
 @if ($options['user'] && $options['place'])
 
