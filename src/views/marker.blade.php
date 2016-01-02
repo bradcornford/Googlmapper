@@ -28,7 +28,7 @@ var marker_{!! $id !!} = new google.maps.Marker({
 		},
 	@endif
 		
-	@if ($options['draggable'] && $options['draggable'] == true)
+	@if (isset($options['draggable']) && $options['draggable'] == true)
 		draggable:true,
 	@endif
 	
