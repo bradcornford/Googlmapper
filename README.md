@@ -106,6 +106,11 @@ The `marker` method allows a marker to be added to a map, with latitude, longitu
 	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['symbol' => 'circle', 'scale' => 1000]);
 	Mapper::map(52.381128999999990000, 0.470085000000040000)->marker(53.381128999999990000, -1.470085000000040000, ['markers' => ['symbol' => 'circle', 'scale' => 1000, 'animation' => 'DROP']]);
 
+If you need draggable marker, you can add option draggable. 
+
+	Mapper::marker(53.38,-1.47,[
+		'draggable'	=> true
+	]);
 ### Information Window
 
 The `informationWindow` method allows an information window to be added to to a map, with latitude, longitude, content, and optional parameters for options.

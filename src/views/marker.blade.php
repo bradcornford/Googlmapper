@@ -27,6 +27,11 @@ var marker_{!! $id !!} = new google.maps.Marker({
 			webUrl: document.URL
 		},
 	@endif
+		
+	@if (isset($options['draggable']) && $options['draggable'] == true)
+		draggable:true,
+	@endif
+	
 	title: '{!! $options['title'] !!}',
 	animation: @if (empty($options['animation']) || $options['animation'] == 'NONE') '' @else google.maps.Animation.{!! $options['animation'] !!} @endif,
 	@if ($options['symbol'])
