@@ -72,3 +72,10 @@ markers.push(marker_{!! $id !!});
 	@endif
 
 @endif
+
+
+@if (isset($options['dragend_event']))
+	google.maps.event.addListener(marker_{!! $id !!}, 'dragend', function (event) {
+		{!! $options['dragend_event'] !!}
+	});
+@endif
