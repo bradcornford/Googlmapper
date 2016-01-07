@@ -111,6 +111,20 @@ If you need draggable marker, you can add option draggable.
 	Mapper::marker(53.38,-1.47,[
 		'draggable'	=> true
 	]);
+
+`dragend` 
+I am add option dragend for markers. This option need for take marker coordinates before draggable!
+
+Example
+	//controller
+	Mapper::marker(53.38,-1,47,[
+		'draggable' 	=> true, // can draggable marker
+		'draggend'	=> view('path.to.my.view')
+	]);
+	//view
+	console.log(this.getPosition().lat());
+	
+
 ### Information Window
 
 The `informationWindow` method allows an information window to be added to to a map, with latitude, longitude, content, and optional parameters for options.
