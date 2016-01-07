@@ -116,13 +116,15 @@ If you need draggable marker, you can add option draggable.
 I am add option dragend for markers. This option need for take marker coordinates before draggable!
 
 Example
+	```php
 	//controller
 	Mapper::marker(53.38,-1,47,[
 		'draggable' 	=> true, // can draggable marker
 		'draggend'	=> view('path.to.my.view')
-	]);
+	]); 
 	//view
-	console.log(this.getPosition().lat());
+	console.log(this.getPosition().lat()); 
+	```
 	
 
 ### Information Window
