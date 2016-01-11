@@ -19,11 +19,15 @@ class MapperServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$configPath = __DIR__ . '/../../config/config.php';
-		$this->publishes([$configPath => config_path('googlmapper.php')], 'googlmapper');
+		$this->loadViewsFrom(__DIR__ . '/../../views', 'googlmapper');
 
-		$viewPath = __DIR__ . '/../../views';
-		$this->loadViewsFrom($viewPath, 'googlmapper');
+		$this->publishes(
+			[
+				__DIR__ . '/../../config/config.php' => config_path('googlmapper.php'),
+				__DIR__ . '/../../views' => base_path('resources/views/cornford/googlmapper')
+			],
+			'googlmapper'
+		);
 	}
 
 	/**
