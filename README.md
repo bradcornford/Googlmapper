@@ -87,7 +87,7 @@ The `map` method allows a map to be created, with latitude, longitude and option
 
 	Mapper::map(53.381128999999990000, -1.470085000000040000);
 	Mapper::map(53.381128999999990000, -1.470085000000040000, ['zoom' => 15, 'center' => false, 'marker' => false, 'type' => 'HYBRID', 'overlay' => 'TRAFFIC']);
-	Mapper::map(53.381128999999990000, -1.470085000000040000, ['zoom' => 10, 'markers' => ['title' => 'My Location', 'Animation' => 'DROP']]);
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['zoom' => 10, 'markers' => ['title' => 'My Location', 'animation' => 'DROP']]);
 
 ### Location
 
@@ -112,11 +112,68 @@ The `marker` method allows a marker to be added to a map, with latitude, longitu
 	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['symbol' => 'circle', 'scale' => 1000]);
 	Mapper::map(52.381128999999990000, 0.470085000000040000)->marker(53.381128999999990000, -1.470085000000040000, ['markers' => ['symbol' => 'circle', 'scale' => 1000, 'animation' => 'DROP']]);
 
+#### Draggable Markers
+
 If you need draggable marker, you can add option draggable. 
 
-	Mapper::marker(53.38,-1.47,[
-		'draggable'	=> true
-	]);
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true]);
+
+##### Draggable Events
+
+**Click**
+
+This event is fired when the marker icon was clicked.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventClick' => 'console.log("left click");']);
+
+**Right Click**
+
+This event is fired for a right click on the marker.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventRightClick' => 'console.log("right click");']);
+
+**Mouse Over**
+
+This event is fired when the mouse enters the area of the marker icon.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseOver' => 'console.log("mouse over");']);
+
+**Mouse Down**
+
+This event is fired for a mouse down on the marker.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseDown' => 'console.log("mouse down");']);
+
+**Mouse Up**
+
+This event is fired for a mouse up on the marker.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseUp' => 'console.log("mouse up");']);
+
+**Mouse Out**
+
+This event is fired when the mouse leaves the area of the marker icon.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseOut' => 'console.log("mouse out");']);
+
+**Drag**
+
+This event is repeatedly fired while the user drags the marker.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventDrag' => 'console.log("dragging");']);
+
+**Drag Start**
+
+This event is fired when the user starts dragging the marker.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventDragStart' => 'console.log("drag start");']);
+
+**Drag End**
+
+This event is fired when the user stops dragging the marker.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventDragEnd' => 'console.log("drag end");']);
+
 ### Information Window
 
 The `informationWindow` method allows an information window to be added to to a map, with latitude, longitude, content, and optional parameters for options.
