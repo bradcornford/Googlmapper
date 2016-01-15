@@ -19,7 +19,7 @@ class MapperServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->loadViewsFrom(__DIR__ . '/../../views', 'googlmapper');
+		$this->loadViewsFrom(base_path('resources/views/cornford/googlmapper'), 'googlmapper');
 
 		$this->publishes(
 			[
