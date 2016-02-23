@@ -27,6 +27,11 @@ var marker_{!! $id !!} = new google.maps.Marker({
 			webUrl: document.URL
 		},
 	@endif
+		
+	@if (isset($options['draggable']) && $options['draggable'] == true)
+		draggable:true,
+	@endif
+	
 	title: '{!! $options['title'] !!}',
 	animation: @if (empty($options['animation']) || $options['animation'] == 'NONE') '' @else google.maps.Animation.{!! $options['animation'] !!} @endif,
 	@if ($options['symbol'])
@@ -67,3 +72,15 @@ markers.push(marker_{!! $id !!});
 	@endif
 
 @endif
+
+@foreach (['eventClick', 'eventRightClick', 'eventMouseOver', 'eventMouseDown', 'eventMouseUp', 'eventMouseOut', 'eventDrag', 'eventDragStart', 'eventDragEnd'] as $event)
+
+	@if (isset($options[$event]))
+
+		google.maps.event.addListener(marker_{!! $id !!}, '{!! str_replace('event', '', strtolower($event)) !!}', function (event) {
+			{!! $options[$event] !!}
+		});
+
+	@endif
+
+@endforeach

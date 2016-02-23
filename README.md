@@ -10,6 +10,7 @@
 Think of Googlmapper as an easy way to integrate Google Maps with Laravel, providing a variety of helpers to speed up the utilisation of mapping. These include:
 
 - `Mapper::map`
+- `Mapper::location`
 - `Mapper::stretview`
 - `Mapper::marker`
 - `Mapper::informationWindow`
@@ -59,6 +60,7 @@ You can now configure Googlmapper in a few simple steps. Open `app/config/packag
 - `marker` - Automatically add Google Maps marker for your maps initial location, e.g. true.
 - `center` - Automatically center Google Maps around the initial location, when false, Google Maps will automatically center the map, e.g. true.
 - `zoom` - Set the default zoom level for Google Maps, e.g. 8.
+- `scrollWheelZoom` - Set the default scroll wheel zoom Google Maps, e.g. true.
 - `type` - Set the default map type for Google Maps, e.g. ROADMAP, SATELLITE, HYBRID, TERRAIN.
 - `ui` - Show the Google Maps default UI options, e.g. true.
 - `markers.icon` - Set the default marker icon, e.g. img/icon.png.
@@ -73,6 +75,7 @@ It's really as simple as using the Mapper class in any Controller / Model / File
 This will give you access to
 
 - [Map](#map)
+- [Location](#location)
 - [Streetview](#streetview)
 - [Marker](#marker)
 - [Information Window](#information-window)
@@ -88,14 +91,36 @@ The `map` method allows a map to be created, with latitude, longitude and option
 
 	Mapper::map(53.381128999999990000, -1.470085000000040000);
 	Mapper::map(53.381128999999990000, -1.470085000000040000, ['zoom' => 15, 'center' => false, 'marker' => false, 'type' => 'HYBRID', 'overlay' => 'TRAFFIC']);
-	Mapper::map(53.381128999999990000, -1.470085000000040000, ['zoom' => 10, 'markers' => ['title' => 'My Location', 'Animation' => 'DROP']]);
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['zoom' => 10, 'markers' => ['title' => 'My Location', 'animation' => 'DROP']]);
+
+##### Map Events
+
+**Before Load**
+
+This event is fired before the map is loaded.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventBeforeLoad' => 'console.log("before load");']);
+
+**After Load**
+
+This event is fired after the map is loaded.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventAfterLoad' => 'console.log("after load");']);
+
+### Location
+
+The `location` method allows a location to be searched for with a string, returning a Location object with its latitude and longitude.
+
+	Mapper::location('Sheffield');
+	Mapper::location('Sheffield')->map(['zoom' => 15, 'center' => false, 'marker' => false, 'type' => 'HYBRID', 'overlay' => 'TRAFFIC']);
+	Mapper::location('Sheffield')->streetview(1, 1, ['ui' => false]);
 
 ### Streetview
 
 The `streetview` method allows a streetview map to be created, with latitude, longitude, heading, pitch and optional parameters for options.
 
-	Mapper::streetview(53.381128999999990000, -1.470085000000040000);
-	Mapper::streetview(53.381128999999990000, -1.470085000000040000, ['ui' => false]);
+	Mapper::streetview(53.381128999999990000, -1.470085000000040000, 1, 1);
+	Mapper::streetview(53.381128999999990000, -1.470085000000040000, 1, 1, ['ui' => false]);
 
 ### Marker
 
@@ -104,6 +129,68 @@ The `marker` method allows a marker to be added to a map, with latitude, longitu
 	Mapper::marker(53.381128999999990000, -1.470085000000040000);
 	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['symbol' => 'circle', 'scale' => 1000]);
 	Mapper::map(52.381128999999990000, 0.470085000000040000)->marker(53.381128999999990000, -1.470085000000040000, ['markers' => ['symbol' => 'circle', 'scale' => 1000, 'animation' => 'DROP']]);
+
+#### Draggable Markers
+
+If you need draggable marker, you can add option draggable. 
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true]);
+
+##### Draggable Events
+
+**Click**
+
+This event is fired when the marker icon was clicked.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventClick' => 'console.log("left click");']);
+
+**Right Click**
+
+This event is fired for a right click on the marker.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventRightClick' => 'console.log("right click");']);
+
+**Mouse Over**
+
+This event is fired when the mouse enters the area of the marker icon.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseOver' => 'console.log("mouse over");']);
+
+**Mouse Down**
+
+This event is fired for a mouse down on the marker.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseDown' => 'console.log("mouse down");']);
+
+**Mouse Up**
+
+This event is fired for a mouse up on the marker.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseUp' => 'console.log("mouse up");']);
+
+**Mouse Out**
+
+This event is fired when the mouse leaves the area of the marker icon.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseOut' => 'console.log("mouse out");']);
+
+**Drag**
+
+This event is repeatedly fired while the user drags the marker.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventDrag' => 'console.log("dragging");']);
+
+**Drag Start**
+
+This event is fired when the user starts dragging the marker.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventDragStart' => 'console.log("drag start");']);
+
+**Drag End**
+
+This event is fired when the user stops dragging the marker.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventDragEnd' => 'console.log("drag end");']);
 
 ### Information Window
 
