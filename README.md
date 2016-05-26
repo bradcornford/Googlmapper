@@ -65,6 +65,7 @@ You can now configure Googlmapper in a few simple steps. Open `app/config/packag
 - `ui` - Show the Google Maps default UI options, e.g. true.
 - `markers.icon` - Set the default marker icon, e.g. img/icon.png.
 - `markers.animation` - Set the default marker animation, e.g. NONE, DROP, BOUNCE.
+- `cluster` - Set if map marker clusters should be used.
 
 ## Usage
 
