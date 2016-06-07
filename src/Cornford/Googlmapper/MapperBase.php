@@ -7,6 +7,8 @@ use Illuminate\View\Factory as View;
 abstract class MapperBase implements MappingBaseInterface
 {
 
+	const ENABLED = true;
+
 	const REGION = 'GB';
 
 	const LANGUAGE = 'en-gb';
@@ -16,10 +18,18 @@ abstract class MapperBase implements MappingBaseInterface
 	const TYPE_HYBRID = 'HYBRID';
 	const TYPE_TERRAIN = 'TERRAIN';
 
+	const USER = false;
+
+	const MARKER = true;
+
+	const CENTER = true;
+
 	const ZOOM = 8;
 	const SCROLL_WHEEL_ZOOM = true;
 
 	const TILT = 90;
+
+	const UI = true;
 
 	const ANIMATION_NONE = 'NONE';
 	const ANIMATION_DROP = 'DROP';
@@ -35,6 +45,16 @@ abstract class MapperBase implements MappingBaseInterface
 	const SYMBOL_FORWARD_CLOSED_ARROW = 'FORWARD_CLOSED_ARROW';
 	const SYMBOL_BACKWARD_OPEN_ARROW = 'BACKWARD_OPEN_ARROW';
 	const SYMBOL_FORWARD_OPEN_ARROW = 'FORWARD_OPEN_ARROW';
+
+	const ICON = '';
+
+	const CLUSTER = true;
+
+	const CLUSTERS_ICON = '//googlemaps.github.io/js-marker-clusterer/images/m';
+	const CLUSTERS_GRID = 60;
+	const CLUSTERS_ZOOM = null;
+	const CLUSTERS_CENTER = false;
+	const CLUSTERS_SIZE = 2;
 
 	/**
 	 * View.
@@ -568,6 +588,41 @@ abstract class MapperBase implements MappingBaseInterface
 	protected $cluster;
 
 	/**
+	 * Map marker clusters icon.
+	 *
+	 * @var array
+	 */
+	protected $clustersIcon;
+
+	/**
+	 * Map marker clusters grid.
+	 *
+	 * @var integer
+	 */
+	protected $clustersGrid;
+
+	/**
+	 * Map marker clusters zoom.
+	 *
+	 * @var integer|null
+	 */
+	protected $clustersZoom;
+
+	/**
+	 * Map marker clusters center.
+	 *
+	 * @var boolean
+	 */
+	protected $clustersCenter;
+
+	/**
+	 * Map marker clusters size.
+	 *
+	 * @var integer
+	 */
+	protected $clustersSize;
+
+	/**
 	 * Mapping items.
 	 *
 	 * @var array
@@ -606,21 +661,26 @@ abstract class MapperBase implements MappingBaseInterface
 			throw new MapperArgumentException('Language is required in ISO 639-1 code format.');
 		}
 
-		$this->setEnabled(isset($options['enabled']) ? $options['enabled'] : true);
+		$this->setEnabled(isset($options['enabled']) ? $options['enabled'] : self::ENABLED);
 		$this->setKey($options['key']);
 		$this->setRegion(isset($options['region']) ? $options['region'] : self::REGION);
 		$this->setLanguage(isset($options['language']) ? $options['language'] : self::LANGUAGE);
-		$this->setUser(isset($options['user']) ? $options['user'] : false);
-		$this->setMarker(isset($options['marker']) ? $options['marker'] : true);
-		$this->setCenter(isset($options['centre']) ? $options['centre'] : true);
+		$this->setUser(isset($options['user']) ? $options['user'] : self::USER);
+		$this->setMarker(isset($options['marker']) ? $options['marker'] : self::MARKER);
+		$this->setCenter(isset($options['center']) ? $options['center'] : self::CENTER);
 		$this->setZoom(isset($options['zoom']) ? $options['zoom'] : self::ZOOM);
 		$this->setScrollWheelZoom(isset($options['scrollWheelZoom']) ? $options['scrollWheelZoom'] : self::SCROLL_WHEEL_ZOOM);
 		$this->setType(isset($options['type']) ? $options['type'] : self::TYPE_ROADMAP);
 		$this->setTilt(isset($options['tilt']) ? $options['tilt'] : self::TILT);
-		$this->setUi(isset($options['ui']) ? $options['ui'] : true);
-		$this->setIcon(isset($options['markers']['icon']) ? $options['markers']['icon'] : '');
+		$this->setUi(isset($options['ui']) ? $options['ui'] : self::UI);
+		$this->setIcon(isset($options['markers']['icon']) ? $options['markers']['icon'] : self::ICON);
 		$this->setAnimation(isset($options['markers']['animation']) ? $options['markers']['animation'] : self::ANIMATION_NONE);
-		$this->setCluster(isset($options['cluster']) ? $options['cluster'] : true);
+		$this->setCluster(isset($options['cluster']) ? $options['cluster'] : self::CLUSTER);
+		$this->setClustersIcon(isset($options['clusters']['icon']) ? $options['clusters']['icon'] : self::CLUSTERS_ICON);
+		$this->setClustersGrid(isset($options['clusters']['grid']) ? $options['clusters']['grid'] : self::CLUSTERS_GRID);
+		$this->setClustersZoom(isset($options['clusters']['zoom']) ? $options['clusters']['zoom'] : self::CLUSTERS_ZOOM);
+		$this->setClustersCenter(isset($options['clusters']['center']) ? $options['clusters']['center'] : self::CLUSTERS_CENTER);
+		$this->setClustersSize(isset($options['clusters']['size']) ? $options['clusters']['size'] : self::CLUSTERS_SIZE);
 	}
 
 	/**
@@ -1136,6 +1196,193 @@ abstract class MapperBase implements MappingBaseInterface
 	{
 		return $this->animation;
 	}
+	/**
+	 * Set cluster status.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	protected function setCluster($value)
+	{
+		if (!is_bool($value)) {
+			throw new MapperArgumentException('Invalid map cluster setting.');
+		}
+
+		$this->cluster = $value;
+	}
+
+	/**
+	 * Get the cluster status.
+	 *
+	 * @return boolean
+	 */
+	public function getCluster()
+	{
+		return $this->cluster;
+	}
+
+	/**
+	 * Enable cluster.
+	 *
+	 * @return void
+	 */
+	public function enableCluster()
+	{
+		$this->setCluster(true);
+	}
+
+	/**
+	 * Disable cluster.
+	 *
+	 * @return void
+	 */
+	public function disableCluster()
+	{
+		$this->setCluster(false);
+	}
+
+	/**
+	 * Set map cluster icon.
+	 *
+	 * @param string $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setClustersIcon($value)
+	{
+		if (!is_string($value)) {
+			throw new MapperArgumentException('Invalid map clusters icon setting.');
+		}
+
+		$this->clustersIcon = $value;
+	}
+
+	/**
+	 * Get map clusters icon.
+	 *
+	 * @return string
+	 */
+	public function getClustersIcon()
+	{
+		return $this->clustersIcon;
+	}
+
+	/**
+	 * Set map cluster grid.
+	 *
+	 * @param integer $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setClustersGrid($value)
+	{
+		if (!is_integer($value)) {
+			throw new MapperArgumentException('Invalid map clusters grid setting.');
+		}
+
+		$this->clustersGrid = $value;
+	}
+
+	/**
+	 * Get map cluster grid.
+	 *
+	 * @return integer
+	 */
+	public function getClustersGrid()
+	{
+		return $this->clustersGrid;
+	}
+
+	/**
+	 * Set map cluster zoom.
+	 *
+	 * @param integer|null $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setClustersZoom($value)
+	{
+		if (!is_integer($value) && !is_null($value)) {
+			throw new MapperArgumentException('Invalid map clusters zoom setting.');
+		}
+
+		$this->clustersZoom = $value;
+	}
+
+	/**
+	 * Get map cluster grid.
+	 *
+	 * @return integer|null
+	 */
+	public function getClustersZoom()
+	{
+		return $this->clustersZoom;
+	}
+
+	/**
+	 * Set map cluster center.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setClustersCenter($value)
+	{
+		if (!is_bool($value)) {
+			throw new MapperArgumentException('Invalid map clusters center setting.');
+		}
+
+		$this->clustersCenter = $value;
+	}
+
+	/**
+	 * Get map cluster center.
+	 *
+	 * @return boolean
+	 */
+	public function getClustersCenter()
+	{
+		return $this->clustersCenter;
+	}
+
+	/**
+	 * Set map cluster size.
+	 *
+	 * @param integer $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setClustersSize($value)
+	{
+		if (!is_integer($value)) {
+			throw new MapperArgumentException('Invalid map clusters size setting.');
+		}
+
+		$this->clustersSize = $value;
+	}
+
+	/**
+	 * Get map cluster size.
+	 *
+	 * @return integer
+	 */
+	public function getClustersSize()
+	{
+		return $this->clustersSize;
+	}
 
 	/**
 	 * Get mapper options.
@@ -1166,7 +1413,14 @@ abstract class MapperBase implements MappingBaseInterface
 				'animation' => $this->getAnimation(),
 				'symbol' => '',
 			],
-			'cluster' => $this->getCluster()
+			'cluster' => $this->getCluster(),
+			'clusters' => [
+				'icon' => $this->getClustersIcon(),
+				'grid' => $this->getClustersGrid(),
+				'zoom' => $this->getClustersZoom(),
+				'center' => $this->getClustersCenter(),
+				'size' => $this->getClustersSize()
+			],
 		];
 	}
 
@@ -1214,54 +1468,6 @@ abstract class MapperBase implements MappingBaseInterface
 	public function getItem($item)
 	{
 		return isset($this->items[$item]) ? $this->items[$item] : false;
-	}
-
-	/**
-	 * Set cluster status.
-	 *
-	 * @param boolean $value
-	 *
-	 * @throws MapperArgumentException
-	 *
-	 * @return void
-	 */
-	protected function setCluster($value)
-	{
-		if (!is_bool($value)) {
-			throw new MapperArgumentException('Invalid map cluster setting.');
-		}
-
-		$this->cluster = $value;
-	}
-
-	/**
-	 * Get the cluster status.
-	 *
-	 * @return boolean
-	 */
-	protected function getCluster()
-	{
-		return $this->cluster;
-	}
-
-	/**
-	 * Enable cluster.
-	 *
-	 * @return void
-	 */
-	public function enableCluster()
-	{
-		$this->setCluster(true);
-	}
-
-	/**
-	 * Disable cluster.
-	 *
-	 * @return void
-	 */
-	public function disableCluster()
-	{
-		$this->setCluster(false);
 	}
 
 }
