@@ -156,4 +156,68 @@ return array(
     */
     'cluster' => true,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Map Marker Cluster
+    |--------------------------------------------------------------------------
+    |
+    | Set the default Googlmapper map marker cluster behaviour.
+    |
+    */
+    'clusters' => array (
+
+        /*
+        |--------------------------------------------------------------------------
+        | Cluster Icon
+        |--------------------------------------------------------------------------
+        |
+        | Display custom images for clusters using icon path. (Link to an image path)
+        |
+        */
+        'icon' => '//googlemaps.github.io/js-marker-clusterer/images/m',
+
+        /*
+        |--------------------------------------------------------------------------
+        | Cluster Size
+        |--------------------------------------------------------------------------
+        |
+        | The grid size of a cluster in pixels.
+        |
+        */
+        'grid' => 60,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Cluster Zoom
+        |--------------------------------------------------------------------------
+        |
+        | The maximum zoom level that a marker can be part of a cluster.
+        |
+        */
+        'zoom' => null,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Cluster Center
+        |--------------------------------------------------------------------------
+        |
+        | Whether the center of each cluster should be the average of all markers
+        | in the cluster.
+        |
+        */
+        'center' => false,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Cluster Size
+        |--------------------------------------------------------------------------
+        |
+        | The minimum number of markers to be in a cluster before the markers are
+        | hidden and a count is shown.
+        |
+        */
+        'size' => 2
+
+    ),
+
 );

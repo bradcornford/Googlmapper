@@ -9,10 +9,13 @@ class MapperSpec extends ObjectBehavior
 
 	const STRING = 'test';
 	const INTEGER = 10;
+	const BOOLEAN = false;
 
 	const REGION = 'GB';
 	const LANGUAGE = 'en-gb';
 	const TYPE = 'ROADMAP';
+
+	const ANIMATION = 'NONE';
 
 	public function let()
 	{
@@ -134,6 +137,56 @@ class MapperSpec extends ObjectBehavior
 	{
 		$this->setTilt(self::INTEGER);
 		$this->getTilt()->shouldReturn(self::INTEGER);
+	}
+
+	public function it_can_set_and_get_icon_option()
+	{
+		$this->setIcon(self::STRING);
+		$this->getIcon()->shouldReturn(self::STRING);
+	}
+
+	public function it_can_set_and_get_animation_option()
+	{
+		$this->setAnimation(self::ANIMATION);
+		$this->getAnimation()->shouldReturn(self::ANIMATION);
+	}
+
+	public function it_can_set_and_get_cluster_option()
+	{
+		$this->enableCluster();
+		$this->getCluster()->shouldReturn(true);
+		$this->disableCluster();
+		$this->getCluster()->shouldReturn(false);
+	}
+
+	public function it_can_set_and_get_clusters_icon_option()
+	{
+		$this->setClustersIcon(self::STRING);
+		$this->getClustersIcon()->shouldReturn(self::STRING);
+	}
+
+	public function it_can_set_and_get_clusters_grid_option()
+	{
+		$this->setClustersGrid(self::INTEGER);
+		$this->getClustersGrid()->shouldReturn(self::INTEGER);
+	}
+
+	public function it_can_set_and_get_clusters_zoom_option()
+	{
+		$this->setClustersZoom(self::INTEGER);
+		$this->getClustersZoom()->shouldReturn(self::INTEGER);
+	}
+
+	public function it_can_set_and_get_clusters_center_option()
+	{
+		$this->setClustersCenter(self::BOOLEAN);
+		$this->getClustersCenter()->shouldReturn(self::BOOLEAN);
+	}
+
+	public function it_can_set_and_get_clusters_size_option()
+	{
+		$this->setClustersSize(self::INTEGER);
+		$this->getClustersSize()->shouldReturn(self::INTEGER);
 	}
 
 	public function it_can_create_a_map()
