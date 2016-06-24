@@ -65,6 +65,12 @@ You can now configure Googlmapper in a few simple steps. Open `app/config/packag
 - `ui` - Show the Google Maps default UI options, e.g. true.
 - `markers.icon` - Set the default marker icon, e.g. img/icon.png.
 - `markers.animation` - Set the default marker animation, e.g. NONE, DROP, BOUNCE.
+- `cluster` - Set if map marker clusters should be used.
+- `clusters.icon` - Display custom images for clusters using icon path.
+- `clusters.grid` - The grid size of a cluster in pixels.
+- `clusters.zoom` - The maximum zoom level that a marker can be part of a cluster.
+- `clusters.center` - Whether the center of each cluster should be the average of all markers in the cluster.
+- `clusters.size` - The minimum number of markers to be in a cluster before the markers are hidden and a count is shown.
 
 ## Usage
 
@@ -92,6 +98,8 @@ The `map` method allows a map to be created, with latitude, longitude and option
 	Mapper::map(53.381128999999990000, -1.470085000000040000);
 	Mapper::map(53.381128999999990000, -1.470085000000040000, ['zoom' => 15, 'center' => false, 'marker' => false, 'type' => 'HYBRID', 'overlay' => 'TRAFFIC']);
 	Mapper::map(53.381128999999990000, -1.470085000000040000, ['zoom' => 10, 'markers' => ['title' => 'My Location', 'animation' => 'DROP']]);
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['zoom' => 10, 'markers' => ['title' => 'My Location', 'animation' => 'DROP'], 'cluster' => false]);
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['zoom' => 10, 'markers' => ['title' => 'My Location', 'animation' => 'DROP'], 'clusters' => ['size' => 10, 'center' => true, 'zoom' => 20]]);
 
 ##### Map Events
 

@@ -27,10 +27,6 @@
 			{!! $marker->render($key, $view) !!}
 		@endforeach
 
-		@if ($options['cluster'])
-			var markerCluster = new MarkerClusterer(map_{!! $id !!}, markers);
-		@endif
-
 		@foreach ($options['shapes'] as $key => $shape)
 			{!! $shape->render($key, $view) !!}
 		@endforeach
@@ -66,6 +62,17 @@
 			google.maps.event.addListenerOnce(map_{!! $id !!}, "tilesloaded", function() {
 				{!! $options['eventAfterLoad'] !!}
 			});
+		@endif
+
+		@if ($options['cluster'])
+			var markerClusterOptions = {
+				imagePath: '{!! $options['clusters']['icon'] !!}',
+				gridSize: {!! $options['clusters']['grid'] !!},
+				maxZoom: @if ($options['clusters']['zoom'] === null) null @else {!! $options['clusters']['zoom'] !!} @endif,
+				averageCenter: @if ($options['clusters']['center'] === true) true @else false @endif,
+				minimumClusterSize: {!! $options['clusters']['size'] !!}
+			};
+			var markerCluster = new MarkerClusterer(map_{!! $id !!}, markers, markerClusterOptions);
 		@endif
 
 		maps.push({
