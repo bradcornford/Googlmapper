@@ -46,10 +46,12 @@ $mapper = new Mapper($viewFactory, $config);
 $mapper->location('Sheffield')->streetview(1, 1, ['ui' => false]);
 
 // Map
-$mapper->map(53.3, -1.4, ['zoom' => 10, 'markers' => ['title' => 'My Location', 'animation' => 'DROP']]);
+$mapper->map(53.3, -1.4, ['zoom' => 10, 'center' => false, 'markers' => ['title' => 'My Location', 'animation' => 'DROP']]);
 
 // Information window
 $mapper->informationWindow(53.4, -1.5, 'Content');
+$mapper->informationWindow(52.4, -1.0, 'Content');
+$mapper->informationWindow(51.4, -0.5, 'Content');
 
 // Render
 print $mapper->render();
