@@ -35,10 +35,6 @@
 			{{ $shape->render($key, $view) }}
 		@endforeach
 
-		@if (!$options['center'])
-			map_{{ $id }}.fitBounds(bounds);
-		@endif
-
 		@if ($options['overlay'] == 'BIKE')
 			var bikeLayer = new google.maps.BicyclingLayer();
 			bikeLayer.setMap(map_{{ $id }});
@@ -56,6 +52,11 @@
 
 		var listener = google.maps.event.addListener(map_{{ $id }}, "idle", function () {
 			map_{{ $id }}.setZoom({{ $options['zoom'] }});
+
+			@if (!$options['center'])
+				map_{{ $id }}.fitBounds(bounds);
+			@endif
+
 			google.maps.event.removeListener(listener);
 		});
 
