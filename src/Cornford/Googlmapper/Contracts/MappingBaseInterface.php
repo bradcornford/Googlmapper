@@ -141,6 +141,27 @@ interface MappingBaseInterface {
 	public function disableCenter();
 
 	/**
+	 * Get the map locate user status.
+	 *
+	 * @return boolean
+	 */
+	public function getLocate();
+
+	/**
+	 * Enable locate user position on maps.
+	 *
+	 * @return void
+	 */
+	public function enableLocate();
+
+	/**
+	 * Disable locate user position on maps.
+	 *
+	 * @return void
+	 */
+	public function disableLocate();
+
+	/**
 	 * Get the map UI status.
 	 *
 	 * @return boolean

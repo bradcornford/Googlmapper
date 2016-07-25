@@ -8,6 +8,7 @@ class MapperSpec extends ObjectBehavior
 {
 
 	const STRING = 'test';
+	const LOCATION = 'Sheffield, United Kingdom';
 	const INTEGER = 10;
 
 	const REGION = 'GB';
@@ -43,7 +44,7 @@ class MapperSpec extends ObjectBehavior
 
 	public function it_can_return_a_location_when_a_location_is_searched()
 	{
-		$this->location(self::STRING)->shouldReturnAnInstanceOf('Cornford\Googlmapper\Models\Location');
+		$this->location(self::LOCATION)->shouldReturnAnInstanceOf('Cornford\Googlmapper\Models\Location');
 	}
 
 	public function it_can_throws_an_exception_when_a_blank_location_is_searched()
@@ -108,6 +109,14 @@ class MapperSpec extends ObjectBehavior
 		$this->getCenter()->shouldReturn(true);
 		$this->disableCenter();
 		$this->getCenter()->shouldReturn(false);
+	}
+
+	public function it_can_set_and_get_locate_option()
+	{
+		$this->enableLocate();
+		$this->getLocate()->shouldReturn(true);
+		$this->disableLocate();
+		$this->getLocate()->shouldReturn(false);
 	}
 
 	public function it_can_set_and_get_ui_option()

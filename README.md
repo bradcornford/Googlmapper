@@ -55,6 +55,7 @@ You can now configure Googlmapper in a few simple steps. Open `app/config/packag
 - `user` - Use custom Google Maps for users logged into the Google service, e.g. false.
 - `marker` - Automatically add Google Maps marker for your maps initial location, e.g. true.
 - `center` - Automatically center Google Maps around the initial location, when false, Google Maps will automatically center the map, e.g. true.
+- `locate` - Automatically center Google Maps around the users current location, when false, Google Maps will automatically center the map, e.g. true.
 - `zoom` - Set the default zoom level for Google Maps, e.g. 8.
 - `scrollWheelZoom` - Set the default scroll wheel zoom Google Maps, e.g. true.
 - `type` - Set the default map type for Google Maps, e.g. ROADMAP, SATELLITE, HYBRID, TERRAIN.
