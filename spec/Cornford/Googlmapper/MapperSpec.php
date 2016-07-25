@@ -113,6 +113,14 @@ class MapperSpec extends ObjectBehavior
 		$this->getCenter()->shouldReturn(false);
 	}
 
+	public function it_can_set_and_get_locate_option()
+	{
+		$this->enableLocate();
+		$this->getLocate()->shouldReturn(true);
+		$this->disableLocate();
+		$this->getLocate()->shouldReturn(false);
+	}
+
 	public function it_can_set_and_get_ui_option()
 	{
 		$this->enableUi();

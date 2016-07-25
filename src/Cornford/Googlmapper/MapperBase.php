@@ -24,6 +24,8 @@ abstract class MapperBase implements MappingBaseInterface
 
 	const CENTER = true;
 
+	const LOCATE = false;
+
 	const ZOOM = 8;
 	const SCROLL_WHEEL_ZOOM = true;
 
@@ -509,6 +511,13 @@ abstract class MapperBase implements MappingBaseInterface
 	protected $center;
 
 	/**
+	 * Locate users location.
+	 *
+	 * @var boolean
+	 */
+	protected $locate;
+
+	/**
 	 * Show map UI.
 	 *
 	 * @var boolean
@@ -668,6 +677,7 @@ abstract class MapperBase implements MappingBaseInterface
 		$this->setUser(isset($options['user']) ? $options['user'] : self::USER);
 		$this->setMarker(isset($options['marker']) ? $options['marker'] : self::MARKER);
 		$this->setCenter(isset($options['center']) ? $options['center'] : self::CENTER);
+		$this->setLocate(isset($options['locate']) ? $options['locate'] : self::LOCATE);
 		$this->setZoom(isset($options['zoom']) ? $options['zoom'] : self::ZOOM);
 		$this->setScrollWheelZoom(isset($options['scrollWheelZoom']) ? $options['scrollWheelZoom'] : self::SCROLL_WHEEL_ZOOM);
 		$this->setType(isset($options['type']) ? $options['type'] : self::TYPE_ROADMAP);
@@ -975,6 +985,54 @@ abstract class MapperBase implements MappingBaseInterface
 	public function disableCenter()
 	{
 		$this->setCenter(false);
+	}
+
+	/**
+	 * Set the map locate user status.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	protected function setLocate($value)
+	{
+		if (!is_bool($value)) {
+			throw new MapperArgumentException('Invalid map locate setting.');
+		}
+
+		$this->locate = $value;
+	}
+
+	/**
+	 * Get the map locate user status.
+	 *
+	 * @return boolean
+	 */
+	public function getLocate()
+	{
+		return $this->locate;
+	}
+
+	/**
+	 * Enable locate user position on maps.
+	 *
+	 * @return void
+	 */
+	public function enableLocate()
+	{
+		$this->setLocate(true);
+	}
+
+	/**
+	 * Disable locate user position on maps.
+	 *
+	 * @return void
+	 */
+	public function disableLocate()
+	{
+		$this->setLocate(false);
 	}
 
 	/**
@@ -1399,6 +1457,7 @@ abstract class MapperBase implements MappingBaseInterface
 			'user' => $this->getUser(),
 			'marker' => $this->getMarker(),
 			'center' => $this->getCenter(),
+			'locate' => $this->getLocate(),
 			'zoom' => $this->getZoom(),
 			'scrollWheelZoom' => $this->getScrollWheelZoom(),
 			'type' => $this->getType(),
