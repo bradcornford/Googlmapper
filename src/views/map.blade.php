@@ -57,6 +57,14 @@
 				map_{{ $id }}.fitBounds(bounds);
 			@endif
 
+			@if ($options['locate'])
+				if (typeof navigator !== 'undefined' && navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(function (position) {
+						map_{{ $id }}.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+					});
+				}
+			@endif
+
 			google.maps.event.removeListener(listener);
 		});
 
