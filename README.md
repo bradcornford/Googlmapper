@@ -116,20 +116,6 @@ This event is fired after the map is loaded.
 
 	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventAfterLoad' => 'console.log("after load");']);
 
-##### Map Events
-
-**Before Load**
-
-This event is fired before the map is loaded.
-
-	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventBeforeLoad' => 'console.log("before load");']);
-
-**After Load**
-
-This event is fired after the map is loaded.
-
-	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventAfterLoad' => 'console.log("after load");']);
-
 ### Location
 
 The `location` method allows a location to be searched for with a string, returning a Location object with its latitude and longitude.
