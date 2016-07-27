@@ -14,3 +14,7 @@ var polyline_{{ $id }} = new google.maps.Polyline({
 });
 
 polyline_{{ $id }}.setMap({{ $options['map'] }});
+
+shapes.push({
+	'polyline_{{ $id }}': polyline_{{ $id }}
+});

@@ -22,6 +22,7 @@
 		map_{{ $id }}.setTilt({{ $options['tilt'] }});
 
 		var markers = [];
+		var shapes = [];
 
 		@foreach ($options['markers'] as $key => $marker)
 			{{ $marker->render($key, $view) }}
@@ -60,7 +61,7 @@
 			@if ($options['locate'])
 				if (typeof navigator !== 'undefined' && navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(function (position) {
-						map_{!! $id !!}.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+						map_{{ $id }}.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
 					});
 				}
 			@endif
@@ -69,19 +70,20 @@
 		});
 
 		@if (isset($options['eventBeforeLoad']))
-			{!! $options['eventBeforeLoad'] !!}
+			{{ $options['eventBeforeLoad'] }}
 		@endif
 
 		@if (isset($options['eventAfterLoad']))
-			google.maps.event.addListenerOnce(map_{!! $id !!}, "tilesloaded", function() {
-				{!! $options['eventAfterLoad'] !!}
+			google.maps.event.addListenerOnce(map_{{ $id }}, "tilesloaded", function() {
+				{{ $options['eventAfterLoad'] }}
 			});
 		@endif
 
 		maps.push({
 			key: {{ $id }},
 			markers: markers,
-			map: map_{{ $id }}
+			map: map_{{ $id }},
+			shapes: shapes
 		});
 	}
 
