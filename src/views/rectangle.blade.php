@@ -15,3 +15,7 @@ var rectangle_{!! $id !!} = new google.maps.Rectangle({
 });
 
 rectangle_{!! $id !!}.setMap({!! $options['map'] !!});
+
+shapes.push({
+	'rectangle_{!! $id !!}': rectangle_{!! $id !!}
+});
