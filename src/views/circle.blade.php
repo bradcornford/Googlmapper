@@ -16,3 +16,7 @@ var circle_{!! $id !!} = new google.maps.Circle({
 });
 
 circle_{!! $id !!}.setMap({!! $options['map'] !!});
+
+shapes.push({
+	'circle_{!! $id !!}': circle_{!! $id !!}
+});

@@ -22,6 +22,7 @@
 		map_{!! $id !!}.setTilt({!! $options['tilt'] !!});
 
 		var markers = [];
+		var shapes = [];
 
 		@foreach ($options['markers'] as $key => $marker)
 			{!! $marker->render($key, $view) !!}
@@ -86,7 +87,8 @@
 		maps.push({
 			key: {!! $id !!},
 			markers: markers,
-			map: map_{!! $id !!}
+			map: map_{!! $id !!},
+			shapes: shapes
 		});
 	}
 
