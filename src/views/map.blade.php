@@ -68,6 +68,16 @@
 			google.maps.event.removeListener(listener);
 		});
 
+		@if (isset($options['eventBeforeLoad']))
+			{!! $options['eventBeforeLoad'] !!}
+		@endif
+
+		@if (isset($options['eventAfterLoad']))
+			google.maps.event.addListenerOnce(map_{!! $id !!}, "tilesloaded", function() {
+				{!! $options['eventAfterLoad'] !!}
+			});
+		@endif
+
 		maps.push({
 			key: {{ $id }},
 			markers: markers,

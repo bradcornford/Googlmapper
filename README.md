@@ -90,6 +90,20 @@ The `map` method allows a map to be created, with latitude, longitude and option
 	Mapper::map(53.381128999999990000, -1.470085000000040000, ['zoom' => 15, 'center' => false, 'marker' => false, 'type' => 'HYBRID', 'overlay' => 'TRAFFIC']);
 	Mapper::map(53.381128999999990000, -1.470085000000040000, ['zoom' => 10, 'markers' => ['title' => 'My Location', 'animation' => 'DROP']]);
 
+##### Map Events
+
+**Before Load**
+
+This event is fired before the map is loaded.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventBeforeLoad' => 'console.log("before load");']);
+
+**After Load**
+
+This event is fired after the map is loaded.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventAfterLoad' => 'console.log("after load");']);
+
 ### Location
 
 The `location` method allows a location to be searched for with a string, returning a Location object with its latitude and longitude.
