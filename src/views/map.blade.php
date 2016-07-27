@@ -60,13 +60,23 @@
 			@if ($options['locate'])
 				if (typeof navigator !== 'undefined' && navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(function (position) {
-						map_{!! $id !!}.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+						map_{{ $id }}.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
 					});
 				}
 			@endif
 
 			google.maps.event.removeListener(listener);
 		});
+
+		@if (isset($options['eventBeforeLoad']))
+			{{ $options['eventBeforeLoad'] }}
+		@endif
+
+		@if (isset($options['eventAfterLoad']))
+			google.maps.event.addListenerOnce(map_{{ $id }}, "tilesloaded", function() {
+				{{ $options['eventAfterLoad'] }}
+			});
+		@endif
 
 		maps.push({
 			key: {{ $id }},
