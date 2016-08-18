@@ -29,6 +29,8 @@ abstract class MapperBase implements MappingBaseInterface
 	const ZOOM = 8;
 	const SCROLL_WHEEL_ZOOM = true;
 
+	const FULLSCREEN_CONTROL = true;
+
 	const TILT = 90;
 
 	const UI = true;
@@ -539,6 +541,13 @@ abstract class MapperBase implements MappingBaseInterface
 	protected $scrollWheelZoom;
 
 	/**
+	 * Map fullscreen zoom.
+	 *
+	 * @var boolean
+	 */
+	protected $fullscreenControl;
+
+	/**
 	 * Map type.
 	 *
 	 * @var string
@@ -680,6 +689,7 @@ abstract class MapperBase implements MappingBaseInterface
 		$this->setLocate(isset($options['locate']) ? $options['locate'] : self::LOCATE);
 		$this->setZoom(isset($options['zoom']) ? $options['zoom'] : self::ZOOM);
 		$this->setScrollWheelZoom(isset($options['scrollWheelZoom']) ? $options['scrollWheelZoom'] : self::SCROLL_WHEEL_ZOOM);
+		$this->setFullscreenControl(isset($options['fullscreenControl']) ? $options['fullscreenControl'] : self::FULLSCREEN_CONTROL);
 		$this->setType(isset($options['type']) ? $options['type'] : self::TYPE_ROADMAP);
 		$this->setTilt(isset($options['tilt']) ? $options['tilt'] : self::TILT);
 		$this->setUi(isset($options['ui']) ? $options['ui'] : self::UI);
@@ -1144,6 +1154,34 @@ abstract class MapperBase implements MappingBaseInterface
 	}
 
 	/**
+	 * Set map fullscreen control.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setFullscreenControl($value)
+	{
+		if (!is_bool($value)) {
+			throw new MapperArgumentException('Fullscreen control must be a boolean.');
+		}
+
+		$this->fullscreenControl = $value;
+	}
+
+	/**
+	 * Get map fullscreen control.
+	 *
+	 * @return boolean
+	 */
+	public function getFullscreenControl()
+	{
+		return $this->fullscreenControl;
+	}
+
+	/**
 	 * Set map type.
 	 *
 	 * @param string $value
@@ -1254,6 +1292,7 @@ abstract class MapperBase implements MappingBaseInterface
 	{
 		return $this->animation;
 	}
+
 	/**
 	 * Set cluster status.
 	 *
@@ -1460,6 +1499,7 @@ abstract class MapperBase implements MappingBaseInterface
 			'locate' => $this->getLocate(),
 			'zoom' => $this->getZoom(),
 			'scrollWheelZoom' => $this->getScrollWheelZoom(),
+			'fullscreenControl' => $this->getFullscreenControl(),
 			'type' => $this->getType(),
 			'tilt' => $this->getTilt(),
 			'ui' => $this->getUi(),

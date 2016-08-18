@@ -1,5 +1,7 @@
 <?php namespace Cornford\Googlmapper\Contracts;
 
+use Cornford\Googlmapper\Exceptions\MapperArgumentException;
+
 interface MappingBaseInterface {
 
 	/**
@@ -201,6 +203,42 @@ interface MappingBaseInterface {
 	public function getZoom();
 
 	/**
+	 * Set map scroll wheel zoom.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setScrollWheelZoom($value);
+
+	/**
+	 * Get map scroll wheel zoom.
+	 *
+	 * @return boolean
+	 */
+	public function getScrollWheelZoom();
+
+	/**
+	 * Set map fullscreen control.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setFullscreenControl($value);
+
+	/**
+	 * Get map fullscreen control.
+	 *
+	 * @return boolean
+	 */
+	public function getFullscreenControl();
+
+	/**
 	 * Set map type.
 	 *
 	 * @param string $type
@@ -271,6 +309,117 @@ interface MappingBaseInterface {
 	 * @return string
 	 */
 	public function getAnimation();
+
+	/**
+	 * Get the cluster status.
+	 *
+	 * @return boolean
+	 */
+	public function getCluster();
+
+	/**
+	 * Enable cluster.
+	 *
+	 * @return void
+	 */
+	public function enableCluster();
+
+	/**
+	 * Disable cluster.
+	 *
+	 * @return void
+	 */
+	public function disableCluster();
+
+	/**
+	 * Set map cluster icon.
+	 *
+	 * @param string $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setClustersIcon($value);
+
+	/**
+	 * Get map clusters icon.
+	 *
+	 * @return string
+	 */
+	public function getClustersIcon();
+
+	/**
+	 * Set map cluster grid.
+	 *
+	 * @param integer $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setClustersGrid($value);
+
+	/**
+	 * Get map cluster grid.
+	 *
+	 * @return integer
+	 */
+	public function getClustersGrid();
+
+	/**
+	 * Set map cluster zoom.
+	 *
+	 * @param integer|null $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setClustersZoom($value);
+
+	/**
+	 * Get map cluster grid.
+	 *
+	 * @return integer|null
+	 */
+	public function getClustersZoom();
+
+	/**
+	 * Set map cluster center.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setClustersCenter($value);
+
+	/**
+	 * Get map cluster center.
+	 *
+	 * @return boolean
+	 */
+	public function getClustersCenter();
+
+	/**
+	 * Set map cluster size.
+	 *
+	 * @param integer $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setClustersSize($value);
+
+	/**
+	 * Get map cluster size.
+	 *
+	 * @return integer
+	 */
+	public function getClustersSize();
 
 	/**
 	 * Get the mapping items.
