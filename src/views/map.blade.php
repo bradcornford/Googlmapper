@@ -15,7 +15,8 @@
 			@endif
 			mapTypeId: google.maps.MapTypeId.{!! $options['type'] !!},
 			disableDefaultUI: @if (!$options['ui']) true @else false @endif,
-			scrollwheel: @if ($options['scrollWheelZoom']) true @else false @endif
+			scrollwheel: @if ($options['scrollWheelZoom']) true @else false @endif,
+			fullscreenControl: @if ($options['fullscreenControl']) true @else false @endif,
 		};
 
 		var map_{!! $id !!} = new google.maps.Map(document.getElementById('map-canvas-{!! $id !!}'), mapOptions_{!! $id !!});

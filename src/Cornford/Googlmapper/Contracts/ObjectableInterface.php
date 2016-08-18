@@ -1,7 +1,5 @@
 <?php namespace Cornford\Googlmapper\Contracts;
 
-use Illuminate\View\Factory as View;
-
 interface ObjectableInterface {
 
 	/**
