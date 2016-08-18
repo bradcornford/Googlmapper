@@ -1,5 +1,7 @@
 <?php namespace Cornford\Googlmapper\Contracts;
 
+use Cornford\Googlmapper\Exceptions\MapperArgumentException;
+
 interface MappingBaseInterface {
 
 	/**
@@ -201,6 +203,42 @@ interface MappingBaseInterface {
 	public function getZoom();
 
 	/**
+	 * Set map scroll wheel zoom.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setScrollWheelZoom($value);
+
+	/**
+	 * Get map scroll wheel zoom.
+	 *
+	 * @return boolean
+	 */
+	public function getScrollWheelZoom();
+
+	/**
+	 * Set map fullscreen control.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setFullscreenControl($value);
+
+	/**
+	 * Get map fullscreen control.
+	 *
+	 * @return boolean
+	 */
+	public function getFullscreenControl();
+
+	/**
 	 * Set map type.
 	 *
 	 * @param string $type
@@ -271,6 +309,27 @@ interface MappingBaseInterface {
 	 * @return string
 	 */
 	public function getAnimation();
+
+	/**
+	 * Get the cluster status.
+	 *
+	 * @return boolean
+	 */
+	public function getCluster();
+
+	/**
+	 * Enable cluster.
+	 *
+	 * @return void
+	 */
+	public function enableCluster();
+
+	/**
+	 * Disable cluster.
+	 *
+	 * @return void
+	 */
+	public function disableCluster();
 
 	/**
 	 * Get the mapping items.
