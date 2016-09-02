@@ -15,13 +15,15 @@
 			@endif
 			mapTypeId: google.maps.MapTypeId.{!! $options['type'] !!},
 			disableDefaultUI: @if (!$options['ui']) true @else false @endif,
-			scrollwheel: @if ($options['scrollWheelZoom']) true @else false @endif
+			scrollwheel: @if ($options['scrollWheelZoom']) true @else false @endif,
+			fullscreenControl: @if ($options['fullscreenControl']) true @else false @endif,
 		};
 
 		var map_{!! $id !!} = new google.maps.Map(document.getElementById('map-canvas-{!! $id !!}'), mapOptions_{!! $id !!});
 		map_{!! $id !!}.setTilt({!! $options['tilt'] !!});
 
 		var markers = [];
+		var shapes = [];
 
 		@foreach ($options['markers'] as $key => $marker)
 			{!! $marker->render($key, $view) !!}
@@ -30,10 +32,6 @@
 		@foreach ($options['shapes'] as $key => $shape)
 			{!! $shape->render($key, $view) !!}
 		@endforeach
-
-		@if (!$options['center'])
-			map_{!! $id !!}.fitBounds(bounds);
-		@endif
 
 		@if ($options['overlay'] == 'BIKE')
 			var bikeLayer = new google.maps.BicyclingLayer();
@@ -52,6 +50,18 @@
 
 		var idleListener = google.maps.event.addListenerOnce(map_{!! $id !!}, "idle", function () {
 			map_{!! $id !!}.setZoom({!! $options['zoom'] !!});
+
+			@if (!$options['center'])
+				map_{!! $id !!}.fitBounds(bounds);
+			@endif
+
+			@if ($options['locate'])
+				if (typeof navigator !== 'undefined' && navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(function (position) {
+						map_{!! $id !!}.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+					});
+				}
+			@endif
 		});
 
 		@if (isset($options['eventBeforeLoad']))
@@ -78,7 +88,8 @@
 		maps.push({
 			key: {!! $id !!},
 			markers: markers,
-			map: map_{!! $id !!}
+			map: map_{!! $id !!},
+			shapes: shapes
 		});
 	}
 

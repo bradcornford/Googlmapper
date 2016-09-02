@@ -24,8 +24,12 @@ abstract class MapperBase implements MappingBaseInterface
 
 	const CENTER = true;
 
+	const LOCATE = false;
+
 	const ZOOM = 8;
 	const SCROLL_WHEEL_ZOOM = true;
+
+	const FULLSCREEN_CONTROL = true;
 
 	const TILT = 90;
 
@@ -509,6 +513,13 @@ abstract class MapperBase implements MappingBaseInterface
 	protected $center;
 
 	/**
+	 * Locate users location.
+	 *
+	 * @var boolean
+	 */
+	protected $locate;
+
+	/**
 	 * Show map UI.
 	 *
 	 * @var boolean
@@ -528,6 +539,13 @@ abstract class MapperBase implements MappingBaseInterface
 	 * @var boolean
 	 */
 	protected $scrollWheelZoom;
+
+	/**
+	 * Map fullscreen zoom.
+	 *
+	 * @var boolean
+	 */
+	protected $fullscreenControl;
 
 	/**
 	 * Map type.
@@ -668,8 +686,10 @@ abstract class MapperBase implements MappingBaseInterface
 		$this->setUser(isset($options['user']) ? $options['user'] : self::USER);
 		$this->setMarker(isset($options['marker']) ? $options['marker'] : self::MARKER);
 		$this->setCenter(isset($options['center']) ? $options['center'] : self::CENTER);
+		$this->setLocate(isset($options['locate']) ? $options['locate'] : self::LOCATE);
 		$this->setZoom(isset($options['zoom']) ? $options['zoom'] : self::ZOOM);
 		$this->setScrollWheelZoom(isset($options['scrollWheelZoom']) ? $options['scrollWheelZoom'] : self::SCROLL_WHEEL_ZOOM);
+		$this->setFullscreenControl(isset($options['fullscreenControl']) ? $options['fullscreenControl'] : self::FULLSCREEN_CONTROL);
 		$this->setType(isset($options['type']) ? $options['type'] : self::TYPE_ROADMAP);
 		$this->setTilt(isset($options['tilt']) ? $options['tilt'] : self::TILT);
 		$this->setUi(isset($options['ui']) ? $options['ui'] : self::UI);
@@ -978,6 +998,54 @@ abstract class MapperBase implements MappingBaseInterface
 	}
 
 	/**
+	 * Set the map locate user status.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	protected function setLocate($value)
+	{
+		if (!is_bool($value)) {
+			throw new MapperArgumentException('Invalid map locate setting.');
+		}
+
+		$this->locate = $value;
+	}
+
+	/**
+	 * Get the map locate user status.
+	 *
+	 * @return boolean
+	 */
+	public function getLocate()
+	{
+		return $this->locate;
+	}
+
+	/**
+	 * Enable locate user position on maps.
+	 *
+	 * @return void
+	 */
+	public function enableLocate()
+	{
+		$this->setLocate(true);
+	}
+
+	/**
+	 * Disable locate user position on maps.
+	 *
+	 * @return void
+	 */
+	public function disableLocate()
+	{
+		$this->setLocate(false);
+	}
+
+	/**
 	 * Set the map UI status.
 	 *
 	 * @param boolean $value
@@ -1083,6 +1151,34 @@ abstract class MapperBase implements MappingBaseInterface
 	public function getScrollWheelZoom()
 	{
 		return $this->scrollWheelZoom;
+	}
+
+	/**
+	 * Set map fullscreen control.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setFullscreenControl($value)
+	{
+		if (!is_bool($value)) {
+			throw new MapperArgumentException('Fullscreen control must be a boolean.');
+		}
+
+		$this->fullscreenControl = $value;
+	}
+
+	/**
+	 * Get map fullscreen control.
+	 *
+	 * @return boolean
+	 */
+	public function getFullscreenControl()
+	{
+		return $this->fullscreenControl;
 	}
 
 	/**
@@ -1196,6 +1292,7 @@ abstract class MapperBase implements MappingBaseInterface
 	{
 		return $this->animation;
 	}
+
 	/**
 	 * Set cluster status.
 	 *
@@ -1399,8 +1496,10 @@ abstract class MapperBase implements MappingBaseInterface
 			'user' => $this->getUser(),
 			'marker' => $this->getMarker(),
 			'center' => $this->getCenter(),
+			'locate' => $this->getLocate(),
 			'zoom' => $this->getZoom(),
 			'scrollWheelZoom' => $this->getScrollWheelZoom(),
+			'fullscreenControl' => $this->getFullscreenControl(),
 			'type' => $this->getType(),
 			'tilt' => $this->getTilt(),
 			'ui' => $this->getUi(),

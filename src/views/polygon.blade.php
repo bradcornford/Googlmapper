@@ -15,3 +15,7 @@ var polygon_{!! $id !!} = new google.maps.Polygon({
 });
 
 polygon_{!! $id !!}.setMap({!! $options['map'] !!});
+
+shapes.push({
+	'polygon_{!! $id !!}': polygon_{!! $id !!}
+});

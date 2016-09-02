@@ -1,5 +1,11 @@
 <?php namespace Cornford\Googlmapper\Contracts;
 
+use Cornford\Googlmapper\Exceptions\MapperArgumentException;
+use Cornford\Googlmapper\Exceptions\MapperException;
+use Cornford\Googlmapper\Exceptions\MapperSearchException;
+use Cornford\Googlmapper\Exceptions\MapperSearchResultException;
+use Cornford\Googlmapper\Models\Location;
+
 interface MappingInterface {
 
     /**
@@ -10,6 +16,20 @@ interface MappingInterface {
      * @return string
      */
     public function render($item = -1);
+
+    /**
+     * Locate a location and return a Location instance.
+     *
+     * @param string $location
+     *
+     * @throws MapperArgumentException
+     * @throws MapperSearchException
+     * @throws MapperSearchResultException
+     * @throws MapperException
+     *
+     * @return Location
+     */
+    public function location($location);
 
     /**
      * Add a new map.
