@@ -65,6 +65,12 @@ markers.push(marker_{!! $id !!});
 			content: {!! json_encode($options['content']) !!}
 		});
 
+		@if (isset($options['open']) && $options['open'])
+
+			infowindow_{!! $id !!}.open({!! $options['map'] !!}, marker_{!! $id !!});
+
+		@endif
+
 		google.maps.event.addListener(marker_{!! $id !!}, 'click', function() {
 			infowindow_{!! $id !!}.open({!! $options['map'] !!}, marker_{!! $id !!});
 		});
