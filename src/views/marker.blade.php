@@ -66,6 +66,12 @@ markers.push(marker_{{ $id }});
 			content: {{ json_encode($options['content']) }}
 		});
 
+		@if (isset($options['maxWidth']))
+
+			infowindow_{{ $id }}.setOptions({ maxWidth: {{ $options['maxWidth'] }} });
+
+		@endif
+
 		@if (isset($options['open']) && $options['open'])
 
 			infowindow_{{ $id }}.open({{ $options['map'] }}, marker_{{ $id }});
