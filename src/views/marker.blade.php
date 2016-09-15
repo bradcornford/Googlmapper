@@ -42,7 +42,7 @@ var marker_{{ $id }} = new google.maps.Marker({
 bounds.extend(marker_{{ $id }}.position);
 
 marker_{{ $id }}.setMap({{ $options['map'] }});
-markers.push(marker_{!! $id !!});
+markers.push(marker_{{ $id }});
 
 @if ($options['user'] && $options['place'])
 
@@ -59,6 +59,8 @@ markers.push(marker_{!! $id !!});
 		var infowindow_{{ $id }} = new google.maps.InfoWindow({
 			content: '{{ $options['content'] }}'
 		});
+
+		infowindows.push(infowindow_{{ $id }});
 
 		google.maps.event.addListener(marker_{{ $id }}, 'click', function() {
 			infowindow_{{ $id }}.open({{ $options['map'] }}, marker_{{ $id }});

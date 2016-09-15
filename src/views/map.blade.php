@@ -21,13 +21,15 @@
 		map_{{ $id }}.setTilt({{ $options['tilt'] }});
 
 		var markers = [];
+		var infowindows = [];
+		var shapes = [];
 
 		@foreach ($options['markers'] as $key => $marker)
 			{{ $marker->render($key, $view) }}
 		@endforeach
 
 		@if ($options['cluster'])
-			var markerCluster = new MarkerClusterer(map_{!! $id !!}, markers);
+			var markerCluster = new MarkerClusterer(map_{{ $id }}, markers);
 		@endif
 
 		@foreach ($options['shapes'] as $key => $shape)
@@ -59,9 +61,11 @@
 		});
 
 		maps.push({
-			key: {!! $id !!},
+			key: {{ $id }},
 			markers: markers,
-			map: map_{!! $id !!}
+			infowindows: infowindows,
+			map: map_{{ $id }},
+			shapes: shapes
 		});
 	}
 
