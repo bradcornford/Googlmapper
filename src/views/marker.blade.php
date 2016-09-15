@@ -82,6 +82,8 @@ markers.push(marker_{{ $id }});
 			infowindow_{{ $id }}.open({{ $options['map'] }}, marker_{{ $id }});
 		});
 
+		infowindows.push(infowindow_{{ $id }});
+
 	@endif
 
 @endif
