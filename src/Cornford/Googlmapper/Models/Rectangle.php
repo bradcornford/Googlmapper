@@ -38,5 +38,15 @@ class Rectangle implements ModelingInterface {
 			->render();
 	}
 
+	/**
+	 * Get the model options.
+	 *
+	 * @return array
+	 */
+	public function getOptions()
+	{
+		return $this->options;
+	}
+
 }
  

@@ -21,4 +21,11 @@ interface ModelingInterface {
 	 */
 	public function render($identifier, View $view);
 
+	/**
+	 * Get the model options.
+	 *
+	 * @return array
+	 */
+	public function getOptions();
+
 }
