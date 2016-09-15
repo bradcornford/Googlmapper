@@ -21,6 +21,8 @@
 		map_{!! $id !!}.setTilt({!! $options['tilt'] !!});
 
 		var markers = [];
+		var infowindows = [];
+		var shapes = [];
 
 		@foreach ($options['markers'] as $key => $marker)
 			{!! $marker->render($key, $view) !!}
@@ -62,6 +64,9 @@
 			key: {!! $id !!},
 			markers: markers,
 			map: map_{!! $id !!}
+			infowindows: infowindows,
+			map: map_{!! $id !!},
+			shapes: shapes
 		});
 	}
 
