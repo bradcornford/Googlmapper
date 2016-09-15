@@ -23,6 +23,7 @@
 		map_{!! $id !!}.setTilt({!! $options['tilt'] !!});
 
 		var markers = [];
+		var infowindows = [];
 		var shapes = [];
 
 		@foreach ($options['markers'] as $key => $marker)
@@ -88,6 +89,7 @@
 		maps.push({
 			key: {!! $id !!},
 			markers: markers,
+			infowindows: infowindows,
 			map: map_{!! $id !!},
 			shapes: shapes
 		});
