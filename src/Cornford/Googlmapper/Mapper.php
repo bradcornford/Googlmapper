@@ -24,9 +24,19 @@ class Mapper extends MapperBase implements MappingInterface {
 			return;
 		}
 
+		$options = $this->getOptions();
+
+		foreach (($item > -1 ? [$this->getItem($item)] : $this->getItems()) as $model) {
+			foreach ($model->getOptions() as $key => $option) {
+				if (array_key_exists($key, $this->getOptions()) && $this->getOptions()[$key] !== $option) {
+					$options[$key] = $option;
+				}
+			}
+		}
+
 		return $this->view->make('googlmapper::mapper')
 			->withView($this->view)
-			->withOptions($this->getOptions())
+			->withOptions($options)
 			->withItems($item > -1 ? [$item => $this->getItem($item)] : $this->getItems())->render();
 	}
 
