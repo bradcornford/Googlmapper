@@ -60,6 +60,8 @@ markers.push(marker_{{ $id }});
 			content: '{{ $options['content'] }}'
 		});
 
+		infowindows.push(infowindow_{{ $id }});
+
 		google.maps.event.addListener(marker_{{ $id }}, 'click', function() {
 			infowindow_{{ $id }}.open({{ $options['map'] }}, marker_{{ $id }});
 		});
