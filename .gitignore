@@ -4,3 +4,4 @@ composer.lock
 .DS_Store
 .idea
 src/config/dev
+example.dev.php

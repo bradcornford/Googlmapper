@@ -19,6 +19,8 @@
 		map_{!! $id !!}.setTilt({!! $options['tilt'] !!});
 
 		var markers = [];
+		var infowindows = [];
+		var shapes = [];
 
 		@foreach ($options['markers'] as $key => $marker)
 			{!! $marker->render($key, $view) !!}
@@ -54,6 +56,14 @@
 		var listener = google.maps.event.addListener(map_{!! $id !!}, "idle", function () {
 			map_{!! $id !!}.setZoom({!! $options['zoom'] !!});
 			google.maps.event.removeListener(listener);
+		});
+
+		maps.push({
+			key: {!! $id !!},
+			markers: markers,
+			infowindows: infowindows,
+			map: map_{!! $id !!},
+			shapes: shapes
 		});
 	}
 
