@@ -3,6 +3,7 @@
 use Cornford\Googlmapper\Exceptions\MapperArgumentException;
 use Cornford\Googlmapper\Exceptions\MapperException;
 use Cornford\Googlmapper\Exceptions\MapperSearchException;
+use Cornford\Googlmapper\Exceptions\MapperSearchLimitException;
 use Cornford\Googlmapper\Exceptions\MapperSearchResultException;
 use Cornford\Googlmapper\Models\Location;
 
@@ -25,6 +26,7 @@ interface MappingInterface {
      * @throws MapperArgumentException
      * @throws MapperSearchException
      * @throws MapperSearchResultException
+     * @throws MapperSearchLimitException
      * @throws MapperException
      *
      * @return Location
