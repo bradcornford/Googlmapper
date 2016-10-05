@@ -19,6 +19,13 @@ interface MappingInterface {
     public function render($item = -1);
 
     /**
+     * Renders and returns Google Map javascript code.
+     *
+     * @return string
+     */
+    public function renderJavascript();
+
+    /**
      * Locate a location and return a Location instance.
      *
      * @param string $location
