@@ -83,6 +83,7 @@ This will give you access to
 - [Rectangle](#rectangle)
 - [Circle](#circle)
 - [Render](#render)
+- [RenderJavascript](#renderJavascript)
 
 ### Map
 
@@ -237,6 +238,12 @@ The `render` method allows all maps to be rendered to the page, this method can 
 
 	Mapper::render();
 	Mapper::render(0);
+
+### RenderJavascript
+
+The `renderJavascript` method allows all required javascript to be rendered to the page, this method can be included in Views or added as controller passed parameter.
+
+    Mapper::renderJavascript();
 
 ### License
 
