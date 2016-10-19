@@ -33,6 +33,39 @@ class Mapper extends MapperBase implements MappingInterface {
 			return;
 		}
 
+		return $this->view->make('googlmapper::mapper')
+			->withView($this->view)
+			->withOptions($this->generateRenderOptions($item))
+			->withItems($item > -1 ? [$item => $this->getItem($item)] : $this->getItems())
+			->render();
+	}
+
+	/**
+	 * Renders and returns Google Map javascript code.
+	 *
+	 * @return string
+	 */
+	public function renderJavascript()
+	{
+		if (!$this->isEnabled()) {
+			return;
+		}
+
+		return $this->view->make('googlmapper::javascript')
+			->withView($this->view)
+			->withOptions($this->generateRenderOptions())
+			->render();
+	}
+
+	/**
+	 * Generates the render options for Google Map.
+	 *
+	 * @param integer $item
+	 *
+	 * @return string
+	 */
+	protected function generateRenderOptions($item = -1)
+	{
 		$options = $this->getOptions();
 
 		foreach (($item > -1 ? [$this->getItem($item)] : $this->getItems()) as $model) {
@@ -43,10 +76,7 @@ class Mapper extends MapperBase implements MappingInterface {
 			}
 		}
 
-		return $this->view->make('googlmapper::mapper')
-			->withView($this->view)
-			->withOptions($options)
-			->withItems($item > -1 ? [$item => $this->getItem($item)] : $this->getItems())->render();
+		return $options;
 	}
 
 	/**

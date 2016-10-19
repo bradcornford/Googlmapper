@@ -270,4 +270,9 @@ class MapperSpec extends ObjectBehavior
 		$this->render()->shouldReturn(self::STRING);
 	}
 
+	public function it_can_create_javascript_inclusions()
+	{
+		$this->map(self::INTEGER, self::INTEGER)->shouldReturn($this);
+		$this->renderJavascript()->shouldReturn(self::STRING);
+	}
 }
