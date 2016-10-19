@@ -78,6 +78,15 @@ markers.push(marker_{!! $id !!});
 		@endif
 
 		google.maps.event.addListener(marker_{!! $id !!}, 'click', function() {
+
+			@if (isset($options['autoClose']) && $options['autoClose'])
+
+				for (var i = 0; i < infowindows.length; i++) {
+					infowindows[i].close();
+				}
+
+			@endif
+
 			infowindow_{!! $id !!}.open({!! $options['map'] !!}, marker_{!! $id !!});
 		});
 
