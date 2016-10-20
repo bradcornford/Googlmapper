@@ -4,7 +4,9 @@ use Cornford\Googlmapper\Contracts\MappingInterface;
 use Cornford\Googlmapper\Exceptions\MapperArgumentException;
 use Cornford\Googlmapper\Exceptions\MapperException;
 use Cornford\Googlmapper\Exceptions\MapperSearchException;
+use Cornford\Googlmapper\Exceptions\MapperSearchKeyException;
 use Cornford\Googlmapper\Exceptions\MapperSearchLimitException;
+use Cornford\Googlmapper\Exceptions\MapperSearchResponseException;
 use Cornford\Googlmapper\Exceptions\MapperSearchResultException;
 use Cornford\Googlmapper\Models\Location;
 use Cornford\Googlmapper\Models\Map;
@@ -106,7 +108,9 @@ class Mapper extends MapperBase implements MappingInterface {
 	 *
 	 * @throws MapperArgumentException
 	 * @throws MapperSearchException
+	 * @throws MapperSearchResponseException
 	 * @throws MapperSearchResultException
+	 * @throws MapperSearchKeyException
 	 * @throws MapperSearchLimitException
 	 * @throws MapperException
 	 *
@@ -124,6 +128,14 @@ class Mapper extends MapperBase implements MappingInterface {
 			throw new MapperSearchException('Unable to perform location search, the error was: "' . $exception->getMessage() .  '".');
 		}
 
+		if (isset($resultObject->status) &&
+			$resultObject->status == self::GOOGLE_RESPONSE_DENIED &&
+			property_exists($resultObject, 'error_message') &&
+			$resultObject->error_message == 'The provided API key is invalid.'
+		) {
+			throw new MapperSearchKeyException('Unable to perform location search, provided API key is invalid.');
+		}
+
 		if (isset($resultObject->status) && $resultObject->status == self::GOOGLE_RESPONSE_QUERY_LIMIT) {
 			throw new MapperSearchLimitException('Unable to perform location search, your API key is over your quota.');
 		}
@@ -138,7 +150,7 @@ class Mapper extends MapperBase implements MappingInterface {
 				]
 			)
 		) {
-			throw new MapperSearchResultException('An error occurred performing the location search.');
+			throw new MapperSearchResponseException('An error occurred performing the location search, the error was: "' . (property_exists($resultObject, 'error_message') ? $resultObject->error_message : 'Unknown') .  '".');
 		}
 
 		if ((isset($resultObject->status) && $resultObject->status == self::GOOGLE_RESPONSE_ZERO_RESULTS) ||
