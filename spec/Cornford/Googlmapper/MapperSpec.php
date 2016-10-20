@@ -51,20 +51,22 @@ class MapperSpec extends ObjectBehavior
 		$this->location(self::LOCATION)->shouldReturnAnInstanceOf('Cornford\Googlmapper\Models\Location');
 	}
 
-	public function it_can_throws_an_exception_when_a_blank_location_is_searched()
+	public function it_throws_an_exception_when_a_blank_location_is_searched()
 	{
+		$this->setKey('AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw');
 		$this->shouldThrow('Cornford\Googlmapper\Exceptions\MapperArgumentException')->during('location', ['']);
 	}
 
-	public function it_can_throws_an_exception_when_an_invalid_location_is_searched()
+	public function it_throws_an_exception_when_an_invalid_location_is_searched()
 	{
+		$this->setKey('AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw');
 		$this->shouldThrow('Cornford\Googlmapper\Exceptions\MapperSearchResultException')->during('location', ['abcdefghijklmnopqrstuvwxyz']);
 	}
 
-	public function it_can_throws_an_exception_when_an_invalid_key_is_used_to_location_search()
+	public function it_throws_an_exception_when_an_invalid_key_is_used_to_location_search()
 	{
 		$this->setKey('123');
-		$this->shouldThrow('Cornford\Googlmapper\Exceptions\MapperSearchResultException')->during('location', [self::LOCATION]);
+		$this->shouldThrow('Cornford\Googlmapper\Exceptions\MapperSearchKeyException')->during('location', [self::LOCATION]);
 	}
 
 	public function it_can_be_enabled()
