@@ -1,4 +1,4 @@
-@include('javascript')
+@include('googlmapper::javascript')
 
 @foreach ($items as $id => $item)
 
