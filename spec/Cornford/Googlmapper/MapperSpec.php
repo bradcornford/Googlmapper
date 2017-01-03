@@ -6,7 +6,6 @@ use Mockery;
 
 class MapperSpec extends ObjectBehavior
 {
-
 	const STRING = 'test';
 	const INTEGER = 10;
 	const BOOLEAN = false;
