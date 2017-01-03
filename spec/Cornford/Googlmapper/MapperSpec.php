@@ -6,13 +6,14 @@ use Mockery;
 
 class MapperSpec extends ObjectBehavior
 {
-
 	const STRING = 'test';
 	const INTEGER = 10;
 
 	const REGION = 'GB';
 	const LANGUAGE = 'en-gb';
 	const TYPE = 'ROADMAP';
+
+	const API_KEY  = 'AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw';
 
 	public function let()
 	{
@@ -43,11 +44,13 @@ class MapperSpec extends ObjectBehavior
 
 	public function it_can_return_a_location_when_a_location_is_searched()
 	{
+        $this->setKey(self::API_KEY);
 		$this->location(self::STRING)->shouldReturnAnInstanceOf('Cornford\Googlmapper\Models\Location');
 	}
 
 	public function it_can_throws_an_exception_when_a_blank_location_is_searched()
 	{
+        $this->setKey(self::API_KEY);
 		$this->shouldThrow('Cornford\Googlmapper\Exceptions\MapperArgumentException')->during('location', ['']);
 	}
 
