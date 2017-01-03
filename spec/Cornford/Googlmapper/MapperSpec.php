@@ -6,7 +6,6 @@ use Mockery;
 
 class MapperSpec extends ObjectBehavior
 {
-
 	const STRING = 'test';
 	const LOCATION = 'Sheffield, United Kingdom';
 	const INTEGER = 10;
