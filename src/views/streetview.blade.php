@@ -30,6 +30,10 @@
 		map.setStreetView(panorama);
 	}
 
-	google.maps.event.addDomListener(window, 'load', initialize_{{ $id }});
+    @if (!$options['async'])
+
+        google.maps.event.addDomListener(window, 'load', initialize_{{ $id }});
+
+    @endif
 
 </script>

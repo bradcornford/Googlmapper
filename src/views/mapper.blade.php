@@ -4,5 +4,16 @@
 
 	{{ $item->render($id, $view) }}
 
-@endforeach
+    @if ($options['async'])
 
+        <script type="text/javascript">
+
+            initialize_items.push({
+                method: initialize_{{ $id }}
+            });
+
+        </script>
+
+    @endif
+
+@endforeach
