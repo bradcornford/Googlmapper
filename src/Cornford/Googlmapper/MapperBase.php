@@ -18,6 +18,8 @@ abstract class MapperBase implements MappingBaseInterface
 	const TYPE_HYBRID = 'HYBRID';
 	const TYPE_TERRAIN = 'TERRAIN';
 
+	const ASYNC = false;
+
 	const USER = false;
 
 	const MARKER = true;
@@ -31,7 +33,9 @@ abstract class MapperBase implements MappingBaseInterface
 
 	const FULLSCREEN_CONTROL = true;
 
-	const TILT = 90;
+	const HEADING = 0;
+
+	const TILT = 0;
 
 	const UI = true;
 
@@ -492,6 +496,13 @@ abstract class MapperBase implements MappingBaseInterface
 	];
 
 	/**
+	 * Async maps.
+	 *
+	 * @var boolean
+	 */
+	protected $async;
+
+	/**
 	 * User custom maps.
 	 *
 	 * @var boolean
@@ -565,6 +576,13 @@ abstract class MapperBase implements MappingBaseInterface
 		'HYBRID',
 		'TERRAIN'
 	];
+
+    /**
+     * Map heading.
+     *
+     * @var integer
+     */
+    protected $heading;
 
 	/**
 	 * Map tilt.
@@ -684,6 +702,7 @@ abstract class MapperBase implements MappingBaseInterface
 		$this->setRegion(isset($options['region']) ? $options['region'] : self::REGION);
 		$this->setLanguage(isset($options['language']) ? $options['language'] : self::LANGUAGE);
 		$this->setUser(isset($options['user']) ? $options['user'] : self::USER);
+		$this->setAsync(isset($options['async']) ? $options['async'] : self::ASYNC);
 		$this->setMarker(isset($options['marker']) ? $options['marker'] : self::MARKER);
 		$this->setCenter(isset($options['center']) ? $options['center'] : self::CENTER);
 		$this->setLocate(isset($options['locate']) ? $options['locate'] : self::LOCATE);
@@ -691,6 +710,7 @@ abstract class MapperBase implements MappingBaseInterface
 		$this->setScrollWheelZoom(isset($options['scrollWheelZoom']) ? $options['scrollWheelZoom'] : self::SCROLL_WHEEL_ZOOM);
 		$this->setFullscreenControl(isset($options['fullscreenControl']) ? $options['fullscreenControl'] : self::FULLSCREEN_CONTROL);
 		$this->setType(isset($options['type']) ? $options['type'] : self::TYPE_ROADMAP);
+		$this->setHeading(isset($options['heading']) ? $options['heading'] : self::HEADING);
 		$this->setTilt(isset($options['tilt']) ? $options['tilt'] : self::TILT);
 		$this->setUi(isset($options['ui']) ? $options['ui'] : self::UI);
 		$this->setIcon(isset($options['markers']['icon']) ? $options['markers']['icon'] : self::ICON);
@@ -852,6 +872,54 @@ abstract class MapperBase implements MappingBaseInterface
 	{
 		return $this->language;
 	}
+
+    /**
+     * Set the map async status.
+     *
+     * @param boolean $value
+     *
+     * @throws MapperArgumentException
+     *
+     * @return void
+     */
+    protected function setAsync($value)
+    {
+        if (!is_bool($value)) {
+            throw new MapperArgumentException('Invalid map async status.');
+        }
+
+        $this->async = $value;
+    }
+
+    /**
+     * Get the map async status.
+     *
+     * @return boolean
+     */
+    public function getAsync()
+    {
+        return $this->async;
+    }
+
+    /**
+     * Enable async for maps.
+     *
+     * @return void
+     */
+    public function enableAsync()
+    {
+        $this->setAsync(true);
+    }
+
+    /**
+     * Disable async for maps.
+     *
+     * @return void
+     */
+    public function disableAsync()
+    {
+        $this->setAsync(false);
+    }
 
 	/**
 	 * Set the map user status.
@@ -1210,6 +1278,34 @@ abstract class MapperBase implements MappingBaseInterface
 	}
 
 	/**
+	 * Set map heading.
+	 *
+	 * @param integer|double $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setHeading($value)
+	{
+		if (!is_numeric($value)) {
+			throw new MapperArgumentException('Invalid map heading.');
+		}
+
+		$this->heading = $value;
+	}
+
+	/**
+	 * Get map heading.
+	 *
+	 * @return integer
+	 */
+	public function getHeading()
+	{
+		return $this->heading;
+	}
+
+	/**
 	 * Set map tilt.
 	 *
 	 * @param integer|double $value
@@ -1228,7 +1324,7 @@ abstract class MapperBase implements MappingBaseInterface
 	}
 
 	/**
-	 * Get map $tilt.
+	 * Get map tilt.
 	 *
 	 * @return integer
 	 */
@@ -1493,6 +1589,7 @@ abstract class MapperBase implements MappingBaseInterface
 			'version' => $this->version,
 			'region' => $this->getRegion(),
 			'language' => $this->getLanguage(),
+			'async' => $this->getAsync(),
 			'user' => $this->getUser(),
 			'marker' => $this->getMarker(),
 			'center' => $this->getCenter(),
@@ -1501,6 +1598,7 @@ abstract class MapperBase implements MappingBaseInterface
 			'scrollWheelZoom' => $this->getScrollWheelZoom(),
 			'fullscreenControl' => $this->getFullscreenControl(),
 			'type' => $this->getType(),
+			'heading' => $this->getHeading(),
 			'tilt' => $this->getTilt(),
 			'ui' => $this->getUi(),
 			'overlay' => '',
