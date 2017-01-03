@@ -79,6 +79,27 @@ interface MappingBaseInterface {
 	 */
 	public function getLanguage();
 
+    /**
+     * Get the map async status.
+     *
+     * @return boolean
+     */
+    public function getAsync();
+
+    /**
+     * Enable async for maps.
+     *
+     * @return void
+     */
+    public function enableAsync();
+
+    /**
+     * Disable async for maps.
+     *
+     * @return void
+     */
+    public function disableAsync();
+
 	/**
 	 * Get the map user status.
 	 *
@@ -256,6 +277,24 @@ interface MappingBaseInterface {
 	 */
 	public function getType();
 
+    /**
+     * Set map heading.
+     *
+     * @param integer|double $value
+     *
+     * @throws MapperArgumentException
+     *
+     * @return void
+     */
+    public function setHeading($value);
+
+    /**
+     * Get map heading.
+     *
+     * @return integer
+     */
+    public function getHeading();
+
 	/**
 	 * Set map tilt.
 	 *
@@ -268,7 +307,7 @@ interface MappingBaseInterface {
 	public function setTilt($value);
 
 	/**
-	 * Get map $tilt.
+	 * Get map tilt.
 	 *
 	 * @return integer
 	 */
