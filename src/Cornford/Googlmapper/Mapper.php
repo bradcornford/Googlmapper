@@ -175,14 +175,20 @@ class Mapper extends MapperBase implements MappingInterface {
 	public function marker($latitude, $longitude, array $options = [])
 	{
 		$items = $this->getItems();
-		$parameters = $this->getOptions();
-		$options = array_replace_recursive(['user' => $parameters['user']], $parameters['markers'], $options);
 
 		if (empty($items)) {
 			throw new MapperException('No map found to add a marker to.');
 		}
 
 		$item = end($items);
+		$parameters = $this->getOptions();
+		$options = array_replace_recursive(
+			['user' => $parameters['user']],
+			['markers' => $parameters['markers']],
+			$item->getOptions()['markers'],
+			$options
+		);
+
 		$item->marker($latitude, $longitude, $options);
 
 		return $this;
@@ -208,9 +214,15 @@ class Mapper extends MapperBase implements MappingInterface {
 			throw new MapperException('No map found to add a information window to.');
 		}
 
-		$parameters = $this->getOptions();
-		$options = array_replace_recursive(['user' => $parameters['user']], ['markers' => $parameters['markers']], $options);
 		$item = end($items);
+		$parameters = $this->getOptions();
+		$options = array_replace_recursive(
+			['user' => $parameters['user']],
+			['markers' => $parameters['markers']],
+			$item->getOptions()['markers'],
+			$options
+		);
+
 		$item->marker($latitude, $longitude, array_replace_recursive($options, ['markers' => ['content' => $content]]));
 
 		return $this;
@@ -229,7 +241,10 @@ class Mapper extends MapperBase implements MappingInterface {
 	public function polyline(array $coordinates = [], array $options = [])
 	{
 		$items = $this->getItems();
-		$parameters = $this->getOptions();
+
+		if (empty($items)) {
+			throw new MapperException('No map found to add a polyline to.');
+		}
 
 		$defaults = [
 			'coordinates' => $coordinates,
@@ -239,13 +254,16 @@ class Mapper extends MapperBase implements MappingInterface {
 			'strokeWeight' => 2,
 			'editable' => false
 		];
-		$options = array_replace_recursive(['user' => $parameters['user']], $defaults, $options);
 
-		if (empty($items)) {
-			throw new MapperException('No map found to add a polyline to.');
-		}
+        $item = end($items);
+		$parameters = $this->getOptions();
+		$options = array_replace_recursive(
+			['user' => $parameters['user']],
+			$defaults,
+            ['user' => $item->getOptions()['user']],
+			$options
+		);
 
-		$item = end($items);
 		$item->shape('polyline', $coordinates, $options);
 
 		return $this;
@@ -264,7 +282,10 @@ class Mapper extends MapperBase implements MappingInterface {
 	public function polygon(array $coordinates = [], array $options = [])
 	{
 		$items = $this->getItems();
-		$parameters = $this->getOptions();
+
+		if (empty($items)) {
+			throw new MapperException('No map found to add a polygon to.');
+		}
 
 		$defaults = [
 			'coordinates' => $coordinates,
@@ -275,13 +296,16 @@ class Mapper extends MapperBase implements MappingInterface {
 			'fillOpacity' => 0.35,
 			'editable' => false
 		];
-		$options = array_replace_recursive(['user' => $parameters['user']], $defaults, $options);
-
-		if (empty($items)) {
-			throw new MapperException('No map found to add a polygon to.');
-		}
 
 		$item = end($items);
+		$parameters = $this->getOptions();
+		$options = array_replace_recursive(
+			['user' => $parameters['user']],
+			$defaults,
+            ['user' => $item->getOptions()['user']],
+			$options
+		);
+
 		$item->shape('polygon', $coordinates, $options);
 
 		return $this;
@@ -300,7 +324,10 @@ class Mapper extends MapperBase implements MappingInterface {
 	public function rectangle(array $coordinates = [], array $options = [])
 	{
 		$items = $this->getItems();
-		$parameters = $this->getOptions();
+
+		if (empty($items)) {
+			throw new MapperException('No map found to add a rectangle to.');
+		}
 
 		$defaults = [
 			'coordinates' => $coordinates,
@@ -311,13 +338,16 @@ class Mapper extends MapperBase implements MappingInterface {
 			'fillOpacity' => 0.35,
 			'editable' => false
 		];
-		$options = array_replace_recursive(['user' => $parameters['user']], $defaults, $options);
-
-		if (empty($items)) {
-			throw new MapperException('No map found to add a rectangle to.');
-		}
 
 		$item = end($items);
+		$parameters = $this->getOptions();
+		$options = array_replace_recursive(
+			['user' => $parameters['user']],
+			$defaults,
+            ['user' => $item->getOptions()['user']],
+			$options
+		);
+
 		$item->shape('rectangle', $coordinates, $options);
 
 		return $this;
@@ -336,7 +366,10 @@ class Mapper extends MapperBase implements MappingInterface {
 	public function circle(array $coordinates = [], array $options = [])
 	{
 		$items = $this->getItems();
-		$parameters = $this->getOptions();
+
+		if (empty($items)) {
+			throw new MapperException('No map found to add a circle to.');
+		}
 
 		$defaults = [
 			'coordinates' => $coordinates,
@@ -348,13 +381,16 @@ class Mapper extends MapperBase implements MappingInterface {
 			'radius' => 100000,
 			'editable' => false
 		];
-		$options = array_replace_recursive(['user' => $parameters['user']], $defaults, $options);
-
-		if (empty($items)) {
-			throw new MapperException('No map found to add a circle to.');
-		}
 
 		$item = end($items);
+		$parameters = $this->getOptions();
+		$options = array_replace_recursive(
+			['user' => $parameters['user']],
+			$defaults,
+            ['user' => $item->getOptions()['user']],
+			$options
+		);
+
 		$item->shape('circle', $coordinates, $options);
 
 		return $this;
