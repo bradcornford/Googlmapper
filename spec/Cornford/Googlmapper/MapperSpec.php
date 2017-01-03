@@ -6,7 +6,6 @@ use Mockery;
 
 class MapperSpec extends ObjectBehavior
 {
-
 	const STRING = 'test';
 	const LOCATION = 'Sheffield, United Kingdom';
 	const INTEGER = 10;
@@ -17,6 +16,8 @@ class MapperSpec extends ObjectBehavior
 	const TYPE = 'ROADMAP';
 
 	const ANIMATION = 'NONE';
+
+	const API_KEY  = 'AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw';
 
 	public function let()
 	{
@@ -47,7 +48,7 @@ class MapperSpec extends ObjectBehavior
 
 	public function it_can_return_a_location_when_a_location_is_searched()
 	{
-		$this->setKey('AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw');
+		$this->setKey(self::API_KEY);
 		$this->location(self::LOCATION)->shouldReturnAnInstanceOf('Cornford\Googlmapper\Models\Location');
 	}
 
