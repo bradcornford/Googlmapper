@@ -6,7 +6,6 @@ use Mockery;
 
 class MapperSpec extends ObjectBehavior
 {
-
 	const STRING = 'test';
 	const LOCATION = 'Sheffield, United Kingdom';
 	const INTEGER = 10;
@@ -14,6 +13,8 @@ class MapperSpec extends ObjectBehavior
 	const REGION = 'GB';
 	const LANGUAGE = 'en-gb';
 	const TYPE = 'ROADMAP';
+
+	const API_KEY  = 'AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw';
 
 	public function let()
 	{
@@ -44,19 +45,19 @@ class MapperSpec extends ObjectBehavior
 
 	public function it_can_return_a_location_when_a_location_is_searched()
 	{
-		$this->setKey('AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw');
+		$this->setKey(self::API_KEY);
 		$this->location(self::LOCATION)->shouldReturnAnInstanceOf('Cornford\Googlmapper\Models\Location');
 	}
 
 	public function it_throws_an_exception_when_a_blank_location_is_searched()
 	{
-		$this->setKey('AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw');
+		$this->setKey(self::API_KEY);
 		$this->shouldThrow('Cornford\Googlmapper\Exceptions\MapperArgumentException')->during('location', ['']);
 	}
 
 	public function it_throws_an_exception_when_an_invalid_location_is_searched()
 	{
-		$this->setKey('AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw');
+		$this->setKey(self::API_KEY);
 		$this->shouldThrow('Cornford\Googlmapper\Exceptions\MapperSearchResultException')->during('location', ['abcdefghijklmnopqrstuvwxyz']);
 	}
 
