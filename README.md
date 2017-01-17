@@ -95,6 +95,25 @@ This will give you access to
 - [Render](#render)
 - [RenderJavascript](#renderJavascript)
 
+### Example
+
+Initialize the map in your controller `MyController.php` as:
+
+        use Cornford\Googlmapper\Mapper;
+
+	public function renderMap()
+	{
+	    Mapper::map(53.381128999999990000, -1.470085000000040000);
+
+	    return view('my_view')
+	}
+
+Then in the view `my_view.blade.php` add following code to render the map:
+
+	<div style="width:500px;height:500px;">
+		{!! Mapper::render() !!}
+	</div>
+
 ### Map
 
 The `map` method allows a map to be created, with latitude, longitude and optional parameters for options.
