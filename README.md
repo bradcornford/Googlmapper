@@ -42,7 +42,7 @@ The next step is to introduce the facade. Open `app/config/app.php`, and add a n
 
 Finally we need to introduce the configuration files into your application.
 
-	php artisan vendor:publish --provider="Cornford\\Googlmapper\\MapperServiceProvider"
+	php artisan vendor:publish --provider="Cornford\\Googlmapper\\MapperServiceProvider" --tag=googlmapper
 
 You also need to set your Google API Key into the `GOOGLE_API_KEY` environment variable. To obtain an API key for your project, visit the [Google developers console](https://console.developers.google.com/).
 
@@ -94,6 +94,25 @@ This will give you access to
 - [Circle](#circle)
 - [Render](#render)
 - [RenderJavascript](#renderJavascript)
+
+### Example
+
+Initialize the map in your controller `MapController.php`:
+
+    use Cornford\Googlmapper\Mapper;
+
+	public function index()
+	{
+	    Mapper::map(53.381128999999990000, -1.470085000000040000);
+
+	    return view('map')
+	}
+
+Within in the view `map.blade.php` add following code to render the map:
+
+	<div style="width: 500px; height: 500px;">
+		{!! Mapper::render() !!}
+	</div>
 
 ### Map
 
@@ -166,7 +185,7 @@ This event is fired for a right click on the marker.
 
 This event is fired when the mouse enters the area of the marker icon.
 
-	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseOver' => 'console.log("mouse over");']);
+ 	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseOver' => 'console.log("mouse over");']);
 
 **Mouse Down**
 
