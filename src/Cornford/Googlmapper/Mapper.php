@@ -11,6 +11,7 @@ use Cornford\Googlmapper\Exceptions\MapperSearchResultException;
 use Cornford\Googlmapper\Models\Location;
 use Cornford\Googlmapper\Models\Map;
 use Cornford\Googlmapper\Models\Streetview;
+use Exception;
 
 class Mapper extends MapperBase implements MappingInterface {
 
