@@ -71,6 +71,8 @@
 			google.maps.event.removeListener(listener);
 		});
 
+        var map = map_{{ $id }};
+
 		@if (isset($options['eventBeforeLoad']))
 			{{ $options['eventBeforeLoad'] }}
 		@endif
