@@ -65,6 +65,8 @@
 			@endif
 		});
 
+        var map = map_{!! $id !!};
+
 		@if (isset($options['eventBeforeLoad']))
 			{!! $options['eventBeforeLoad'] !!}
 		@endif
