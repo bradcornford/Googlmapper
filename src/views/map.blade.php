@@ -1,4 +1,4 @@
-<div id="map-canvas-{{ $id }}" style="height: 100%; margin: 0; padding: 0;"></div>
+<div id="map-canvas-{{ $id }}" style="width: 100%; height: 100%; margin: 0; padding: 0; position: relative; overflow: hidden;"></div>
 
 <script type="text/javascript">
 
