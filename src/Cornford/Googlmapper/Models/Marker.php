@@ -22,7 +22,7 @@ class Marker implements ModelingInterface {
 		$this->options = $parameters;
 
 		if (isset($parameters['markers'])) {
-			$this->options = array_replace_recursive($parameters['markers'], $this->options);
+            $this->options = array_replace_recursive($this->options, $parameters['markers']);
 		}
 	}
 
