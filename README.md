@@ -11,7 +11,7 @@ Think of Googlmapper as an easy way to integrate Google Maps with Laravel, provi
 
 - `Mapper::map`
 - `Mapper::location`
-- `Mapper::stretview`
+- `Mapper::streetview`
 - `Mapper::marker`
 - `Mapper::informationWindow`
 - `Mapper::polyline`
