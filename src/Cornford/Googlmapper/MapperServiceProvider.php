@@ -40,13 +40,13 @@ class MapperServiceProvider extends ServiceProvider {
 		$configPath = __DIR__ . '/../../config/config.php';
 		$this->mergeConfigFrom($configPath, 'googlmapper');
 
-		$this->app['mapper'] = $this->app->share(function($app)
-		{
-			return new Mapper(
-				$this->app->view,
-				$app['config']->get('googlmapper')
-			);
-		});
+        $this->app->singleton(
+            'mapper',
+            function($app)
+            {
+                return new Mapper($this->app->view, $app['config']->get('googlmapper'));
+            }
+        );
 	}
 
 	/**
