@@ -257,9 +257,8 @@ class Mapper extends MapperBase implements MappingInterface {
 		if (empty($items)) {
 			throw new MapperException('No map found to add a marker to.');
 		}
-
-		$item = end($items);
-		$parameters = $this->getOptions();
+        $item = end($items);
+        $parameters = $this->getOptions();
 		$options = array_replace_recursive(
 			['user' => $parameters['user']],
 			['markers' => $parameters['markers']],
@@ -284,7 +283,7 @@ class Mapper extends MapperBase implements MappingInterface {
 	 *
 	 * @return self
 	 */
-	public function informationWindow($latitude, $longitude, $content, array $options = [])
+	public function informationWindow($latitude, $longitude, $content = '', array $options = [])
 	{
 		$items = $this->getItems();
 
@@ -293,15 +292,17 @@ class Mapper extends MapperBase implements MappingInterface {
 		}
 
 		$item = end($items);
+
 		$parameters = $this->getOptions();
 		$options = array_replace_recursive(
 			['user' => $parameters['user']],
 			['markers' => $parameters['markers']],
 			$item->getOptions()['markers'],
-			$options
+			$options,
+			($content !== '' ? ['markers' => ['content' => $content]] : [])
 		);
 
-		$item->marker($latitude, $longitude, array_replace_recursive($options, ['markers' => ['content' => $content]]));
+		$item->marker($latitude, $longitude, $options);
 
 		return $this;
 	}
@@ -333,12 +334,12 @@ class Mapper extends MapperBase implements MappingInterface {
 			'editable' => false
 		];
 
-        $item = end($items);
+		$item = end($items);
 		$parameters = $this->getOptions();
 		$options = array_replace_recursive(
 			['user' => $parameters['user']],
 			$defaults,
-            ['user' => $item->getOptions()['user']],
+			['user' => $item->getOptions()['user']],
 			$options
 		);
 
@@ -380,7 +381,7 @@ class Mapper extends MapperBase implements MappingInterface {
 		$options = array_replace_recursive(
 			['user' => $parameters['user']],
 			$defaults,
-            ['user' => $item->getOptions()['user']],
+			['user' => $item->getOptions()['user']],
 			$options
 		);
 
@@ -422,7 +423,7 @@ class Mapper extends MapperBase implements MappingInterface {
 		$options = array_replace_recursive(
 			['user' => $parameters['user']],
 			$defaults,
-            ['user' => $item->getOptions()['user']],
+			['user' => $item->getOptions()['user']],
 			$options
 		);
 
@@ -465,7 +466,7 @@ class Mapper extends MapperBase implements MappingInterface {
 		$options = array_replace_recursive(
 			['user' => $parameters['user']],
 			$defaults,
-            ['user' => $item->getOptions()['user']],
+			['user' => $item->getOptions()['user']],
 			$options
 		);
 
