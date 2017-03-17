@@ -34,11 +34,11 @@ Next, update Composer from the Terminal:
 
 Once this operation completes, the next step is to add the service provider. Open `app/config/app.php`, and add a new item to the providers array.
 
-	'Cornford\Googlmapper\MapperServiceProvider',
+	Cornford\Googlmapper\MapperServiceProvider::class,
 
 The next step is to introduce the facade. Open `app/config/app.php`, and add a new item to the aliases array.
 
-	'Mapper'         => 'Cornford\Googlmapper\Facades\MapperFacade',
+	'Mapper'         => Cornford\Googlmapper\Facades\MapperFacade::class,
 
 Finally we need to introduce the configuration files into your application.
 
