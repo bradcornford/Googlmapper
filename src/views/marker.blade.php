@@ -28,7 +28,7 @@ var marker_{{ $id }} = new google.maps.Marker({
 		},
 	@endif
 
-	title: {{ json_encode($options['title']) }},
+	title: {{ json_encode((string) $options['title']) }},
 	animation: @if (empty($options['animation']) || $options['animation'] == 'NONE') '' @else google.maps.Animation.{{ $options['animation'] }} @endif,
 
 	@if (isset($options['draggable']) && $options['draggable'] == true)
@@ -63,7 +63,7 @@ markers.push(marker_{{ $id }});
 	@if (!empty($options['content']))
 
 		var infowindow_{{ $id }} = new google.maps.InfoWindow({
-			content: {{ json_encode($options['content']) }}
+			content: {{ json_encode((string) $options['content']) }}
 		});
 
 		@if (isset($options['maxWidth']))
