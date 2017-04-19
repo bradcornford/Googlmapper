@@ -40,7 +40,7 @@ var marker_{!! $id !!} = new google.maps.Marker({
 			scale: {!! $options['scale'] !!}
 		}
 	@else
-		icon: '{!! $options['icon'] !!}'
+		icon: {!! json_encode((is_array($options['icon']) ? (array) $options['icon'] : (string) $options['icon'])) !!}
 	@endif
 });
 
