@@ -77,7 +77,22 @@ You can now configure Googlmapper in a few simple steps. Open `app/config/packag
 
 ## Usage
 
-It's really as simple as using the Mapper class in any Controller / Model / File you see fit with:
+Initialize the map in your controller `MyController.php` as:
+
+        use Cornford\Googlmapper\Mapper;
+
+	public function renderMap()
+	{
+	    Mapper::map(53.381128999999990000, -1.470085000000040000);
+
+	    return view('my_view')
+	}
+
+Then in the view `my_view.blade.php` add following code to render the map:
+
+	<div style="width:500px;height:500px;">
+		{!! Mapper::render() !!}
+	</div>
 
 `Mapper::`
 
