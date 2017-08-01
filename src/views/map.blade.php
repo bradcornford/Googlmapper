@@ -16,7 +16,12 @@
 			mapTypeId: google.maps.MapTypeId.{!! $options['type'] !!},
 			disableDefaultUI: @if (!$options['ui']) true @else false @endif,
 			scrollwheel: @if ($options['scrollWheelZoom']) true @else false @endif,
-			fullscreenControl: @if ($options['fullscreenControl']) true @else false @endif,
+            zoomControl: @if ($options['zoomControl']) true @else false @endif,
+            mapTypeControl: @if ($options['mapTypeControl']) true @else false @endif,
+            scaleControl: @if ($options['scaleControl']) true @else false @endif,
+            streetViewControl: @if ($options['streetViewControl']) true @else false @endif,
+            rotateControl: @if ($options['rotateControl']) true @else false @endif,
+            fullscreenControl: @if ($options['fullscreenControl']) true @else false @endif
 		};
 
 		var map_{!! $id !!} = new google.maps.Map(document.getElementById('map-canvas-{!! $id !!}'), mapOptions_{!! $id !!});
