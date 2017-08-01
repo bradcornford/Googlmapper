@@ -242,7 +242,7 @@ interface MappingBaseInterface {
 	public function getScrollWheelZoom();
 
 	/**
-	 * Set map fullscreen control.
+	 * Set map zoom control.
 	 *
 	 * @param boolean $value
 	 *
@@ -250,14 +250,104 @@ interface MappingBaseInterface {
 	 *
 	 * @return void
 	 */
-	public function setFullscreenControl($value);
+	public function setZoomControl($value);
 
 	/**
-	 * Get map fullscreen control.
+	 * Get map zoom control.
 	 *
 	 * @return boolean
 	 */
-	public function getFullscreenControl();
+	public function getZoomControl();
+
+    /**
+     * Set map type control.
+     *
+     * @param boolean $value
+     *
+     * @throws MapperArgumentException
+     *
+     * @return void
+     */
+    public function setMapTypeControl($value);
+
+    /**
+     * Get map type control.
+     *
+     * @return boolean
+     */
+    public function getMapTypeControl();
+
+	/**
+	 * Set map scale control.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setScaleControl($value);
+
+	/**
+	 * Get map scale control.
+	 *
+	 * @return boolean
+	 */
+	public function getScaleControl();
+
+	/**
+	 * Set map street view control.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setStreetViewControl($value);
+
+	/**
+	 * Get map street view control.
+	 *
+	 * @return boolean
+	 */
+	public function getStreetViewControl();
+
+	/**
+	 * Set map rotate control.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setRotateControl($value);
+
+	/**
+	 * Get map rotate control.
+	 *
+	 * @return boolean
+	 */
+	public function getRotateControl();
+
+    /**
+     * Set map fullscreen control.
+     *
+     * @param boolean $value
+     *
+     * @throws MapperArgumentException
+     *
+     * @return void
+     */
+    public function setFullscreenControl($value);
+
+    /**
+     * Get map fullscreen control.
+     *
+     * @return boolean
+     */
+    public function getFullscreenControl();
 
 	/**
 	 * Set map type.

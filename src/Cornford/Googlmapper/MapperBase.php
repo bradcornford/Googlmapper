@@ -29,9 +29,14 @@ abstract class MapperBase implements MappingBaseInterface
 	const ZOOM = 8;
 	const SCROLL_WHEEL_ZOOM = true;
 
-	const FULLSCREEN_CONTROL = true;
+    const CONTROL_ZOOM = true;
+    const CONTROL_MAP_TYPE = true;
+    const CONTROL_SCALE = false;
+    const CONTROL_STREET_VIEW = true;
+    const CONTROL_ROTATE = false;
+    const CONTROL_FULLSCREEN = true;
 
-	const HEADING = 0;
+    const HEADING = 0;
 
 	const TILT = 0;
 
@@ -537,14 +542,49 @@ abstract class MapperBase implements MappingBaseInterface
 	 */
 	protected $scrollWheelZoom;
 
-	/**
-	 * Map fullscreen zoom.
+    /**
+     * Map zoom control.
+     *
+     * @var boolean
+     */
+    protected $zoomControl;
+
+    /**
+     * Map type control.
+     *
+     * @var boolean
+     */
+    protected $mapTypeControl;
+
+    /**
+	 * Map scale control.
 	 *
 	 * @var boolean
 	 */
-	protected $fullscreenControl;
+	protected $scaleControl;
 
-	/**
+    /**
+	 * Map street view control.
+	 *
+	 * @var boolean
+	 */
+	protected $streetViewControl;
+
+    /**
+	 * Map rotate control.
+	 *
+	 * @var boolean
+	 */
+	protected $rotateControl;
+
+    /**
+     * Map fullscreen control.
+     *
+     * @var boolean
+     */
+    protected $fullscreenControl;
+
+    /**
 	 * Map type.
 	 *
 	 * @var string
@@ -659,8 +699,13 @@ abstract class MapperBase implements MappingBaseInterface
 		$this->setLocate(isset($options['locate']) ? $options['locate'] : self::LOCATE);
 		$this->setZoom(isset($options['zoom']) ? $options['zoom'] : self::ZOOM);
 		$this->setScrollWheelZoom(isset($options['scrollWheelZoom']) ? $options['scrollWheelZoom'] : self::SCROLL_WHEEL_ZOOM);
-		$this->setFullscreenControl(isset($options['fullscreenControl']) ? $options['fullscreenControl'] : self::FULLSCREEN_CONTROL);
-		$this->setType(isset($options['type']) ? $options['type'] : self::TYPE_ROADMAP);
+        $this->setZoomControl(isset($options['zoomControl']) ? $options['zoomControl'] : self::CONTROL_ZOOM);
+        $this->setMapTypeControl(isset($options['mapTypeControl']) ? $options['mapTypeControl'] : self::CONTROL_MAP_TYPE);
+        $this->setScaleControl(isset($options['scaleControl']) ? $options['scaleControl'] : self::CONTROL_SCALE);
+        $this->setStreetViewControl(isset($options['streetViewControl']) ? $options['streetViewControl'] : self::CONTROL_STREET_VIEW);
+        $this->setRotateControl(isset($options['rotateControl']) ? $options['rotateControl'] : self::CONTROL_ROTATE);
+        $this->setFullscreenControl(isset($options['fullscreenControl']) ? $options['fullscreenControl'] : self::CONTROL_FULLSCREEN);
+        $this->setType(isset($options['type']) ? $options['type'] : self::TYPE_ROADMAP);
 		$this->setHeading(isset($options['heading']) ? $options['heading'] : self::HEADING);
 		$this->setTilt(isset($options['tilt']) ? $options['tilt'] : self::TILT);
 		$this->setUi(isset($options['ui']) ? $options['ui'] : true);
@@ -1168,7 +1213,7 @@ abstract class MapperBase implements MappingBaseInterface
 	}
 
 	/**
-	 * Set map fullscreen control.
+	 * Set map zoom control.
 	 *
 	 * @param boolean $value
 	 *
@@ -1176,24 +1221,164 @@ abstract class MapperBase implements MappingBaseInterface
 	 *
 	 * @return void
 	 */
-	public function setFullscreenControl($value)
+	public function setZoomControl($value)
 	{
 		if (!is_bool($value)) {
-			throw new MapperArgumentException('Fullscreen control must be a boolean.');
+			throw new MapperArgumentException('Zoom control must be a boolean.');
 		}
 
-		$this->fullscreenControl = $value;
+		$this->zoomControl = $value;
 	}
 
 	/**
-	 * Get map fullscreen control.
+	 * Get map zoom control.
 	 *
 	 * @return boolean
 	 */
-	public function getFullscreenControl()
+	public function getZoomControl()
 	{
-		return $this->fullscreenControl;
+		return $this->zoomControl;
 	}
+
+    /**
+     * Set map type control.
+     *
+     * @param boolean $value
+     *
+     * @throws MapperArgumentException
+     *
+     * @return void
+     */
+    public function setMapTypeControl($value)
+    {
+        if (!is_bool($value)) {
+            throw new MapperArgumentException('Map type control must be a boolean.');
+        }
+
+        $this->mapTypeControl = $value;
+    }
+
+    /**
+     * Get map type control.
+     *
+     * @return boolean
+     */
+    public function getMapTypeControl()
+    {
+        return $this->mapTypeControl;
+    }
+
+	/**
+	 * Set map scale control.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setScaleControl($value)
+	{
+		if (!is_bool($value)) {
+			throw new MapperArgumentException('Scale control must be a boolean.');
+		}
+
+		$this->scaleControl = $value;
+	}
+
+	/**
+	 * Get map scale control.
+	 *
+	 * @return boolean
+	 */
+	public function getScaleControl()
+	{
+		return $this->scaleControl;
+	}
+
+	/**
+	 * Set map street view control.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setStreetViewControl($value)
+	{
+		if (!is_bool($value)) {
+			throw new MapperArgumentException('Street view control must be a boolean.');
+		}
+
+		$this->streetViewControl = $value;
+	}
+
+	/**
+	 * Get map street view control.
+	 *
+	 * @return boolean
+	 */
+	public function getStreetViewControl()
+	{
+		return $this->streetViewControl;
+	}
+
+	/**
+	 * Set map rotate control.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setRotateControl($value)
+	{
+		if (!is_bool($value)) {
+			throw new MapperArgumentException('Rotate control must be a boolean.');
+		}
+
+		$this->rotateControl = $value;
+	}
+
+	/**
+	 * Get map rotate control.
+	 *
+	 * @return boolean
+	 */
+	public function getRotateControl()
+	{
+		return $this->rotateControl;
+	}
+
+    /**
+     * Set map fullscreen control.
+     *
+     * @param boolean $value
+     *
+     * @throws MapperArgumentException
+     *
+     * @return void
+     */
+    public function setFullscreenControl($value)
+    {
+        if (!is_bool($value)) {
+            throw new MapperArgumentException('Fullscreen control must be a boolean.');
+        }
+
+        $this->fullscreenControl = $value;
+    }
+
+    /**
+     * Get map fullscreen control.
+     *
+     * @return boolean
+     */
+    public function getFullscreenControl()
+    {
+        return $this->fullscreenControl;
+    }
 
 	/**
 	 * Set map type.
@@ -1403,6 +1588,11 @@ abstract class MapperBase implements MappingBaseInterface
 			'zoom' => $this->getZoom(),
 			'scrollWheelZoom' => $this->getScrollWheelZoom(),
 			'fullscreenControl' => $this->getFullscreenControl(),
+			'zoomControl' => $this->getZoomControl(),
+			'scaleControl' => $this->getScaleControl(),
+			'streetViewControl' => $this->getStreetViewControl(),
+			'rotateControl' => $this->getRotateControl(),
+			'mapTypeControl' => $this->getMapTypeControl(),
 			'type' => $this->getType(),
 			'heading' => $this->getHeading(),
 			'tilt' => $this->getTilt(),
