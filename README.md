@@ -105,7 +105,7 @@ This will give you access to
 
 Initialize the map in your controller `MapController.php`:
 
-    use Cornford\Googlmapper\Mapper;
+    use Mapper;
 
 	public function index()
 	{
