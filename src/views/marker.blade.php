@@ -41,7 +41,22 @@ var marker_{!! $id !!} = new google.maps.Marker({
 			scale: {!! $options['scale'] !!}
 		}
 	@else
-		icon: {!! json_encode((is_array($options['icon']) ? (array) $options['icon'] : (string) $options['icon'])) !!}
+		icon:
+		@if (is_array($options['icon']) && isset($options['icon']['url']))
+			{
+				url: {!! json_encode((string) $options['icon']['url']) !!},
+
+				@if (isset($options['icon']['size']))
+					@if (is_array($options['icon']['size']))
+						scaledSize: new google.maps.Size({!! $options['icon']['size'][0] !!}, {!! $options['icon']['size'][1] !!})
+					@else
+						scaledSize: new google.maps.Size({!! $options['icon']['size'] !!}, {!! $options['icon']['size'] !!})
+					@endif
+				@endif
+			}
+		@else
+			{!! json_encode($options['icon']) !!}
+		@endif
 	@endif
 });
 
