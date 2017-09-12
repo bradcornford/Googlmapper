@@ -29,7 +29,7 @@ var marker_{{ $id }} = new google.maps.Marker({
 	@endif
 
 	title: {{ json_encode((string) $options['title']) }},
-	label: {{ json_encode((string) $options['label']) }},
+	label: {{ json_encode($options['label']) }},
 	animation: @if (empty($options['animation']) || $options['animation'] == 'NONE') '' @else google.maps.Animation.{{ $options['animation'] }} @endif,
 
 	@if (isset($options['draggable']) && $options['draggable'] == true)
