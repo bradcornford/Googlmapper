@@ -161,7 +161,7 @@ class Mapper extends MapperBase implements MappingInterface {
 		}
 
 		if (!isset($resultObject->results[0]->formatted_address) ||
-			!isset($resultObject->results[0]->address_components[0]->types[0]) ||
+			!isset($resultObject->results[0]->address_components[0]->types) ||
 			!isset($resultObject->results[0]->geometry->location->lat) ||
 			!isset($resultObject->results[0]->geometry->location->lng) ||
 			!isset($resultObject->results[0]->place_id) ||
@@ -174,7 +174,7 @@ class Mapper extends MapperBase implements MappingInterface {
 			'mapper'    => $this,
 			'search'    => $location,
 			'address'   => $resultObject->results[0]->formatted_address,
-			'type'      => $resultObject->results[0]->address_components[0]->types[0],
+			'type'      => (isset($resultObject->results[0]->address_components[0]->types[0]) ? $resultObject->results[0]->address_components[0]->types[0] : null),
 			'latitude'  => $resultObject->results[0]->geometry->location->lat,
 			'longitude' => $resultObject->results[0]->geometry->location->lng,
 			'placeId'   => $resultObject->results[0]->place_id,
