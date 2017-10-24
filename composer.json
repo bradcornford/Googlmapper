@@ -23,5 +23,15 @@
             "Cornford\\Googlmapper": "src/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Cornford\\Googlmapper\\MapperServiceProvider"
+            ],
+            "aliases": {
+                "Mapper": "Cornford\\Googlmapper\\Facades\\MapperFacade"
+            }
+        }
+    }
 }
