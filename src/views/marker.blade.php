@@ -13,6 +13,14 @@
 
 @endif
 
+@if ($options['locate'] && $options['marker'])
+	if (typeof navigator !== 'undefined' && navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function (position) {
+			marker_0.setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+		});
+	}
+@endif
+
 var markerPosition_{{ $id }} = new google.maps.LatLng({{ $options['latitude'] }}, {{ $options['longitude'] }});
 
 var marker_{{ $id }} = new google.maps.Marker({
