@@ -151,6 +151,12 @@ This event is fired when the marker icon was clicked.
 
 	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventClick' => 'console.log("left click");']);
 
+**Double Click**
+
+This event is fired when the marker icon was double clicked.
+
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventDblClick' => 'console.log("double left click");']);
+
 **Right Click**
 
 This event is fired for a right click on the marker.
