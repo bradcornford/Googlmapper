@@ -118,6 +118,7 @@ class Mapper extends MapperBase implements MappingInterface {
 	 */
 	public function location($location)
 	{
+		$location = strip_tags($location);
 		if (empty($location)) {
 			throw new MapperArgumentException('Invalid location search term provided.');
 		}
@@ -173,7 +174,7 @@ class Mapper extends MapperBase implements MappingInterface {
         $postalCode = null;
 
         foreach ($resultObject->results[0]->address_components as $addressComponent) {
-            if ($addressComponent['types'][0] == 'postal_code') {
+            if ($addressComponent->types[0] == 'postal_code') {
                 $postalCode = $addressComponent['long_name'];
             }
         }
