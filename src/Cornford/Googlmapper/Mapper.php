@@ -118,6 +118,7 @@ class Mapper extends MapperBase implements MappingInterface {
 	 */
 	public function location($location)
 	{
+		$location = strip_tags($location);
 		if (empty($location)) {
 			throw new MapperArgumentException('Invalid location search term provided.');
 		}
