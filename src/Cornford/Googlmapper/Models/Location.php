@@ -28,6 +28,13 @@ class Location implements ObjectableInterface {
 	 */
 	protected $address;
 
+    /**
+     * Postal Code.
+     *
+     * @var string
+     */
+    protected $postalCode;
+
 	/**
 	 * Type.
 	 *
@@ -66,6 +73,7 @@ class Location implements ObjectableInterface {
 		$this->setMapper($parameters['mapper']);
 		$this->setSearch($parameters['search']);
 		$this->setAddress($parameters['address']);
+        $this->setPostalCode($parameters['postalCode']);
 		$this->setType($parameters['type']);
 		$this->setLatitude($parameters['latitude']);
 		$this->setLongitude($parameters['longitude']);
@@ -137,6 +145,28 @@ class Location implements ObjectableInterface {
 	{
 		$this->address = $address;
 	}
+
+    /**
+     * Get the locations postal code.
+     *
+     * @return string
+     */
+    public function getPostalCode()
+    {
+        return $this->postalCode;
+    }
+
+    /**
+     * Set the locations postal code.
+     *
+     * @param string $postalCode
+     *
+     * @return void
+     */
+    protected function setPostalCode($postalCode)
+    {
+        $this->postalCode = $postalCode;
+    }
 
 	/**
 	 * Get the locations type.

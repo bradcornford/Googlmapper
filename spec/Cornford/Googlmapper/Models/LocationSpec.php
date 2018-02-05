@@ -21,6 +21,7 @@ class LocationSpec extends ObjectBehavior
 			'mapper' => $mapper,
 			'search' => self::STRING,
 			'address' => self::STRING,
+			'postalCode' => self::STRING,
 			'type' => self::STRING,
 			'latitude' => self::INTEGER,
 			'longitude' => self::INTEGER,
