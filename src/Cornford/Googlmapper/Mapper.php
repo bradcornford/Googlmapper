@@ -175,7 +175,7 @@ class Mapper extends MapperBase implements MappingInterface {
 
         foreach ($resultObject->results[0]->address_components as $addressComponent) {
             if ($addressComponent->types[0] == 'postal_code') {
-                $postalCode = $addressComponent['long_name'];
+                $postalCode = $addressComponent->long_name;
             }
         }
 
