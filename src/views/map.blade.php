@@ -13,6 +13,7 @@
 			@if ($options['center'])
 				center: position,
 			@endif
+            zoom: {!! $options['zoom'] !!},
 			mapTypeId: google.maps.MapTypeId.{!! $options['type'] !!},
 			disableDefaultUI: @if (!$options['ui']) true @else false @endif,
 			scrollwheel: @if ($options['scrollWheelZoom']) true @else false @endif,
