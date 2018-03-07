@@ -1,4 +1,4 @@
-@if ($options['user'] && $options['place'])
+@if ($options['place'])
 
 	var service = new google.maps.places.PlacesService({!! $options['map'] !!});
 	var request = {
@@ -25,7 +25,7 @@ var markerPosition_{!! $id !!} = new google.maps.LatLng({!! $options['latitude']
 
 var marker_{!! $id !!} = new google.maps.Marker({
 	position: markerPosition_{!! $id !!},
-	@if ($options['user'] && $options['place'])
+	@if ($options['place'])
 		place: {
 			placeId: '{!! $options['place'] !!}',
 			location: { lat: {!! $options['latitude'] !!}, lng: {!! $options['longitude'] !!} }
@@ -73,7 +73,7 @@ bounds.extend(marker_{!! $id !!}.position);
 marker_{!! $id !!}.setMap({!! $options['map'] !!});
 markers.push(marker_{!! $id !!});
 
-@if ($options['user'] && $options['place'])
+@if ($options['place'])
 
 		marker_{!! $id !!}.addListener('click', function() {
 			infowindow.setContent('<a href="' + placeResult.website + '">' + placeResult.name + '</a>');

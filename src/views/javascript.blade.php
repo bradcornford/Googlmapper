@@ -4,11 +4,11 @@
 
     @if ($options['async'])
 
-        <script async defer type="text/javascript" src="//maps.googleapis.com/maps/api/js?v={!! $options['version'] !!}&region={!! $options['region'] !!}&language={!! $options['language'] !!}&key={!! $options['key'] !!}&signed_in={!! $options['user'] ? 'true' : 'false' !!}&libraries=places&callback=initialize_method"></script>
+        <script async defer type="text/javascript" src="//maps.googleapis.com/maps/api/js?v={!! $options['version'] !!}&region={!! $options['region'] !!}&language={!! $options['language'] !!}&key={!! $options['key'] !!}&libraries=places&callback=initialize_method"></script>
 
     @else
 
-        <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?v={!! $options['version'] !!}&region={!! $options['region'] !!}&language={!! $options['language'] !!}&key={!! $options['key'] !!}&signed_in={!! $options['user'] ? 'true' : 'false' !!}&libraries=places"></script>
+        <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?v={!! $options['version'] !!}&region={!! $options['region'] !!}&language={!! $options['language'] !!}&key={!! $options['key'] !!}&libraries=places"></script>
 
     @endif
 

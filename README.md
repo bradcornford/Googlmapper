@@ -57,7 +57,6 @@ You can now configure Googlmapper in a few simple steps. Open `app/config/packag
 - `region` - A region Google Maps should utilise, required in ISO 3166-1 code format, e.g. GB.
 - `language` - A language Google Maps should utilise, required in ISO 639-1 code format, e.g. en-gb.
 - `async` - Perform the loading and rendering of Googlmapper map asynchronously, e.g. false.
-- `user` - Use custom Google Maps for users logged into the Google service, e.g. false.
 - `marker` - Automatically add Google Maps marker for your maps initial location, e.g. true.
 - `center` - Automatically center Google Maps around the initial location, when false, Google Maps will automatically center the map, e.g. true.
 - `locate` - Automatically center Google Maps around the users current location, when false, Google Maps will automatically center the map, e.g. true.

@@ -105,14 +105,6 @@ class MapperSpec extends ObjectBehavior
 		$this->getLanguage()->shouldReturn(self::LANGUAGE);
 	}
 
-	public function it_can_set_and_get_user_option()
-	{
-		$this->enableUsers();
-		$this->getUser()->shouldReturn(true);
-		$this->disableUsers();
-		$this->getUser()->shouldReturn(false);
-	}
-
 	public function it_can_set_and_get_marker_option()
 	{
 		$this->enableMarkers();

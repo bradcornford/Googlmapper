@@ -101,27 +101,6 @@ interface MappingBaseInterface {
     public function disableAsync();
 
 	/**
-	 * Get the map user status.
-	 *
-	 * @return boolean
-	 */
-	public function getUser();
-
-	/**
-	 * Enable users for maps.
-	 *
-	 * @return void
-	 */
-	public function enableUsers();
-
-	/**
-	 * Disable users for maps.
-	 *
-	 * @return void
-	 */
-	public function disableUsers();
-
-	/**
 	 * Get the marker status.
 	 *
 	 * @return boolean
