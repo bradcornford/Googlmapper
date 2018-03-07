@@ -18,8 +18,6 @@ abstract class MapperBase implements MappingBaseInterface
 
 	const ASYNC = false;
 
-	const USER = false;
-
 	const MARKER = true;
 
 	const CENTER = true;
@@ -494,13 +492,6 @@ abstract class MapperBase implements MappingBaseInterface
 	protected $async;
 
 	/**
-	 * User custom maps.
-	 *
-	 * @var boolean
-	 */
-	protected $user;
-
-	/**
 	 * Automatic map marker.
 	 *
 	 * @var boolean
@@ -692,7 +683,6 @@ abstract class MapperBase implements MappingBaseInterface
 		$this->setKey($options['key']);
 		$this->setRegion(isset($options['region']) ? $options['region'] : self::REGION);
 		$this->setLanguage(isset($options['language']) ? $options['language'] : self::LANGUAGE);
-		$this->setUser(isset($options['user']) ? $options['user'] : self::USER);
 		$this->setAsync(isset($options['async']) ? $options['async'] : self::ASYNC);
 		$this->setMarker(isset($options['marker']) ? $options['marker'] : self::MARKER);
 		$this->setCenter(isset($options['center']) ? $options['center'] : self::CENTER);
@@ -911,54 +901,6 @@ abstract class MapperBase implements MappingBaseInterface
     {
         $this->setAsync(false);
     }
-
-	/**
-	 * Set the map user status.
-	 *
-	 * @param boolean $value
-	 *
-	 * @throws MapperArgumentException
-	 *
-	 * @return void
-	 */
-	protected function setUser($value)
-	{
-		if (!is_bool($value)) {
-			throw new MapperArgumentException('Invalid map user status.');
-		}
-
-		$this->user = $value;
-	}
-
-	/**
-	 * Get the map user status.
-	 *
-	 * @return boolean
-	 */
-	public function getUser()
-	{
-		return $this->user;
-	}
-
-	/**
-	 * Enable users for maps.
-	 *
-	 * @return void
-	 */
-	public function enableUsers()
-	{
-		$this->setUser(true);
-	}
-
-	/**
-	 * Disable users for maps.
-	 *
-	 * @return void
-	 */
-	public function disableUsers()
-	{
-		$this->setUser(false);
-	}
 
 	/**
 	 * Set the marker status.
@@ -1581,7 +1523,6 @@ abstract class MapperBase implements MappingBaseInterface
 			'region' => $this->getRegion(),
 			'language' => $this->getLanguage(),
 			'async' => $this->getAsync(),
-			'user' => $this->getUser(),
 			'marker' => $this->getMarker(),
 			'center' => $this->getCenter(),
 			'locate' => $this->getLocate(),
