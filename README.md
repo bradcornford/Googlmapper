@@ -98,7 +98,7 @@ This will give you access to
 - [Rectangle](#rectangle)
 - [Circle](#circle)
 - [Render](#render)
-- [RenderJavascript](#renderJavascript)
+- [RenderJavascript](#renderjavascript)
 
 ### Example
 
