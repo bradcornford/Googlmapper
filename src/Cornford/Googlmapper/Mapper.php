@@ -3,11 +3,13 @@
 use Cornford\Googlmapper\Contracts\MappingInterface;
 use Cornford\Googlmapper\Exceptions\MapperArgumentException;
 use Cornford\Googlmapper\Exceptions\MapperException;
+use Cornford\Googlmapper\Exceptions\MapperInstanceException;
 use Cornford\Googlmapper\Exceptions\MapperSearchException;
 use Cornford\Googlmapper\Exceptions\MapperSearchKeyException;
 use Cornford\Googlmapper\Exceptions\MapperSearchLimitException;
 use Cornford\Googlmapper\Exceptions\MapperSearchResponseException;
 use Cornford\Googlmapper\Exceptions\MapperSearchResultException;
+use Cornford\Googlmapper\Exceptions\MapperSearchResultMalformedException;
 use Cornford\Googlmapper\Models\Location;
 use Cornford\Googlmapper\Models\Map;
 use Cornford\Googlmapper\Models\Streetview;
@@ -168,7 +170,7 @@ class Mapper extends MapperBase implements MappingInterface {
 			!isset($resultObject->results[0]->place_id) ||
 			isset($resultObject->status) && $resultObject->status != self::GOOGLE_RESPONSE_OK
 		) {
-			throw new MapperException('The location search return invalid result data.');
+			throw new MapperSearchResultMalformedException('The location search return invalid result data.');
 		}
 
         $postalCode = null;
@@ -265,7 +267,7 @@ class Mapper extends MapperBase implements MappingInterface {
 		$items = $this->getItems();
 
 		if (empty($items)) {
-			throw new MapperException('No map found to add a marker to.');
+			throw new MapperInstanceException('No map found to add a marker to.');
 		}
         $item = end($items);
         $parameters = $this->getOptions();
@@ -297,7 +299,7 @@ class Mapper extends MapperBase implements MappingInterface {
 		$items = $this->getItems();
 
 		if (empty($items)) {
-			throw new MapperException('No map found to add a information window to.');
+			throw new MapperInstanceException('No map found to add a information window to.');
 		}
 
 		$item = end($items);
@@ -330,7 +332,7 @@ class Mapper extends MapperBase implements MappingInterface {
 		$items = $this->getItems();
 
 		if (empty($items)) {
-			throw new MapperException('No map found to add a polyline to.');
+			throw new MapperInstanceException('No map found to add a polyline to.');
 		}
 
 		$defaults = [
@@ -368,7 +370,7 @@ class Mapper extends MapperBase implements MappingInterface {
 		$items = $this->getItems();
 
 		if (empty($items)) {
-			throw new MapperException('No map found to add a polygon to.');
+			throw new MapperInstanceException('No map found to add a polygon to.');
 		}
 
 		$defaults = [
@@ -407,7 +409,7 @@ class Mapper extends MapperBase implements MappingInterface {
 		$items = $this->getItems();
 
 		if (empty($items)) {
-			throw new MapperException('No map found to add a rectangle to.');
+			throw new MapperInstanceException('No map found to add a rectangle to.');
 		}
 
 		$defaults = [
@@ -446,7 +448,7 @@ class Mapper extends MapperBase implements MappingInterface {
 		$items = $this->getItems();
 
 		if (empty($items)) {
-			throw new MapperException('No map found to add a circle to.');
+			throw new MapperInstanceException('No map found to add a circle to.');
 		}
 
 		$defaults = [
