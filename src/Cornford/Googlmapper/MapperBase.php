@@ -1742,7 +1742,7 @@ abstract class MapperBase implements MappingBaseInterface
 	{
 		return [
 			'key' => $this->getKey(),
-			'version' => $this->version,
+			'version' => $this->getVersion(),
 			'region' => $this->getRegion(),
 			'language' => $this->getLanguage(),
 			'async' => $this->getAsync(),
