@@ -21,6 +21,16 @@ return [
     |
     */
     'key' => env('GOOGLE_API_KEY', 'AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw'),
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Google API version
+    |--------------------------------------------------------------------------
+    |
+    | A Google API version to set version of google map API.
+    |
+    */
+    'version' => env('GOOGLE_API_VERSION'),
 
     /*
     |--------------------------------------------------------------------------
