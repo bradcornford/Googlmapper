@@ -730,7 +730,7 @@ abstract class MapperBase implements MappingBaseInterface
 
 		$this->setEnabled(isset($options['enabled']) ? $options['enabled'] : self::ENABLED);
 		$this->setKey($options['key']);
-		$this->setVersion($options['version'] ?? '3.31');
+		$this->setVersion(isset($options['version']) ? $options['version'] : '3.31');
 		$this->setRegion(isset($options['region']) ? $options['region'] : self::REGION);
 		$this->setLanguage(isset($options['language']) ? $options['language'] : self::LANGUAGE);
 		$this->setAsync(isset($options['async']) ? $options['async'] : self::ASYNC);
@@ -854,9 +854,13 @@ abstract class MapperBase implements MappingBaseInterface
 	 *
 	 * @return void
 	 */
-	public function setVersion(float $value)
+	public function setVersion($value)
 	{
-		$this->version = $value;
+		if (! is_float((float)$value)) {
+			throw new MapperArgumentException('Invalid Google Map\'s API version.');
+		}
+
+		$this->version = (float)$value;
 	}
 
 	/**
