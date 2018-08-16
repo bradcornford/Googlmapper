@@ -93,7 +93,7 @@ abstract class MapperBase implements MappingBaseInterface
 	 *
 	 * @var integer
 	 */
-	protected $version = '3.31';
+	protected $version = 3.31;
 
 	/**
 	 * API region.
@@ -730,6 +730,7 @@ abstract class MapperBase implements MappingBaseInterface
 
 		$this->setEnabled(isset($options['enabled']) ? $options['enabled'] : self::ENABLED);
 		$this->setKey($options['key']);
+		$this->setVersion($options['version']);
 		$this->setRegion(isset($options['region']) ? $options['region'] : self::REGION);
 		$this->setLanguage(isset($options['language']) ? $options['language'] : self::LANGUAGE);
 		$this->setAsync(isset($options['async']) ? $options['async'] : self::ASYNC);
@@ -842,6 +843,38 @@ abstract class MapperBase implements MappingBaseInterface
 	public function getKey()
 	{
 		return $this->key;
+	}
+	
+	/**
+	 * Set the Google Maps version.
+	 *
+	 * @param float|null $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setVersion($value)
+	{
+		if (is_null($value)) {
+			return;
+		}
+		
+		if (! is_float($value)) {
+			throw new MapperArgumentException('Invalid Google Map\'s API version.');
+		}
+
+		$this->version = $value;
+	}
+
+	/**
+	 * Get the Google Maps version.
+	 *
+	 * @return float
+	 */
+	public function getVersion()
+	{
+		return $this->version;
 	}
 
 	/**
@@ -1713,7 +1746,7 @@ abstract class MapperBase implements MappingBaseInterface
 	{
 		return [
 			'key' => $this->getKey(),
-			'version' => $this->version,
+			'version' => $this->getVersion(),
 			'region' => $this->getRegion(),
 			'language' => $this->getLanguage(),
 			'async' => $this->getAsync(),
