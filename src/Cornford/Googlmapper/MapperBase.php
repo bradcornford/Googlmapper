@@ -848,7 +848,7 @@ abstract class MapperBase implements MappingBaseInterface
 	/**
 	 * Set the Google Maps version.
 	 *
-	 * @param float|null $value
+	 * @param string|null $value
 	 *
 	 * @throws MapperArgumentException
 	 *
@@ -860,11 +860,11 @@ abstract class MapperBase implements MappingBaseInterface
 			return;
 		}
 		
-		if (! is_float($value)) {
+		if (! is_float(floatval($value))) {
 			throw new MapperArgumentException('Invalid Google Map\'s API version.');
 		}
 
-		$this->version = $value;
+		$this->version = floatval($value);
 	}
 
 	/**
