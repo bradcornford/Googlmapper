@@ -93,7 +93,7 @@ abstract class MapperBase implements MappingBaseInterface
 	 *
 	 * @var integer
 	 */
-	protected $version = '3.34';
+	protected $version = '3.37';
 
 	/**
 	 * API region.
