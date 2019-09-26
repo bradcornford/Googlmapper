@@ -47,14 +47,14 @@ class Location implements ObjectableInterface {
 	 *
 	 * @var float
 	 */
-	protected $latitude;
+	public $latitude;
 
 	/**
 	 * Longitude.
 	 *
 	 * @var float
 	 */
-	protected $longitude;
+	public $longitude;
 
 	/**
 	 * Place Id.
