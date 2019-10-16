@@ -26,7 +26,7 @@
 
     @if ($options['cluster'])
 
-        <script type="text/javascript" src="//googlemaps.github.io/js-marker-clusterer/src/markerclusterer.js"></script>
+        <script type="text/javascript" src="//googlearchive.github.io/js-marker-clusterer/src/markerclusterer.js"></script>
 
     @endif
 
