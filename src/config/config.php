@@ -245,7 +245,7 @@ return [
         | Display custom images for clusters using icon path. (Link to an image path)
         |
         */
-        'icon' => '//googlemaps.github.io/js-marker-clusterer/images/m',
+        'icon' => '//googlearchive.github.io/js-marker-clusterer/images/m',
 
         /*
         |--------------------------------------------------------------------------
