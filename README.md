@@ -143,6 +143,114 @@ This event is fired after the map is loaded.
 
 	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventAfterLoad' => 'console.log("after load");']);
 
+**Bounds Changed**
+
+This event is fired when the map bounds change.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventBoundsChanged' => 'console.log("bounds changed");']);
+
+**Center Changed**
+
+This event is fired when the map center changes.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventBoundsChanged' => 'console.log("center changed");']);
+
+**Click**
+
+This event is fired when the map is clicked.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventClick' => 'console.log("click");']);
+
+**Double Click**
+
+This event is fired when the map is double clicked.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventDblclick' => 'console.log("double click");']);
+
+**Drag**
+
+This event is fired when the map is dragged.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventDrag' => 'console.log("drag");']);
+
+**Drag End**
+
+This event is fired when the map is drag ends.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventDragend' => 'console.log("drag end");']);
+
+**Drag Start**
+
+This event is fired when the map is drag starts.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventDragstart' => 'console.log("drag start");']);
+
+**Heading Changed**
+
+This event is fired when the map heading changes.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventHeadingChanged' => 'console.log("heading changed");']);
+
+**Idle**
+
+This event is fired when the map is idle.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventIdle' => 'console.log("idle");']);
+
+**Map Type ID Changed**
+
+This event is fired when the map type changes.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventMaptypeidChanged' => 'console.log("map type changed");']);
+
+**Mouse Move**
+
+This event is fired when the mouse moves on the map.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventMousemove' => 'console.log("mouse moves");']);
+
+**Mouse Out**
+
+This event is fired when the mouse moves off the map.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventMouseout' => 'console.log("mouse out");']);
+
+**Mouse Over**
+
+This event is fired when the mouse moves over the map.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventMouseover' => 'console.log("mouse over");']);
+
+**Projection Changed**
+
+This event is fired when the map projection changes.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventProjectionChanged' => 'console.log("projection changed");']);
+
+**Resize**
+
+This event is fired when the map is resized.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventResize' => 'console.log("resized");']);
+
+**Tiles Loaded**
+
+This event is fired when the map tiles are loaded.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventTilesloaded' => 'console.log("tiles loaded");']);
+
+**Tilt Changed**
+
+This event is fired when the map tilt changes.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventTiltChanged' => 'console.log("tilt changed");']);
+
+**Zoom Changed**
+
+This event is fired when the map zoom changes.
+
+	Mapper::map(53.381128999999990000, -1.470085000000040000, ['eventZoomChanged' => 'console.log("zoom changed");']);
+
 ### Location
 
 The `location` method allows a location to be searched for with a string, returning a Location object with its latitude and longitude.
@@ -172,7 +280,7 @@ If you need draggable marker, you can add option draggable.
 
 	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true]);
 
-##### Draggable Events
+##### Marker Events
 
 **Click**
 
@@ -184,55 +292,55 @@ This event is fired when the marker icon was clicked.
 
 This event is fired when the marker icon was double clicked.
 
-	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventDblClick' => 'console.log("double left click");']);
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventDblclick' => 'console.log("double left click");']);
 
 **Right Click**
 
 This event is fired for a right click on the marker.
 
-	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventRightClick' => 'console.log("right click");']);
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventRightclick' => 'console.log("right click");']);
 
 **Mouse Over**
 
 This event is fired when the mouse enters the area of the marker icon.
 
- 	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseOver' => 'console.log("mouse over");']);
+ 	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseover' => 'console.log("mouse over");']);
 
 **Mouse Down**
 
 This event is fired for a mouse down on the marker.
 
-	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseDown' => 'console.log("mouse down");']);
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMousedown' => 'console.log("mouse down");']);
 
 **Mouse Up**
 
 This event is fired for a mouse up on the marker.
 
-	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseUp' => 'console.log("mouse up");']);
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseup' => 'console.log("mouse up");']);
 
 **Mouse Out**
 
 This event is fired when the mouse leaves the area of the marker icon.
 
-	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseOut' => 'console.log("mouse out");']);
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventMouseout' => 'console.log("mouse out");']);
 
 **Drag**
 
 This event is repeatedly fired while the user drags the marker.
 
-	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventDrag' => 'console.log("dragging");']);
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventDrag' => 'console.log("drag");']);
 
 **Drag Start**
 
 This event is fired when the user starts dragging the marker.
 
-	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventDragStart' => 'console.log("drag start");']);
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventDragstart' => 'console.log("drag start");']);
 
 **Drag End**
 
 This event is fired when the user stops dragging the marker.
 
-	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventDragEnd' => 'console.log("drag end");']);
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true, 'eventDragend' => 'console.log("drag end");']);
 
 ### Information Window
 

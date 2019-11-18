@@ -94,6 +94,37 @@
 			var markerCluster = new MarkerClusterer(map_{!! $id !!}, markers, markerClusterOptions);
 		@endif
 
+        @foreach ([
+            'eventBoundsChanged',
+            'eventCenterChanged',
+            'eventClick',
+            'eventDblclick',
+            'eventDrag',
+            'eventDragend',
+            'eventDragstart',
+            'eventHeadingChanged',
+            'eventIdle',
+            'eventMaptypeidChanged',
+            'eventMousemove',
+            'eventMouseout',
+            'eventMouseover',
+            'eventProjectionChanged',
+            'eventResize',
+            'eventTilesloaded',
+            'eventTiltChanged',
+            'eventZoomChanged'
+        ] as $event)
+
+        @if (isset($options[$event]))
+
+            google.maps.event.addListener(map_{!! $id !!}, '{!! strtolower(preg_replace('/([A-Z]+)/', "_$1", lcfirst(str_replace('event', '', $event)))) !!}', function (event) {
+                {!! $options[$event] !!}
+            });
+
+        @endif
+
+        @endforeach
+
 		maps.push({
 			key: {!! $id !!},
 			markers: markers,
@@ -105,7 +136,7 @@
 
     @if (!$options['async'])
 
-	    google.maps.event.addDomListener(window, 'load', initialize_{!! $id !!});
+        google.maps.event.addDomListener(window, 'load', initialize_{!! $id !!});
 
     @endif
 

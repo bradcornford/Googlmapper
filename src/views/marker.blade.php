@@ -35,11 +35,11 @@ var marker_{!! $id !!} = new google.maps.Marker({
 			webUrl: document.URL
 		},
 	@endif
-		
+
 	@if (isset($options['draggable']) && $options['draggable'] == true)
 		draggable: true,
 	@endif
-	
+
 	title: {!! json_encode((string) $options['title']) !!},
 	label: {!! json_encode($options['label']) !!},
 	animation: @if (empty($options['animation']) || $options['animation'] == 'NONE') '' @else google.maps.Animation.{!! $options['animation'] !!} @endif,
@@ -120,14 +120,26 @@ markers.push(marker_{!! $id !!});
 
 @endif
 
-@foreach (['eventClick', 'eventDblClick', 'eventRightClick', 'eventMouseOver', 'eventMouseDown', 'eventMouseUp', 'eventMouseOut', 'eventDrag', 'eventDragStart', 'eventDragEnd', 'eventDomReady'] as $event)
+@foreach ([
+    'eventClick',
+    'eventDblclick',
+    'eventRightclick',
+    'eventMouseover',
+    'eventMousedown',
+    'eventMouseup',
+    'eventMouseout',
+    'eventDrag',
+    'eventDragstart',
+    'eventDragend',
+    'eventDomready'
+] as $event)
 
-	@if (isset($options[$event]))
+    @if (isset($options[$event]))
 
-		google.maps.event.addListener(marker_{!! $id !!}, '{!! str_replace('event', '', strtolower($event)) !!}', function (event) {
-			{!! $options[$event] !!}
-		});
+        google.maps.event.addListener(marker_{!! $id !!}, '{!! str_replace('event', '', strtolower($event)) !!}', function (event) {
+            {!! $options[$event] !!}
+        });
 
-	@endif
+    @endif
 
 @endforeach
