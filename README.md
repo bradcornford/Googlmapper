@@ -5,7 +5,9 @@
 [![Build Status](https://travis-ci.org/bradcornford/Googlmapper.svg?branch=master)](https://travis-ci.org/bradcornford/Googlmapper)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bradcornford/Googlmapper/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bradcornford/Googlmapper/?branch=master)
 
-### For Laravel 4.x, check [version 1.0.1](https://github.com/bradcornford/Googlmapper/tree/v1.0.1)
+### For Laravel 5.x, check [version 2.35.1](https://github.com/bradcornford/Googlmapper/tree/v2.35.1)
+
+### For Laravel 4.x, check [version 1.27.0](https://github.com/bradcornford/Googlmapper/tree/v1.27.0)
 
 Think of Googlmapper as an easy way to integrate Google Maps with Laravel, providing a variety of helpers to speed up the utilisation of mapping. These include:
 
@@ -25,7 +27,7 @@ Think of Googlmapper as an easy way to integrate Google Maps with Laravel, provi
 Begin by installing this package through Composer. Edit your project's `composer.json` file to require `cornford/googlmapper`.
 
 	"require": {
-		"cornford/googlmapper": "2.*"
+		"cornford/googlmapper": "3.*"
 	}
 
 Next, update Composer from the Terminal:
