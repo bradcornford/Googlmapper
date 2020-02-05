@@ -1,5 +1,6 @@
 suites:
   cornford_suite:
-    namespace: Cornford
+    namespace: Cornford\Googlmapper
+    psr4_prefix: Cornford\Googlmapper
     src_path: src
     spec_prefix: spec

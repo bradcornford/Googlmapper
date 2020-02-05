@@ -165,8 +165,9 @@ The `streetview` method allows a streetview map to be created, with latitude, lo
 The `marker` method allows a marker to be added to a map, with latitude, longitude, and optional parameters for options.
 
 	Mapper::marker(53.381128999999990000, -1.470085000000040000);
-	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['symbol' => 'circle', 'scale' => 1000]);
-	Mapper::map(52.381128999999990000, 0.470085000000040000)->marker(53.381128999999990000, -1.470085000000040000, ['markers' => ['symbol' => 'circle', 'scale' => 1000, 'animation' => 'DROP']]);
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['animation' => 'DROP', 'label' => 'Marker', 'title' => 'Marker']);
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['icon' => 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&|FE6256|000000', 'scale' => 1000]);
+	Mapper::map(52.381128999999990000, 0.470085000000040000, ['markers' => ['symbol' => 'circle', 'scale' => 10, 'animation' => 'DROP', 'label' => 'Marker', 'title' => 'Marker']])->marker(53.381128999999990000, -1.470085000000040000);
 
 #### Draggable Markers
 

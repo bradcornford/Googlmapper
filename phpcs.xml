@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+
+    <description>Custom ruleset Based on PSR12</description>
+
+    <rule ref="PSR12"/>
+
+    <arg name="basepath" value="."/>
+    <arg name="extensions" value="php"/>
+    <arg name="colors"/>
+    <arg value="ps"/>
+    <arg name="cache" value=".phpcs-cache"/>
+
+    <exclude-pattern>/vendor/</exclude-pattern>
+
+</ruleset>

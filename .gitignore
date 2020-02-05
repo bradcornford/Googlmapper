@@ -3,5 +3,7 @@ composer.phar
 composer.lock
 .DS_Store
 .idea
-src/config/dev
+config/dev
 example.dev.php
+.phpcs-cache
+.phpunit.result.cache
