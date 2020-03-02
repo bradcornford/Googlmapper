@@ -2,7 +2,7 @@
 
     var service = new google.maps.places.PlacesService({!! $options['map'] !!});
     var request = {
-        placeId: '{!! $options['place'] !!}'
+        placeId: {!! json_encode((string) $options['place']) !!}
     };
 
     service.getDetails(request, function(placeResult, status) {
@@ -27,7 +27,7 @@ var marker_{!! $id !!} = new google.maps.Marker({
     position: markerPosition_{!! $id !!},
     @if ($options['place'])
         place: {
-            placeId: '{!! $options['place'] !!}',
+            placeId: {!! json_encode((string) $options['place']) !!},
             location: { lat: {!! $options['latitude'] !!}, lng: {!! $options['longitude'] !!} }
         },
         attribution: {
@@ -36,31 +36,88 @@ var marker_{!! $id !!} = new google.maps.Marker({
         },
     @endif
 
-    @if (isset($options['draggable']) && $options['draggable'] == true)
-        draggable: true,
+    @if (isset($options['clickable']))
+        clickable: {!! json_encode((bool) $options['clickable']) !!},
+    @endif
+
+    @if (isset($options['cursor']))
+        cursor: {!! json_encode((string) $options['cursor']) !!},
+    @endif
+
+    @if (isset($options['draggable']))
+        draggable: {!! json_encode((bool) $options['draggable']) !!},
+    @endif
+
+    @if (isset($options['opacity']))
+        opacity: {!! json_encode((float) $options['opacity']) !!},
+    @endif
+
+    @if (isset($options['visible']))
+        visible: {!! json_encode((bool) $options['visible']) !!},
+    @endif
+
+    @if (isset($options['zIndex']))
+        zIndex: {!! json_encode((int) $options['zIndex']) !!},
     @endif
 
     title: {!! json_encode((string) $options['title']) !!},
-    label: {!! json_encode($options['label']) !!},
-    animation: @if (empty($options['animation']) || $options['animation'] == 'NONE') '' @else google.maps.Animation.{!! $options['animation'] !!} @endif,
-    @if ($options['symbol'])
-        icon: {
-            path: google.maps.SymbolPath.{!! $options['symbol'] !!},
-            scale: {!! $options['scale'] !!}
+    label:
+    @if (is_array($options['label']))
+        {
+            @foreach ($options['label'] as $key => $value)
+                {!! $key !!}: {!! json_encode((string) $value) !!},
+            @endforeach
         }
     @else
+        {!! json_encode($options['icon']) !!}
+    @endif
+    ,
+    animation: @if (empty($options['animation']) || $options['animation'] == 'NONE') '' @else google.maps.Animation.{!! $options['animation'] !!} @endif,
+    @if (isset($options['icon']))
         icon:
-        @if (is_array($options['icon']) && isset($options['icon']['url']))
+        @if (is_array($options['icon']))
             {
-                url: {!! json_encode((string) $options['icon']['url']) !!},
+                @foreach ($options['icon'] as $key => $value)
 
-                @if (isset($options['icon']['size']))
-                    @if (is_array($options['icon']['size']))
-                        scaledSize: new google.maps.Size({!! $options['icon']['size'][0] !!}, {!! $options['icon']['size'][1] !!})
-                    @else
-                        scaledSize: new google.maps.Size({!! $options['icon']['size'] !!}, {!! $options['icon']['size'] !!})
-                    @endif
-                @endif
+                    @switch($key)
+@case('symbol')
+                            path: google.maps.SymbolPath.{!! $value !!},
+                        @break;
+
+                        @case('size')
+                        @case('scaledSize')
+                            @if (is_array($value))
+                                size: new google.maps.Size({!! $value[0] !!}, {!! $value[1] !!}),
+                            @else
+                                size: new google.maps.Size({!! $value !!}, {!! $value !!}),
+                            @endif
+                        @break;
+
+                        @case('anchor')
+                        @case('origin')
+                        @case('labelOrigin')
+                            @if (is_array($value))
+                                anchor: new google.maps.Point({!! $value[0] !!}, {!! $value[1] !!}),
+                            @else
+                                anchor: new google.maps.Point({!! $value !!}, {!! $value !!}),
+                            @endif
+                        @break;
+
+                        @case('fillOpacity')
+                        @case('rotation')
+                        @case('scale')
+                        @case('strokeOpacity')
+                        @case('strokeWeight')
+                            {!! $key !!}: {!! json_encode((int) $value) !!},
+                        @break
+
+                        @default
+                            {!! $key !!}: {!! json_encode((string) $value) !!},
+                        @break
+
+                    @endswitch
+
+                @endforeach
             }
         @else
             {!! json_encode($options['icon']) !!}
