@@ -120,7 +120,7 @@ var marker_{!! $id !!} = new google.maps.Marker({
                 @endforeach
             }
         @else
-            {!! json_encode($options['icon']) !!}
+            {!! json_encode((string) $options['icon']) !!}
         @endif
     @endif
 });
