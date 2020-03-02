@@ -10,17 +10,21 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "illuminate/view": "^5.0 || ^6.0",
-        "illuminate/support": "^5.0 || ^6.0"
+        "php": ">=7.2",
+        "ext-json": "*",
+        "illuminate/view": "^6.0",
+        "illuminate/support": "^6.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "2.0.*@dev",
-        "mockery/mockery": "0.9.1"
+        "phpspec/phpspec": "^6.0",
+        "mockery/mockery": "^1.2.4",
+        "phpunit/phpunit": "^8.4",
+        "phpmd/phpmd": "^2.7",
+        "squizlabs/php_codesniffer": "^3.5"
     },
     "autoload": {
-        "psr-0": {
-            "Cornford\\Googlmapper": "src/"
+        "psr-4": {
+            "Cornford\\Googlmapper\\": "src/"
         }
     },
     "minimum-stability": "stable",
@@ -33,5 +37,27 @@
                 "Mapper": "Cornford\\Googlmapper\\Facades\\MapperFacade"
             }
         }
+    },
+    "scripts": {
+        "phplint": [
+            "find . -type f -name \"*.php\" ! -path \"./vendor/*\" -exec php -l {} \\; | grep -vi \"no syntax errors\" || true"
+        ],
+        "phpcs": [
+            "./vendor/bin/phpcs --standard=phpcs.xml src || true"
+        ],
+        "phpmd": [
+            "./vendor/bin/phpmd src text phpmd.xml || true"
+        ],
+        "phpspec": [
+            "./vendor/bin/phpspec -c phpspec.yml run spec || true"
+        ],
+        "phpunit": [
+            "./vendor/bin/phpunit -c phpunit.xml tests"
+        ],
+        "analyse": [
+            "@phplint",
+            "@phpcs",
+            "@phpmd"
+        ]
     }
 }

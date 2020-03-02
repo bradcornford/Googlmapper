@@ -1,6 +1,7 @@
 filter:
     excluded_paths:
         - 'spec/*'
+        - 'tests/*'
     paths: {  }
 tools:
     php_sim:
@@ -9,6 +10,7 @@ tools:
         filter:
             excluded_paths:
                 - 'spec/*'
+                - 'tests/*'
             paths: {  }
     php_pdepend:
         enabled: true
@@ -19,6 +21,7 @@ tools:
         filter:
             excluded_paths:
                 - 'spec/*'
+                - 'tests/*'
             paths: {  }
     php_analyzer:
         enabled: true
@@ -28,6 +31,7 @@ tools:
         filter:
             excluded_paths:
                 - 'spec/*'
+                - 'tests/*'
             paths: {  }
         path_configs: {  }
     php_changetracking:
@@ -40,6 +44,7 @@ tools:
         filter:
             excluded_paths:
                 - 'spec/*'
+                - 'tests/*'
             paths: {  }
 before_commands: {  }
 after_commands: {  }
