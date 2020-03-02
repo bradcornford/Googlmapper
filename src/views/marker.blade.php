@@ -35,11 +35,11 @@ var marker_{!! $id !!} = new google.maps.Marker({
 			webUrl: document.URL
 		},
 	@endif
-		
+
 	@if (isset($options['draggable']) && $options['draggable'] == true)
 		draggable: true,
 	@endif
-	
+
 	title: {!! json_encode((string) $options['title']) !!},
 	label: {!! json_encode($options['label']) !!},
 	animation: @if (empty($options['animation']) || $options['animation'] == 'NONE') '' @else google.maps.Animation.{!! $options['animation'] !!} @endif,
@@ -50,9 +50,27 @@ var marker_{!! $id !!} = new google.maps.Marker({
 		}
 	@else
 		icon:
-		@if (is_array($options['icon']) && isset($options['icon']['url']))
+		@if (is_array($options['icon']))
 			{
-				url: {!! json_encode((string) $options['icon']['url']) !!},
+				@if (isset($options['icon']['url']))
+					url: {!! json_encode((string) $options['icon']['url']) !!},
+				@endif
+
+				@foreach (['path', 'fillColor', 'fillOpacity', 'strokeWeight'] as $property)
+					@if (isset($options['icon'][$property]))
+						{{ $property }}: {!! json_encode($options['icon'][$property]) !!},
+					@endif
+				@endforeach
+
+				@foreach (['anchor', 'labelOrigin', 'origin'] as $property)
+					@if (isset($options['icon'][$property]))
+						@if (is_array($options['icon'][$property]))
+							{{ $property }}: new google.maps.Point({!! $options['icon'][$property][0] !!}, {!! $options['icon'][$property][1] !!})
+						@else
+							{{ $property }}: new google.maps.Point({!! $options['icon'][$property] !!}, {!! $options['icon'][$property] !!})
+						@endif
+					@endif
+				@endforeach
 
 				@if (isset($options['icon']['size']))
 					@if (is_array($options['icon']['size']))
@@ -62,8 +80,6 @@ var marker_{!! $id !!} = new google.maps.Marker({
 					@endif
 				@endif
 			}
-		@else
-			{!! json_encode($options['icon']) !!}
 		@endif
 	@endif
 });
