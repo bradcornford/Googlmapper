@@ -4,10 +4,15 @@ namespace Cornford\Googlmapper;
 
 use Cornford\Googlmapper\Contracts\MappingBaseInterface;
 use Cornford\Googlmapper\Exceptions\MapperArgumentException;
+use Cornford\Googlmapper\Traits\Languages;
+use Cornford\Googlmapper\Traits\Regions;
 use Illuminate\View\Factory as View;
 
 abstract class MapperBase implements MappingBaseInterface
 {
+    use Regions;
+    use Languages;
+
     private const ENABLED = true;
 
     private const REGION = 'GB';
@@ -92,9 +97,9 @@ abstract class MapperBase implements MappingBaseInterface
     /**
      * API Version.
      *
-     * @var string
+     * @var float|string
      */
-    protected $version = '3.40';
+    protected $version;
 
     /**
      * API region.
@@ -104,400 +109,11 @@ abstract class MapperBase implements MappingBaseInterface
     protected $region;
 
     /**
-     * API regions.
-     *
-     * @var array
-     */
-    protected $regions = [
-        'AF',
-        'AX',
-        'AL',
-        'DZ',
-        'AS',
-        'AD',
-        'AO',
-        'AI',
-        'AQ',
-        'AG',
-        'AR',
-        'AM',
-        'AW',
-        'AU',
-        'AT',
-        'AZ',
-        'BS',
-        'BH',
-        'BD',
-        'BB',
-        'BY',
-        'BE',
-        'BZ',
-        'BJ',
-        'BM',
-        'BT',
-        'BO',
-        'BQ',
-        'BA',
-        'BW',
-        'BV',
-        'BR',
-        'IO',
-        'BN',
-        'BG',
-        'BF',
-        'BI',
-        'KH',
-        'CM',
-        'CA',
-        'CV',
-        'KY',
-        'CF',
-        'TD',
-        'CL',
-        'CN',
-        'CX',
-        'CC',
-        'CO',
-        'KM',
-        'CG',
-        'CD',
-        'CK',
-        'CR',
-        'CI',
-        'HR',
-        'CU',
-        'CW',
-        'CY',
-        'CZ',
-        'DK',
-        'DJ',
-        'DM',
-        'DO',
-        'EC',
-        'EG',
-        'SV',
-        'GQ',
-        'ER',
-        'EE',
-        'ET',
-        'FK',
-        'FO',
-        'FJ',
-        'FI',
-        'FR',
-        'GF',
-        'PF',
-        'TF',
-        'GA',
-        'GM',
-        'GE',
-        'DE',
-        'GH',
-        'GI',
-        'GR',
-        'GL',
-        'GD',
-        'GP',
-        'GU',
-        'GT',
-        'GG',
-        'GN',
-        'GW',
-        'GY',
-        'HT',
-        'HM',
-        'VA',
-        'HN',
-        'HK',
-        'HU',
-        'IS',
-        'IN',
-        'ID',
-        'IR',
-        'IQ',
-        'IE',
-        'IM',
-        'IL',
-        'IT',
-        'JM',
-        'JP',
-        'JE',
-        'JO',
-        'KZ',
-        'KE',
-        'KI',
-        'KP',
-        'KR',
-        'KW',
-        'KG',
-        'LA',
-        'LV',
-        'LB',
-        'LS',
-        'LR',
-        'LY',
-        'LI',
-        'LT',
-        'LU',
-        'MO',
-        'MK',
-        'MG',
-        'MW',
-        'MY',
-        'MV',
-        'ML',
-        'MT',
-        'MH',
-        'MQ',
-        'MR',
-        'MU',
-        'YT',
-        'MX',
-        'FM',
-        'MD',
-        'MC',
-        'MN',
-        'ME',
-        'MS',
-        'MA',
-        'MZ',
-        'MM',
-        'NA',
-        'NR',
-        'NP',
-        'NL',
-        'NC',
-        'NZ',
-        'NI',
-        'NE',
-        'NG',
-        'NU',
-        'NF',
-        'MP',
-        'NO',
-        'OM',
-        'PK',
-        'PW',
-        'PS',
-        'PA',
-        'PG',
-        'PY',
-        'PE',
-        'PH',
-        'PN',
-        'PL',
-        'PT',
-        'PR',
-        'QA',
-        'RE',
-        'RO',
-        'RU',
-        'RW',
-        'BL',
-        'SH',
-        'KN',
-        'LC',
-        'MF',
-        'PM',
-        'VC',
-        'WS',
-        'SM',
-        'ST',
-        'SA',
-        'SN',
-        'RS',
-        'SC',
-        'SL',
-        'SG',
-        'SX',
-        'SK',
-        'SI',
-        'SB',
-        'SO',
-        'ZA',
-        'GS',
-        'SS',
-        'ES',
-        'LK',
-        'SD',
-        'SR',
-        'SJ',
-        'SZ',
-        'SE',
-        'CH',
-        'SY',
-        'TW',
-        'TJ',
-        'TZ',
-        'TH',
-        'TL',
-        'TG',
-        'TK',
-        'TO',
-        'TT',
-        'TN',
-        'TR',
-        'TM',
-        'TC',
-        'TV',
-        'UG',
-        'UA',
-        'AE',
-        'GB',
-        'US',
-        'UM',
-        'UY',
-        'UZ',
-        'VU',
-        'VE',
-        'VN',
-        'VG',
-        'VI',
-        'WF',
-        'EH',
-        'YE',
-        'ZM',
-        'ZW'
-    ];
-
-    /**
      * API Language.
      *
      * @var string
      */
     protected $language;
-
-    /**
-     * API Languages.
-     *
-     * @var array
-     */
-    protected $languages = [
-        'af',
-        'ar-ae',
-        'ar-bh',
-        'ar-dz',
-        'ar-eg',
-        'ar-iq',
-        'ar-jo',
-        'ar-kw',
-        'ar-lb',
-        'ar-ly',
-        'ar-ma',
-        'ar-om',
-        'ar-qa',
-        'ar-sa',
-        'ar-sy',
-        'ar-tn',
-        'ar-ye',
-        'be',
-        'bg',
-        'ca',
-        'cs',
-        'da',
-        'de',
-        'de-at',
-        'de-ch',
-        'de-li',
-        'de-lu',
-        'el',
-        'en',
-        'en-au',
-        'en-bz',
-        'en-ca',
-        'en-gb',
-        'en-ie',
-        'en-jm',
-        'en-nz',
-        'en-tt',
-        'en-us',
-        'en-za',
-        'es',
-        'es-ar',
-        'es-bo',
-        'es-cl',
-        'es-co',
-        'es-cr',
-        'es-do',
-        'es-ec',
-        'es-gt',
-        'es-hn',
-        'es-mx',
-        'es-ni',
-        'es-pa',
-        'es-pe',
-        'es-pr',
-        'es-py',
-        'es-sv',
-        'es-uy',
-        'es-ve',
-        'et',
-        'eu',
-        'fa',
-        'fi',
-        'fo',
-        'fr',
-        'fr-be',
-        'fr-ca',
-        'fr-ch',
-        'fr-lu',
-        'ga',
-        'gd',
-        'he',
-        'hi',
-        'hr',
-        'hu',
-        'id',
-        'is',
-        'it',
-        'it-ch',
-        'ja',
-        'ji',
-        'ko',
-        'ko',
-        'ku',
-        'lt',
-        'lv',
-        'mk',
-        'ml',
-        'ms',
-        'mt',
-        'nl',
-        'nl-be',
-        'nb',
-        'nn',
-        'no',
-        'pa',
-        'pl',
-        'pt',
-        'pt-br',
-        'rm',
-        'ro',
-        'ro-md',
-        'ru',
-        'ru-md',
-        'sb',
-        'sk',
-        'sl',
-        'sq',
-        'sr',
-        'sv',
-        'sv-fi',
-        'th',
-        'tn',
-        'tr',
-        'ts',
-        'uk',
-        'ur',
-        've',
-        'vi',
-        'xh',
-        'zh-cn',
-        'zh-hk',
-        'zh-sg',
-        'zh-tw',
-        'zu'
-    ];
 
     /**
      * Async maps.
@@ -713,6 +329,10 @@ abstract class MapperBase implements MappingBaseInterface
             throw new MapperArgumentException('Google maps API key is required.');
         }
 
+        if (!isset($options['version'])) {
+            throw new MapperArgumentException('Google maps API version is required.');
+        }
+
         if (!isset($options['region'])) {
             throw new MapperArgumentException('Region is required.');
         }
@@ -731,6 +351,7 @@ abstract class MapperBase implements MappingBaseInterface
 
         $this->setEnabled($options['enabled'] ?? self::ENABLED);
         $this->setKey($options['key']);
+        $this->setVersion($options['version']);
         $this->setRegion($options['region'] ?? self::REGION);
         $this->setLanguage($options['language'] ?? self::LANGUAGE);
         $this->setAsync($options['async'] ?? self::ASYNC);
@@ -847,6 +468,34 @@ abstract class MapperBase implements MappingBaseInterface
     public function getKey()
     {
         return $this->key;
+    }
+
+    /**
+     * Set the Google Maps version.
+     *
+     * @param float|string $value
+     *
+     * @throws MapperArgumentException
+     *
+     * @return void
+     */
+    public function setVersion($value)
+    {
+        if (!is_float($value) && !is_string($value)) {
+            throw new MapperArgumentException('Invalid Google Map\'s API version.');
+        }
+
+        $this->version = $value;
+    }
+
+    /**
+     * Get the Google Maps version.
+     *
+     * @return float|string
+     */
+    public function getVersion()
+    {
+        return $this->version;
     }
 
     /**
@@ -1742,7 +1391,7 @@ abstract class MapperBase implements MappingBaseInterface
     {
         return [
             'key' => $this->getKey(),
-            'version' => $this->version,
+            'version' => $this->getVersion(),
             'region' => $this->getRegion(),
             'language' => $this->getLanguage(),
             'async' => $this->getAsync(),
