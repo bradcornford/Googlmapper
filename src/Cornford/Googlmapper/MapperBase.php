@@ -29,14 +29,14 @@ abstract class MapperBase implements MappingBaseInterface
 	const ZOOM = 8;
 	const SCROLL_WHEEL_ZOOM = true;
 
-    const CONTROL_ZOOM = true;
-    const CONTROL_MAP_TYPE = true;
-    const CONTROL_SCALE = false;
-    const CONTROL_STREET_VIEW = true;
-    const CONTROL_ROTATE = false;
-    const CONTROL_FULLSCREEN = true;
+	const CONTROL_ZOOM = true;
+	const CONTROL_MAP_TYPE = true;
+	const CONTROL_SCALE = false;
+	const CONTROL_STREET_VIEW = true;
+	const CONTROL_ROTATE = false;
+	const CONTROL_FULLSCREEN = true;
 
-    const HEADING = 0;
+	const HEADING = 0;
 
 	const TILT = 0;
 
@@ -91,9 +91,9 @@ abstract class MapperBase implements MappingBaseInterface
 	/**
 	 * API Version.
 	 *
-	 * @var integer
+	 * @var float|string
 	 */
-	protected $version = '3.40';
+	protected $version;
 
 	/**
 	 * API region.
@@ -547,49 +547,49 @@ abstract class MapperBase implements MappingBaseInterface
 	 */
 	protected $scrollWheelZoom;
 
-    /**
-     * Map zoom control.
-     *
-     * @var boolean
-     */
-    protected $zoomControl;
+	/**
+	 * Map zoom control.
+	 *
+	 * @var boolean
+	 */
+	protected $zoomControl;
 
-    /**
-     * Map type control.
-     *
-     * @var boolean
-     */
-    protected $mapTypeControl;
+	/**
+	 * Map type control.
+	 *
+	 * @var boolean
+	 */
+	protected $mapTypeControl;
 
-    /**
+	/**
 	 * Map scale control.
 	 *
 	 * @var boolean
 	 */
 	protected $scaleControl;
 
-    /**
+	/**
 	 * Map street view control.
 	 *
 	 * @var boolean
 	 */
 	protected $streetViewControl;
 
-    /**
+	/**
 	 * Map rotate control.
 	 *
 	 * @var boolean
 	 */
 	protected $rotateControl;
 
-    /**
-     * Map fullscreen control.
-     *
-     * @var boolean
-     */
-    protected $fullscreenControl;
+	/**
+	 * Map fullscreen control.
+	 *
+	 * @var boolean
+	 */
+	protected $fullscreenControl;
 
-    /**
+	/**
 	 * Map type.
 	 *
 	 * @var string
@@ -608,12 +608,12 @@ abstract class MapperBase implements MappingBaseInterface
 		'TERRAIN'
 	];
 
-    /**
-     * Map heading.
-     *
-     * @var integer
-     */
-    protected $heading;
+	/**
+	 * Map heading.
+	 *
+	 * @var integer
+	 */
+	protected $heading;
 
 	/**
 	 * Map tilt.
@@ -712,6 +712,10 @@ abstract class MapperBase implements MappingBaseInterface
 			throw new MapperArgumentException('Google maps API key is required.');
 		}
 
+		if (!isset($options['version'])) {
+			throw new MapperArgumentException('Google maps API version is required.');
+		}
+
 		if (!isset($options['region'])) {
 			throw new MapperArgumentException('Region is required.');
 		}
@@ -730,6 +734,7 @@ abstract class MapperBase implements MappingBaseInterface
 
 		$this->setEnabled(isset($options['enabled']) ? $options['enabled'] : self::ENABLED);
 		$this->setKey($options['key']);
+		$this->setVersion($options['version']);
 		$this->setRegion(isset($options['region']) ? $options['region'] : self::REGION);
 		$this->setLanguage(isset($options['language']) ? $options['language'] : self::LANGUAGE);
 		$this->setAsync(isset($options['async']) ? $options['async'] : self::ASYNC);
@@ -738,13 +743,13 @@ abstract class MapperBase implements MappingBaseInterface
 		$this->setLocate(isset($options['locate']) ? $options['locate'] : self::LOCATE);
 		$this->setZoom(isset($options['zoom']) ? $options['zoom'] : self::ZOOM);
 		$this->setScrollWheelZoom(isset($options['scrollWheelZoom']) ? $options['scrollWheelZoom'] : self::SCROLL_WHEEL_ZOOM);
-        $this->setZoomControl(isset($options['zoomControl']) ? $options['zoomControl'] : self::CONTROL_ZOOM);
-        $this->setMapTypeControl(isset($options['mapTypeControl']) ? $options['mapTypeControl'] : self::CONTROL_MAP_TYPE);
-        $this->setScaleControl(isset($options['scaleControl']) ? $options['scaleControl'] : self::CONTROL_SCALE);
-        $this->setStreetViewControl(isset($options['streetViewControl']) ? $options['streetViewControl'] : self::CONTROL_STREET_VIEW);
-        $this->setRotateControl(isset($options['rotateControl']) ? $options['rotateControl'] : self::CONTROL_ROTATE);
-        $this->setFullscreenControl(isset($options['fullscreenControl']) ? $options['fullscreenControl'] : self::CONTROL_FULLSCREEN);
-        $this->setType(isset($options['type']) ? $options['type'] : self::TYPE_ROADMAP);
+		$this->setZoomControl(isset($options['zoomControl']) ? $options['zoomControl'] : self::CONTROL_ZOOM);
+		$this->setMapTypeControl(isset($options['mapTypeControl']) ? $options['mapTypeControl'] : self::CONTROL_MAP_TYPE);
+		$this->setScaleControl(isset($options['scaleControl']) ? $options['scaleControl'] : self::CONTROL_SCALE);
+		$this->setStreetViewControl(isset($options['streetViewControl']) ? $options['streetViewControl'] : self::CONTROL_STREET_VIEW);
+		$this->setRotateControl(isset($options['rotateControl']) ? $options['rotateControl'] : self::CONTROL_ROTATE);
+		$this->setFullscreenControl(isset($options['fullscreenControl']) ? $options['fullscreenControl'] : self::CONTROL_FULLSCREEN);
+		$this->setType(isset($options['type']) ? $options['type'] : self::TYPE_ROADMAP);
 		$this->setHeading(isset($options['heading']) ? $options['heading'] : self::HEADING);
 		$this->setTilt(isset($options['tilt']) ? $options['tilt'] : self::TILT);
 		$this->setUi(isset($options['ui']) ? $options['ui'] : self::UI);
@@ -845,6 +850,34 @@ abstract class MapperBase implements MappingBaseInterface
 	}
 
 	/**
+	 * Set the Google Maps version.
+	 *
+	 * @param float|string $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setVersion($value)
+	{
+		if (!is_float($value) && !is_string($value)) {
+			throw new MapperArgumentException('Invalid Google Map\'s API version.');
+		}
+
+		$this->version = $value;
+	}
+
+	/**
+	 * Get the Google Maps version.
+	 *
+	 * @return float|string
+	 */
+	public function getVersion()
+	{
+		return $this->version;
+	}
+
+	/**
 	 * Set the Google Maps region.
 	 *
 	 * @param string $value
@@ -908,53 +941,53 @@ abstract class MapperBase implements MappingBaseInterface
 		return $this->language;
 	}
 
-    /**
-     * Set the map async status.
-     *
-     * @param boolean $value
-     *
-     * @throws MapperArgumentException
-     *
-     * @return void
-     */
-    protected function setAsync($value)
-    {
-        if (!is_bool($value)) {
-            throw new MapperArgumentException('Invalid map async status.');
-        }
+	/**
+	 * Set the map async status.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	protected function setAsync($value)
+	{
+		if (!is_bool($value)) {
+			throw new MapperArgumentException('Invalid map async status.');
+		}
 
-        $this->async = $value;
-    }
+		$this->async = $value;
+	}
 
-    /**
-     * Get the map async status.
-     *
-     * @return boolean
-     */
-    public function getAsync()
-    {
-        return $this->async;
-    }
+	/**
+	 * Get the map async status.
+	 *
+	 * @return boolean
+	 */
+	public function getAsync()
+	{
+		return $this->async;
+	}
 
-    /**
-     * Enable async for maps.
-     *
-     * @return void
-     */
-    public function enableAsync()
-    {
-        $this->setAsync(true);
-    }
+	/**
+	 * Enable async for maps.
+	 *
+	 * @return void
+	 */
+	public function enableAsync()
+	{
+		$this->setAsync(true);
+	}
 
-    /**
-     * Disable async for maps.
-     *
-     * @return void
-     */
-    public function disableAsync()
-    {
-        $this->setAsync(false);
-    }
+	/**
+	 * Disable async for maps.
+	 *
+	 * @return void
+	 */
+	public function disableAsync()
+	{
+		$this->setAsync(false);
+	}
 
 	/**
 	 * Set the marker status.
@@ -1236,33 +1269,33 @@ abstract class MapperBase implements MappingBaseInterface
 		return $this->zoomControl;
 	}
 
-    /**
-     * Set map type control.
-     *
-     * @param boolean $value
-     *
-     * @throws MapperArgumentException
-     *
-     * @return void
-     */
-    public function setMapTypeControl($value)
-    {
-        if (!is_bool($value)) {
-            throw new MapperArgumentException('Map type control must be a boolean.');
-        }
+	/**
+	 * Set map type control.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setMapTypeControl($value)
+	{
+		if (!is_bool($value)) {
+			throw new MapperArgumentException('Map type control must be a boolean.');
+		}
 
-        $this->mapTypeControl = $value;
-    }
+		$this->mapTypeControl = $value;
+	}
 
-    /**
-     * Get map type control.
-     *
-     * @return boolean
-     */
-    public function getMapTypeControl()
-    {
-        return $this->mapTypeControl;
-    }
+	/**
+	 * Get map type control.
+	 *
+	 * @return boolean
+	 */
+	public function getMapTypeControl()
+	{
+		return $this->mapTypeControl;
+	}
 
 	/**
 	 * Set map scale control.
@@ -1348,33 +1381,33 @@ abstract class MapperBase implements MappingBaseInterface
 		return $this->rotateControl;
 	}
 
-    /**
-     * Set map fullscreen control.
-     *
-     * @param boolean $value
-     *
-     * @throws MapperArgumentException
-     *
-     * @return void
-     */
-    public function setFullscreenControl($value)
-    {
-        if (!is_bool($value)) {
-            throw new MapperArgumentException('Fullscreen control must be a boolean.');
-        }
+	/**
+	 * Set map fullscreen control.
+	 *
+	 * @param boolean $value
+	 *
+	 * @throws MapperArgumentException
+	 *
+	 * @return void
+	 */
+	public function setFullscreenControl($value)
+	{
+		if (!is_bool($value)) {
+			throw new MapperArgumentException('Fullscreen control must be a boolean.');
+		}
 
-        $this->fullscreenControl = $value;
-    }
+		$this->fullscreenControl = $value;
+	}
 
-    /**
-     * Get map fullscreen control.
-     *
-     * @return boolean
-     */
-    public function getFullscreenControl()
-    {
-        return $this->fullscreenControl;
-    }
+	/**
+	 * Get map fullscreen control.
+	 *
+	 * @return boolean
+	 */
+	public function getFullscreenControl()
+	{
+		return $this->fullscreenControl;
+	}
 
 	/**
 	 * Set map type.
@@ -1713,7 +1746,7 @@ abstract class MapperBase implements MappingBaseInterface
 	{
 		return [
 			'key' => $this->getKey(),
-			'version' => $this->version,
+			'version' => $this->getVersion(),
 			'region' => $this->getRegion(),
 			'language' => $this->getLanguage(),
 			'async' => $this->getAsync(),
