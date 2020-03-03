@@ -14,6 +14,7 @@ class MapperSpec extends ObjectBehavior
     private const STRING = 'test';
     private const LOCATION = 'test';
     private const INTEGER = 10;
+    private const FLOAT = 3.33;
     private const BOOLEAN = false;
 
     private const REGION = 'GB';
@@ -36,7 +37,7 @@ class MapperSpec extends ObjectBehavior
         $view->shouldReceive('render')->andReturn(self::STRING);
         $view->shouldReceive('location')->andReturn($location);
 
-        $this->beConstructedWith($view, ['enabled' => true, 'key' => self::STRING, 'region' => self::REGION, 'language' => self::LANGUAGE]);
+        $this->beConstructedWith($view, ['enabled' => true, 'key' => self::STRING, 'version' => self::FLOAT, 'region' => self::REGION, 'language' => self::LANGUAGE]);
     }
 
     public function it_is_initializable()
@@ -100,6 +101,12 @@ class MapperSpec extends ObjectBehavior
     {
         $this->setKey(self::STRING);
         $this->getKey()->shouldReturn(self::STRING);
+    }
+
+    public function it_can_set_and_get_version_option()
+    {
+        $this->setVersion(self::STRING);
+        $this->getVersion()->shouldReturn(self::STRING);
     }
 
     public function it_can_set_and_get_region_option()
