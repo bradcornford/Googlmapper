@@ -169,7 +169,7 @@ The `marker` method allows a marker to be added to a map, with latitude, longitu
 	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['icon' => 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=|FE6256|000000']);
 	Mapper::marker(53.381128999999990000, -1.470085000000040000, ['icon' => ['url' => 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=|FE6256|000000', 'scale' => 100]]);
 	Mapper::map(52.381128999999990000, 0.470085000000040000, ['markers' => ['icon' => ['symbol' => 'CIRCLE', 'scale' => 10], 'animation' => 'DROP', 'label' => 'Marker', 'title' => 'Marker']])->marker(53.381128999999990000, -1.470085000000040000);
-	Mapper::markermarker(53.381128999999990000, -1.470085000000040000, [
+	Mapper::marker(53.381128999999990000, -1.470085000000040000, [
 		'title' 	=> 'title',
 		'icon'      => [
 			'path'         => 'M10.5,0C4.7,0,0,4.7,0,10.5c0,10.2,9.8,19,10.2,19.4c0.1,0.1,0.2,0.1,0.3,0.1s0.2,0,0.3-0.1C11.2,29.5,21,20.7,21,10.5 C21,4.7,16.3,0,10.5,0z M10.5,5c3,0,5.5,2.5,5.5,5.5S13.5,16,10.5,16S5,13.5,5,10.5S7.5,5,10.5,5z',
