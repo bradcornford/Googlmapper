@@ -61,21 +61,19 @@ var marker_{!! $id !!} = new google.maps.Marker({
     @endif
 
     title: {!! json_encode((string) $options['title']) !!},
-    label:
-    @if (is_array($options['label']))
+    label: @if (is_array($options['label']))
         {
             @foreach ($options['label'] as $key => $value)
                 {!! $key !!}: {!! json_encode((string) $value) !!},
             @endforeach
         }
     @else
-        {!! json_encode($options['icon']) !!}
+        {!! json_encode($options['label']) !!}
     @endif
     ,
     animation: @if (empty($options['animation']) || $options['animation'] == 'NONE') '' @else google.maps.Animation.{!! $options['animation'] !!} @endif,
     @if (isset($options['icon']))
-        icon:
-        @if (is_array($options['icon']))
+        icon: @if (is_array($options['icon']))
             {
                 @foreach ($options['icon'] as $key => $value)
 
