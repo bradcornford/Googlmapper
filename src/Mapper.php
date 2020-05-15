@@ -94,13 +94,25 @@ class Mapper extends MapperBase implements MappingInterface
      */
     protected function searchLocation($location)
     {
-        $request = file_get_contents(
-            sprintf(
-                'https://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false&key=%s',
-                urlencode($location),
-                $this->getKey()
-            )
+        // COMPOSE URL
+        $url_geocode=sprintf(
+            'https://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false&key=%s',
+            urlencode($location),
+            $this->getKey()
         );
+        //CURL
+        if (function_exists('curl_init')) {
+            $curl_handle=curl_init();
+            curl_setopt($curl_handle,CURLOPT_URL,$url_geocode);
+            curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,2);
+            curl_setopt($curl_handle,CURLOPT_RETURNTRANSFER,true);
+            curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
+            $request = curl_exec($curl_handle);
+            curl_close($curl_handle);
+        }else{
+        // FILE GET CONTENT
+            $request = file_get_contents($url_geocode);
+        }
 
         return json_decode($request);
     }
