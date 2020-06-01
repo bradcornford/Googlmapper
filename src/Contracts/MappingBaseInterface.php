@@ -421,6 +421,24 @@ interface MappingBaseInterface
     public function getAnimation();
 
     /**
+     * Set map gesture handling.
+     *
+     * @param string $value
+     *
+     * @throws MapperArgumentException
+     *
+     * @return void
+     */
+    public function setGestureHandling($value);
+
+    /**
+     * Get map gesture handling.
+     *
+     * @return string
+     */
+    public function getGestureHandling();
+
+    /**
      * Get the cluster status.
      *
      * @return bool

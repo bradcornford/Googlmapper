@@ -23,6 +23,8 @@ class MapperSpec extends ObjectBehavior
 
     private const ANIMATION = 'NONE';
 
+    private const GESTURE_HANDLING = 'none';
+
     private const API_KEY  = 'AIzaSyCTwWv4rTQdNtZAaAd8D1SK5m94eTp8GiQ';
 
     public function let()
@@ -181,6 +183,12 @@ class MapperSpec extends ObjectBehavior
     {
         $this->setAnimation(self::ANIMATION);
         $this->getAnimation()->shouldReturn(self::ANIMATION);
+    }
+
+    public function it_can_set_and_get_gesture_handling_option()
+    {
+        $this->setGestureHandling(self::GESTURE_HANDLING);
+        $this->getGestureHandling()->shouldReturn(self::GESTURE_HANDLING);
     }
 
     public function it_can_set_and_get_cluster_option()

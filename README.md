@@ -70,6 +70,7 @@ You can now configure Googlmapper in a few simple steps. Open `app/config/packag
 - `streetViewControl` - Set the default street view control for Google Maps, e.g. true.
 - `rotateControl` - Set the default rotate control for Google Maps, e.g. true.
 - `fullscreenControl` - Set the default fullscreen control for Google Maps, e.g. true.
+- `gestureHandling` - Set the default gesture handling for Google Maps, e.g. auto, none, cooperative, greedy.
 - `type` - Set the default map type for Google Maps, e.g. ROADMAP, SATELLITE, HYBRID, TERRAIN.
 - `ui` - Show the Google Maps default UI options, e.g. true.
 - `markers.icon` - Set the default marker icon, e.g. img/icon.png.

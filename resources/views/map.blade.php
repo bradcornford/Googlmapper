@@ -22,7 +22,8 @@
             scaleControl: @if ($options['scaleControl']) true @else false @endif,
             streetViewControl: @if ($options['streetViewControl']) true @else false @endif,
             rotateControl: @if ($options['rotateControl']) true @else false @endif,
-            fullscreenControl: @if ($options['fullscreenControl']) true @else false @endif
+            fullscreenControl: @if ($options['fullscreenControl']) true @else false @endif,
+            gestureHandling: '{!! $options['gestureHandling'] !!}'
         };
 
         var map_{!! $id !!} = new google.maps.Map(document.getElementById('map-canvas-{!! $id !!}'), mapOptions_{!! $id !!});

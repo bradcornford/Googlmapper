@@ -52,6 +52,11 @@ abstract class MapperBase implements MappingBaseInterface
     private const ANIMATION_DROP = 'DROP';
     private const ANIMATION_BOUNCE = 'BOUNCE';
 
+    private const GESTURE_HANDLING_AUTO = 'auto';
+    private const GESTURE_HANDLING_NONE = 'none';
+    private const GESTURE_HANDLING_GREEDY = 'greedy';
+    private const GESTURE_HANDLING_COOPERATIVE = 'cooperative';
+
     private const OVERLAY_NONE = 'NONE';
     private const OVERLAY_BIKE = 'BIKE';
     private const OVERLAY_TRANSIT = 'TRANSIT';
@@ -265,6 +270,25 @@ abstract class MapperBase implements MappingBaseInterface
     ];
 
     /**
+     * Gesture handling.
+     *
+     * @var string
+     */
+    protected $gestureHandling;
+
+    /**
+     * Available map gesture handlers.
+     *
+     * @var array
+     */
+    protected $gestureHandlers = [
+        'auto',
+        'none',
+        'greedy',
+        'cooperative',
+    ];
+
+    /**
      * Map marker cluster.
      *
      * @var boolean
@@ -372,6 +396,7 @@ abstract class MapperBase implements MappingBaseInterface
         $this->setUi($options['ui'] ?? self::UI);
         $this->setIcon($options['markers']['icon'] ?? self::ICON);
         $this->setAnimation($options['markers']['animation'] ?? self::ANIMATION_NONE);
+        $this->setGestureHandling($options['gestureHandling'] ?? self::GESTURE_HANDLING_AUTO);
         $this->setCluster($options['cluster'] ?? self::CLUSTER);
         $this->setClustersIcon($options['clusters']['icon'] ?? self::CLUSTERS_ICON);
         $this->setClustersGrid($options['clusters']['grid'] ?? self::CLUSTERS_GRID);
@@ -1191,6 +1216,34 @@ abstract class MapperBase implements MappingBaseInterface
     }
 
     /**
+     * Set map gesture handling.
+     *
+     * @param string $value
+     *
+     * @throws MapperArgumentException
+     *
+     * @return void
+     */
+    public function setGestureHandling($value)
+    {
+        if (!in_array($value, $this->gestureHandlers)) {
+            throw new MapperArgumentException('Invalid map gesture handling.');
+        }
+
+        $this->gestureHandling = $value;
+    }
+
+    /**
+     * Get map gesture handling.
+     *
+     * @return string
+     */
+    public function getGestureHandling()
+    {
+        return $this->gestureHandling;
+    }
+
+    /**
      * Set cluster status.
      *
      * @param bool $value
@@ -1411,6 +1464,7 @@ abstract class MapperBase implements MappingBaseInterface
             'tilt' => $this->getTilt(),
             'ui' => $this->getUi(),
             'overlay' => '',
+            'gestureHandling' => $this->getGestureHandling(),
             'markers' => [
                 'title' => '',
                 'label' => '',

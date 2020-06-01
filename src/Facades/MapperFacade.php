@@ -66,6 +66,8 @@ use Illuminate\Support\Facades\Facade;
  * @method static string getIcon()
  * @method static void setAnimation(string $value)
  * @method static string getAnimation()
+ * @method static void setGestureHandling(string $value)
+ * @method static string getGestureHandling()
  * @method static bool getCluster()
  * @method static void enableCluster()
  * @method static void disableCluster()
