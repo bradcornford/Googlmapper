@@ -27,6 +27,12 @@
             "Cornford\\Googlmapper\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\Cornford\\Googlmapper": "spec/",
+            "tests\\Cornford\\Googlmapper": "tests/"
+        }
+    },
     "minimum-stability": "stable",
     "extra": {
         "laravel": {
