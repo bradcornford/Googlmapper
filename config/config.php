@@ -183,7 +183,7 @@ return [
     | Set if gesture handling for Googlmapper.
     |
     */
-    'gestureHandling' => 'none',
+    'gestureHandling' => 'auto',
 
     /*
     |--------------------------------------------------------------------------
