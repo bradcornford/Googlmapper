@@ -85,9 +85,9 @@ var marker_{!! $id !!} = new google.maps.Marker({
                         @case('size')
                         @case('scaledSize')
                             @if (is_array($value))
-                                size: new google.maps.Size({!! $value[0] !!}, {!! $value[1] !!}),
+                                {!! $key !!}: new google.maps.Size({!! $value[0] !!}, {!! $value[1] !!}),
                             @else
-                                size: new google.maps.Size({!! $value !!}, {!! $value !!}),
+                                {!! $key !!}: new google.maps.Size({!! $value !!}, {!! $value !!}),
                             @endif
                         @break;
 
@@ -95,9 +95,9 @@ var marker_{!! $id !!} = new google.maps.Marker({
                         @case('origin')
                         @case('labelOrigin')
                             @if (is_array($value))
-                                anchor: new google.maps.Point({!! $value[0] !!}, {!! $value[1] !!}),
+                                {!! $key !!}: new google.maps.Point({!! $value[0] !!}, {!! $value[1] !!}),
                             @else
-                                anchor: new google.maps.Point({!! $value !!}, {!! $value !!}),
+                                {!! $key !!}: new google.maps.Point({!! $value !!}, {!! $value !!}),
                             @endif
                         @break;
 
