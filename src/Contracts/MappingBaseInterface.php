@@ -1,6 +1,6 @@
 <?php
 
-namespace Cornford\Googlmapper\Contracts;
+namespace Fifyio\Googlmapper\Contracts;
 
 use Cornford\Googlmapper\Exceptions\MapperArgumentException;
 
