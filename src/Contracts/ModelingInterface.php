@@ -1,6 +1,6 @@
 <?php
 
-namespace Cornford\Googlmapper\Contracts;
+namespace FifyIO\Googlmapper\Contracts;
 
 use Illuminate\View\Factory as View;
 

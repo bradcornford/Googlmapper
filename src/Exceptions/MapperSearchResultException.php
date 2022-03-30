@@ -1,6 +1,6 @@
 <?php
 
-namespace Cornford\Googlmapper\Exceptions;
+namespace FifyIO\Googlmapper\Exceptions;
 
 class MapperSearchResultException extends MapperException
 {

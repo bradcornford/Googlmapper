@@ -37,10 +37,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Fifyio\\Googlmapper\\MapperServiceProvider"
+                "FifyIO\\Googlmapper\\MapperServiceProvider"
             ],
             "aliases": {
-                "Mapper": "Fifyio\\Googlmapper\\Facades\\MapperFacade"
+                "Mapper": "FifyIO\\Googlmapper\\Facades\\MapperFacade"
             }
         }
     },

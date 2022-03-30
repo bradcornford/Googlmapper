@@ -1,9 +1,9 @@
 <?php
 
-namespace Cornford\Googlmapper\Models;
+namespace FifyIO\Googlmapper\Models;
 
-use Cornford\Googlmapper\Contracts\ObjectableInterface;
-use Cornford\Googlmapper\Mapper;
+use FifyIO\Googlmapper\Contracts\ObjectableInterface;
+use FifyIO\Googlmapper\Mapper;
 
 class Location implements ObjectableInterface
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\Cornford\Googlmapper\Models;
+namespace spec\FifyIO\Googlmapper\Models;
 
-use Cornford\Googlmapper\Models\Polyline;
+use FifyIO\Googlmapper\Models\Polyline;
 use Illuminate\View\Factory as View;
 use Mockery;
 use PhpSpec\ObjectBehavior;

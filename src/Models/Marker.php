@@ -1,8 +1,8 @@
 <?php
 
-namespace Cornford\Googlmapper\Models;
+namespace FifyIO\Googlmapper\Models;
 
-use Cornford\Googlmapper\Contracts\ModelingInterface;
+use FifyIO\Googlmapper\Contracts\ModelingInterface;
 use Illuminate\View\Factory as View;
 
 class Marker implements ModelingInterface

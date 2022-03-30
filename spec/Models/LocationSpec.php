@@ -1,9 +1,9 @@
 <?php
 
-namespace spec\Cornford\Googlmapper\Models;
+namespace spec\FifyIO\Googlmapper\Models;
 
-use Cornford\Googlmapper\Mapper;
-use Cornford\Googlmapper\Models\Location;
+use FifyIO\Googlmapper\Mapper;
+use FifyIO\Googlmapper\Models\Location;
 use Mockery;
 use PhpSpec\ObjectBehavior;
 

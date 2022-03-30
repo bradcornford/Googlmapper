@@ -1,4 +1,4 @@
-# An easy way to integrate Google Maps with Laravel
+# An easy way to integrate Google Maps with Laravel 9
 
 [![Latest Stable Version](https://poser.pugx.org/cornford/Googlmapper/version.png)](https://packagist.org/packages/cornford/googlmapper)
 [![Total Downloads](https://poser.pugx.org/cornford/googlmapper/d/total.png)](https://packagist.org/packages/cornford/googlmapper)
@@ -24,27 +24,21 @@ Think of Googlmapper as an easy way to integrate Google Maps with Laravel, provi
 
 ## Installation
 
-Begin by installing this package through Composer. Edit your project's `composer.json` file to require `cornford/googlmapper`.
+Begin by installing this package through Composer:
 
-	"require": {
-		"cornford/googlmapper": "3.*"
-	}
-
-Next, update Composer from the Terminal:
-
-	composer update
+	composer require fifyio/googlmapper
 
 Once this operation completes, the next step is to add the service provider. Open `app/config/app.php`, and add a new item to the providers array.
 
-	Cornford\Googlmapper\MapperServiceProvider::class,
+	FifyIO\Googlmapper\MapperServiceProvider::class,
 
 The next step is to introduce the facade. Open `app/config/app.php`, and add a new item to the aliases array.
 
-	'Mapper'         => Cornford\Googlmapper\Facades\MapperFacade::class,
+	'Mapper'         => FifyIO\Googlmapper\Facades\MapperFacade::class,
 
 Finally we need to introduce the configuration files into your application.
 
-	php artisan vendor:publish --provider="Cornford\Googlmapper\MapperServiceProvider" --tag=googlmapper
+	php artisan vendor:publish --provider="FifyIO\Googlmapper\MapperServiceProvider" --tag=googlmapper
 
 You also need to set your Google API Key into the `GOOGLE_API_KEY` environment variable. To obtain an API key for your project, visit the [Google developers console](https://console.developers.google.com/).
 

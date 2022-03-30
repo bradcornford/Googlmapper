@@ -1,6 +1,6 @@
 <?php
 
-namespace Cornford\Googlmapper;
+namespace FifyIO\Googlmapper;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -20,12 +20,12 @@ class MapperServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(base_path('resources/views/cornford/googlmapper'), 'googlmapper');
+        $this->loadViewsFrom(base_path('resources/views/fifyio/googlmapper'), 'googlmapper');
 
         $this->publishes(
             [
                 __DIR__ . '/../config/config.php' => config_path('googlmapper.php'),
-                __DIR__ . '/../resources/views' => base_path('resources/views/cornford/googlmapper')
+                __DIR__ . '/../resources/views' => base_path('resources/views/fifyio/googlmapper')
             ],
             'googlmapper'
         );

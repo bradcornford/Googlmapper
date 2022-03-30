@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\Cornford\Googlmapper\Models;
+namespace spec\FifyIO\Googlmapper\Models;
 
-use Cornford\Googlmapper\Models\Polygon;
+use FifyIO\Googlmapper\Models\Polygon;
 use Illuminate\View\Factory as View;
 use Mockery;
 use PhpSpec\ObjectBehavior;

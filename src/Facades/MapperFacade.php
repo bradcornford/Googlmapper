@@ -1,9 +1,9 @@
 <?php
 
-namespace Cornford\Googlmapper\Facades;
+namespace FifyIO\Googlmapper\Facades;
 
-use Cornford\Googlmapper\Mapper;
-use Cornford\Googlmapper\Models\Location;
+use FifyIO\Googlmapper\Mapper;
+use FifyIO\Googlmapper\Models\Location;
 use Illuminate\Support\Facades\Facade;
 
 /**

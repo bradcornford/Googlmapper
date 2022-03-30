@@ -1,6 +1,6 @@
 suites:
-  cornford_suite:
-    namespace: Cornford\Googlmapper
-    psr4_prefix: Cornford\Googlmapper
+  fifyio_suite:
+    namespace: FifyIO\Googlmapper
+    psr4_prefix: FifyIO\Googlmapper
     src_path: src
     spec_prefix: spec

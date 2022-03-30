@@ -1,10 +1,10 @@
-<?php namespace spec\Cornford\Googlmapper;
+<?php namespace spec\FifyIO\Googlmapper;
 
-use Cornford\Googlmapper\Exceptions\MapperArgumentException;
-use Cornford\Googlmapper\Exceptions\MapperSearchKeyException;
-use Cornford\Googlmapper\Exceptions\MapperSearchResultException;
-use Cornford\Googlmapper\Mapper;
-use Cornford\Googlmapper\Models\Location;
+use FifyIO\Googlmapper\Exceptions\MapperArgumentException;
+use FifyIO\Googlmapper\Exceptions\MapperSearchKeyException;
+use FifyIO\Googlmapper\Exceptions\MapperSearchResultException;
+use FifyIO\Googlmapper\Mapper;
+use FifyIO\Googlmapper\Models\Location;
 use Illuminate\View\Factory as View;
 use Mockery;
 use PhpSpec\ObjectBehavior;

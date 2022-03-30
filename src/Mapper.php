@@ -1,20 +1,20 @@
 <?php
 
-namespace Cornford\Googlmapper;
+namespace FifyIO\Googlmapper;
 
-use Cornford\Googlmapper\Contracts\MappingInterface;
-use Cornford\Googlmapper\Exceptions\MapperArgumentException;
-use Cornford\Googlmapper\Exceptions\MapperException;
-use Cornford\Googlmapper\Exceptions\MapperInstanceException;
-use Cornford\Googlmapper\Exceptions\MapperSearchException;
-use Cornford\Googlmapper\Exceptions\MapperSearchKeyException;
-use Cornford\Googlmapper\Exceptions\MapperSearchLimitException;
-use Cornford\Googlmapper\Exceptions\MapperSearchResponseException;
-use Cornford\Googlmapper\Exceptions\MapperSearchResultException;
-use Cornford\Googlmapper\Exceptions\MapperSearchResultMalformedException;
-use Cornford\Googlmapper\Models\Location;
-use Cornford\Googlmapper\Models\Map;
-use Cornford\Googlmapper\Models\Streetview;
+use FifyIO\Googlmapper\Contracts\MappingInterface;
+use FifyIO\Googlmapper\Exceptions\MapperArgumentException;
+use FifyIO\Googlmapper\Exceptions\MapperException;
+use FifyIO\Googlmapper\Exceptions\MapperInstanceException;
+use FifyIO\Googlmapper\Exceptions\MapperSearchException;
+use FifyIO\Googlmapper\Exceptions\MapperSearchKeyException;
+use FifyIO\Googlmapper\Exceptions\MapperSearchLimitException;
+use FifyIO\Googlmapper\Exceptions\MapperSearchResponseException;
+use FifyIO\Googlmapper\Exceptions\MapperSearchResultException;
+use FifyIO\Googlmapper\Exceptions\MapperSearchResultMalformedException;
+use FifyIO\Googlmapper\Models\Location;
+use FifyIO\Googlmapper\Models\Map;
+use FifyIO\Googlmapper\Models\Streetview;
 use Exception;
 
 class Mapper extends MapperBase implements MappingInterface

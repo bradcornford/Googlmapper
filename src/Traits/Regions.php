@@ -1,6 +1,6 @@
 <?php
 
-namespace Cornford\Googlmapper\Traits;
+namespace FifyIO\Googlmapper\Traits;
 
 trait Regions
 {

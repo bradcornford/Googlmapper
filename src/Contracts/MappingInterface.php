@@ -1,13 +1,13 @@
 <?php
 
-namespace Cornford\Googlmapper\Contracts;
+namespace FifyIO\Googlmapper\Contracts;
 
-use Cornford\Googlmapper\Exceptions\MapperArgumentException;
-use Cornford\Googlmapper\Exceptions\MapperException;
-use Cornford\Googlmapper\Exceptions\MapperSearchException;
-use Cornford\Googlmapper\Exceptions\MapperSearchLimitException;
-use Cornford\Googlmapper\Exceptions\MapperSearchResultException;
-use Cornford\Googlmapper\Models\Location;
+use FifyIO\Googlmapper\Exceptions\MapperArgumentException;
+use FifyIO\Googlmapper\Exceptions\MapperException;
+use FifyIO\Googlmapper\Exceptions\MapperSearchException;
+use FifyIO\Googlmapper\Exceptions\MapperSearchLimitException;
+use FifyIO\Googlmapper\Exceptions\MapperSearchResultException;
+use FifyIO\Googlmapper\Models\Location;
 
 interface MappingInterface
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\Cornford\Googlmapper\Models;
+namespace spec\FifyIO\Googlmapper\Models;
 
-use Cornford\Googlmapper\Models\Map;
+use FifyIO\Googlmapper\Models\Map;
 use Illuminate\View\Factory as View;
 use PhpSpec\ObjectBehavior;
 use Mockery;

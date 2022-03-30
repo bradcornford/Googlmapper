@@ -1,11 +1,11 @@
 <?php
 
-namespace Cornford\Googlmapper;
+namespace FifyIO\Googlmapper;
 
-use Cornford\Googlmapper\Contracts\MappingBaseInterface;
-use Cornford\Googlmapper\Exceptions\MapperArgumentException;
-use Cornford\Googlmapper\Traits\Languages;
-use Cornford\Googlmapper\Traits\Regions;
+use FifyIO\Googlmapper\Contracts\MappingBaseInterface;
+use FifyIO\Googlmapper\Exceptions\MapperArgumentException;
+use FifyIO\Googlmapper\Traits\Languages;
+use FifyIO\Googlmapper\Traits\Regions;
 use Illuminate\View\Factory as View;
 
 abstract class MapperBase implements MappingBaseInterface
