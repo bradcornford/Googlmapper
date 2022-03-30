@@ -1,16 +1,16 @@
 {
-    "name": "cornford/googlmapper",
-    "description": "An easy way to integrate Google Maps with Laravel.",
+    "name": "fifyio/googlmapper",
+    "description": "An easy way to integrate Google Maps with Laravel 9+.",
     "keywords": ["laravel", "google", "maps", "mapping", "streetview", "map"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Bradley Cornford",
-            "email": "me@bradleycornford.co.uk"
+            "name": "Stephen Segari",
+            "email": "stephen@fify.io"
         }
     ],
     "require": {
-        "php": ">=7.2",
+        "php": ">=8.0",
         "ext-json": "*",
         "illuminate/view": "^6.0 || ^7.0 || ^8.0",
         "illuminate/support": "^6.0 || ^7.0 || ^8.0 || ^9.0"
@@ -24,23 +24,23 @@
     },
     "autoload": {
         "psr-4": {
-            "Cornford\\Googlmapper\\": "src/"
+            "Fifyio\\Googlmapper\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "spec\\Cornford\\Googlmapper": "spec/",
-            "tests\\Cornford\\Googlmapper": "tests/"
+            "spec\\Fifyio\\Googlmapper": "spec/",
+            "tests\\Fifyio\\Googlmapper": "tests/"
         }
     },
     "minimum-stability": "stable",
     "extra": {
         "laravel": {
             "providers": [
-                "Cornford\\Googlmapper\\MapperServiceProvider"
+                "Fifyio\\Googlmapper\\MapperServiceProvider"
             ],
             "aliases": {
-                "Mapper": "Cornford\\Googlmapper\\Facades\\MapperFacade"
+                "Mapper": "Fifyio\\Googlmapper\\Facades\\MapperFacade"
             }
         }
     },
