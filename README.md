@@ -1,13 +1,6 @@
 # An easy way to integrate Google Maps with Laravel 9
 
-[![Latest Stable Version](https://poser.pugx.org/cornford/Googlmapper/version.png)](https://packagist.org/packages/cornford/googlmapper)
-[![Total Downloads](https://poser.pugx.org/cornford/googlmapper/d/total.png)](https://packagist.org/packages/cornford/googlmapper)
-[![Build Status](https://travis-ci.org/bradcornford/Googlmapper.svg?branch=master)](https://travis-ci.org/bradcornford/Googlmapper)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bradcornford/Googlmapper/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bradcornford/Googlmapper/?branch=master)
-
-### For Laravel 5.x, check [version 2.35.1](https://github.com/bradcornford/Googlmapper/tree/v2.35.1)
-
-### For Laravel 4.x, check [version 1.27.0](https://github.com/bradcornford/Googlmapper/tree/v1.27.0)
+### This repo was cloned and updated from https://github.com/bradcornford/Googlmapper to provide Laravel 9 - PHP 8 support.
 
 Think of Googlmapper as an easy way to integrate Google Maps with Laravel, providing a variety of helpers to speed up the utilisation of mapping. These include:
 
