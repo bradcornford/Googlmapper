@@ -18,3 +18,15 @@ polyline_{!! $id !!}.setMap({!! $options['map'] !!});
 shapes.push({
     'polyline_{!! $id !!}': polyline_{!! $id !!}
 });
+
+@foreach (['eventClick', 'eventDblClick', 'eventRightClick', 'eventMouseOver', 'eventMouseDown', 'eventMouseUp', 'eventMouseOut', 'eventDrag', 'eventDragStart', 'eventDragEnd', 'eventDomReady'] as $event)
+
+    @if (isset($options[$event]))
+
+        google.maps.event.addListener(polyline_{!! $id !!}, '{!! str_replace('event', '', strtolower($event)) !!}', function (event) {
+            {!! $options[$event] !!}
+        });
+
+    @endif
+
+@endforeach
