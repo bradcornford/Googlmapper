@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static Mapper streetview($latitude, $longitude, $heading, $pitch, array $options = [])
  * @method static Mapper marker($latitude, $longitude, array $options = [])
  * @method static Mapper informationWindow($latitude, $longitude, $content = '', array $options = [])
- * @method static Mapper polyline(array $coordinates = [], array $options = [])
+ * @method static Mapper polyline(array $coordinates = [], $content = '', array $options = [])
  * @method static Mapper polygon(array $coordinates = [], array $options = [])
  * @method static Mapper rectangle(array $coordinates = [], array $options = [])
  * @method static Mapper circle(array $coordinates = [], array $options = [])

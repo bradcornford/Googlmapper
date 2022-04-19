@@ -335,7 +335,7 @@ class Mapper extends MapperBase implements MappingInterface
      *
      * @return self
      */
-    public function polyline(array $coordinates = [], array $options = [])
+    public function polyline(array $coordinates = [], $content = '', array $options = [])
     {
         $items = $this->getItems();
 
@@ -360,7 +360,42 @@ class Mapper extends MapperBase implements MappingInterface
 
         $item->shape('polyline', $coordinates, $options);
 
+        // Info window for a polyline if content is not empty
+        if(!empty($content)) {
+            $parameters = $this->getOptions();
+            $options = array_replace_recursive(
+                ['markers' => $parameters['markers']],
+                $item->getOptions()['markers'],
+                $options,
+                ($content !== '' ? ['markers' => ['content' => $content]] : [])
+            );
+            $options['markers']['visible'] = false;
+            $coordinates = $this->midpoint($coordinates[0]['latitude'], $coordinates[0]['longitude'], $coordinates[1]['latitude'], $coordinates[1]['longitude']);
+            $latitude = $coordinates[0];
+            $longitude = $coordinates[1];
+            $item->marker($latitude, $longitude, $options);
+        }
+
         return $this;
+    }
+
+    public function midpoint ($lat1, $lng1, $lat2, $lng2) {
+
+        $lat1= deg2rad($lat1);
+        $lng1= deg2rad($lng1);
+        $lat2= deg2rad($lat2);
+        $lng2= deg2rad($lng2);
+
+        $dlng = $lng2 - $lng1;
+        $Bx = cos($lat2) * cos($dlng);
+        $By = cos($lat2) * sin($dlng);
+        $lat3 = atan2( sin($lat1)+sin($lat2),
+        sqrt((cos($lat1)+$Bx)*(cos($lat1)+$Bx) + $By*$By ));
+        $lng3 = $lng1 + atan2($By, (cos($lat1) + $Bx));
+        $pi = pi();
+        $coords[] = ($lat3*180)/$pi;
+        $coords[] = ($lng3*180)/$pi;
+        return $coords;
     }
 
     /**
