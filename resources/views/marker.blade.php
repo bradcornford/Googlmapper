@@ -78,7 +78,8 @@ var marker_{!! $id !!} = new google.maps.Marker({
                 @foreach ($options['icon'] as $key => $value)
 
                     @switch($key)
-@case('symbol')
+                        
+                        @case('symbol')
                             path: google.maps.SymbolPath.{!! $value !!},
                         @break;
 
@@ -101,12 +102,15 @@ var marker_{!! $id !!} = new google.maps.Marker({
                             @endif
                         @break;
 
-                        @case('fillOpacity')
                         @case('rotation')
                         @case('scale')
-                        @case('strokeOpacity')
                         @case('strokeWeight')
                             {!! $key !!}: {!! json_encode((int) $value) !!},
+                        @break
+
+                        @case('fillOpacity')
+                        @case('strokeOpacity')
+                            {!! $key !!}: {!! json_encode((float) $value) !!},
                         @break
 
                         @default
